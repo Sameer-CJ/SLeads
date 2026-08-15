@@ -3,533 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SLeads — AI Lead Generation</title>
+<title>SLeads - Pricing & Payment</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-    font-family:Inter,Arial,sans-serif;
+    font-family:Arial,sans-serif;
     background:#060914;
     color:#fff;
-    min-height:100vh;
 }
+button,input,textarea{font-family:inherit}
+.hidden{display:none!important}
 
-button{
-    font-family:inherit;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* ================= NAVBAR ================= */
-
-.navbar{
-    width:100%;
-    padding:22px 7%;
+.nav{
+    height:70px;
+    padding:0 7%;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    border-bottom:1px solid #171d2c;
+    border-bottom:1px solid #1b2335;
 }
-
-.logo{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:-1px;
-}
-
-.logo span{
-    color:#7567ff;
-}
-
-.nav-links{
-    display:flex;
-    gap:30px;
-}
-
-.nav-links a{
-    color:#9da7bc;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.nav-links a:hover{
-    color:#fff;
-}
-
-/* ================= HERO ================= */
+.logo{font-size:25px;font-weight:800}
+.logo span{color:#7567ff}
 
 .hero{
-    max-width:1100px;
-    margin:auto;
-    padding:95px 25px 80px;
     text-align:center;
+    padding:80px 20px 60px;
 }
-
 .badge{
     display:inline-block;
-    padding:8px 14px;
-    border:1px solid #292f46;
-    background:#101526;
+    background:#11172a;
+    border:1px solid #2b3350;
+    color:#9f96ff;
+    padding:8px 15px;
     border-radius:30px;
-    color:#aaa3ff;
     font-size:13px;
-    margin-bottom:22px;
+    margin-bottom:20px;
 }
-
 .hero h1{
-    font-size:58px;
-    line-height:1.05;
-    letter-spacing:-3px;
+    font-size:55px;
     max-width:850px;
     margin:auto;
+    line-height:1.05;
 }
-
-.hero h1 span{
-    color:#7668ff;
-}
-
+.hero h1 span{color:#7567ff}
 .hero p{
     max-width:650px;
-    margin:25px auto;
-    color:#99a4b9;
+    margin:22px auto;
+    color:#9ba6bb;
     line-height:1.7;
-    font-size:17px;
 }
-
-.hero-buttons{
-    display:flex;
-    justify-content:center;
-    gap:14px;
-    margin-top:30px;
-}
-
-.primary-btn,
-.secondary-btn{
-    padding:14px 24px;
+.btn{
+    background:#6d60ff;
+    border:0;
+    color:#fff;
+    padding:14px 25px;
     border-radius:10px;
     cursor:pointer;
     font-weight:700;
-    font-size:15px;
 }
-
-.primary-btn{
-    border:0;
-    background:#6d60ff;
-    color:#fff;
-}
-
-.primary-btn:hover{
-    background:#584cff;
-}
-
-.secondary-btn{
-    background:#101624;
-    border:1px solid #293149;
-    color:#fff;
-}
-
-/* ================= FEATURES ================= */
-
-.features{
-    max-width:1100px;
-    margin:auto;
-    padding:30px 25px 100px;
-}
-
-.section-title{
-    text-align:center;
-    font-size:35px;
-    margin-bottom:45px;
-}
-
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.feature-card{
-    background:#0e1422;
-    border:1px solid #20283b;
-    border-radius:16px;
-    padding:28px;
-}
-
-.feature-icon{
-    font-size:28px;
-    margin-bottom:17px;
-}
-
-.feature-card h3{
-    margin-bottom:10px;
-}
-
-.feature-card p{
-    color:#8f9aae;
-    line-height:1.6;
-    font-size:14px;
-}
-
-/* ================= PRICING ================= */
+.btn:hover{background:#584cff}
 
 .pricing{
     max-width:1150px;
     margin:auto;
-    padding:70px 25px 110px;
+    padding:40px 20px 100px;
 }
-
-.pricing-grid{
+.title{
+    text-align:center;
+    font-size:35px;
+    margin-bottom:45px;
+}
+.grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:20px;
 }
-
-.price-card{
+.card{
     background:#0e1422;
-    border:1px solid #222b40;
+    border:1px solid #222c40;
     border-radius:18px;
-    padding:32px;
-    position:relative;
+    padding:30px;
 }
-
-.price-card.popular{
-    border:1px solid #6d60ff;
+.card.popular{
+    border-color:#6d60ff;
     transform:translateY(-8px);
 }
-
-.popular-tag{
-    position:absolute;
-    top:-13px;
-    right:20px;
+.tag{
     background:#6d60ff;
-    padding:6px 12px;
+    display:inline-block;
+    padding:6px 11px;
     border-radius:20px;
     font-size:11px;
-    font-weight:700;
+    margin-bottom:15px;
 }
-
-.price-card h3{
-    font-size:21px;
-}
-
 .price{
     font-size:45px;
     font-weight:800;
-    margin:17px 0 5px;
+    margin:15px 0;
 }
-
-.price small{
-    font-size:14px;
-    color:#8993a8;
-    font-weight:400;
-}
-
-.price-desc{
-    color:#8d98ac;
-    font-size:14px;
-    margin-bottom:25px;
-}
-
-.price-card ul{
-    list-style:none;
-    margin-bottom:28px;
-}
-
-.price-card li{
-    margin:13px 0;
-    color:#b8c0d0;
-    font-size:14px;
-}
-
-.price-card li::before{
-    content:"✓";
-    color:#7567ff;
-    margin-right:9px;
-}
-
+.price small{font-size:14px;color:#8994a8}
+.desc{color:#8994a8;font-size:14px;margin-bottom:25px}
+ul{list-style:none;margin-bottom:25px}
+li{margin:12px 0;color:#bbc3d1;font-size:14px}
+li:before{content:"✓";color:#7567ff;margin-right:8px}
 .plan-btn{
     width:100%;
     padding:14px;
-    border-radius:10px;
+    background:#151d2c;
     border:1px solid #30394e;
-    background:#151c2b;
     color:#fff;
+    border-radius:10px;
     cursor:pointer;
     font-weight:700;
 }
-
-.plan-btn:hover{
-    background:#6d60ff;
-    border-color:#6d60ff;
-}
-
-/* ================= APP SCREEN ================= */
-
-#appScreen{
-    min-height:100vh;
-    background:#060914;
-}
-
-.app-nav{
-    height:70px;
-    border-bottom:1px solid #20273a;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5%;
-}
-
-.app-user{
-    color:#9da8bc;
-    font-size:14px;
-}
-
-.dashboard{
-    max-width:1200px;
-    margin:auto;
-    padding:40px 25px;
-}
-
-.dashboard-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:30px;
-}
-
-.dashboard-header h1{
-    font-size:32px;
-}
-
-.dashboard-header p{
-    color:#8994a9;
-    margin-top:6px;
-}
-
-.logout-btn{
-    padding:11px 18px;
-    background:#151c2b;
-    color:#fff;
-    border:1px solid #30394c;
-    border-radius:9px;
-    cursor:pointer;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.stat{
-    background:#0e1422;
-    border:1px solid #20283b;
-    border-radius:15px;
-    padding:25px;
-}
-
-.stat span{
-    color:#8994a9;
-    font-size:13px;
-}
-
-.stat strong{
-    display:block;
-    font-size:32px;
-    margin-top:8px;
-}
-
-/* ================= MODAL ================= */
+.plan-btn:hover{background:#6d60ff}
 
 .modal-bg{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.78);
+    background:rgba(0,0,0,.82);
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     padding:20px;
-    z-index:1000;
+    z-index:99;
+    overflow:auto;
 }
-
 .modal{
-    width:430px;
+    width:470px;
     max-width:100%;
     background:#101725;
-    border:1px solid #29334a;
+    border:1px solid #2b354c;
     border-radius:20px;
     padding:30px;
 }
+.modal h2{margin-bottom:8px}
+.sub{color:#8994a8;font-size:14px;margin-bottom:20px}
 
-.modal h2{
-    margin-bottom:8px;
-}
-
-.modal-sub{
-    color:#8e99ad;
-    font-size:14px;
-    margin-bottom:22px;
-}
-
-.selected-plan{
+.plan-box{
     background:#171f30;
-    border-radius:12px;
     padding:17px;
+    border-radius:12px;
+    margin-bottom:18px;
+}
+.plan-box strong{font-size:20px}
+.plan-box span{float:right;color:#aaa2ff;font-weight:700}
+
+.bank-box{
+    background:#0a101d;
+    border:1px solid #29344a;
+    border-radius:13px;
+    padding:18px;
     margin-bottom:20px;
 }
-
-.selected-plan strong{
-    font-size:20px;
-}
-
-.selected-plan span{
-    float:right;
-    color:#aaa3ff;
+.bank-title{
+    color:#9e95ff;
     font-weight:700;
+    margin-bottom:12px;
+}
+.bank-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:8px 0;
+    border-bottom:1px solid #1c2537;
+    font-size:14px;
+}
+.bank-row:last-child{border-bottom:0}
+.bank-row span:first-child{color:#7f8ba0}
+.bank-row span:last-child{
+    text-align:right;
+    font-weight:600;
 }
 
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
+.form-group{margin-bottom:14px}
+label{
     display:block;
+    color:#9ba6b9;
     font-size:13px;
-    color:#9da8ba;
     margin-bottom:7px;
 }
-
-.form-group input{
+input{
     width:100%;
     padding:13px;
-    background:#090e19;
-    border:1px solid #293247;
+    background:#090e18;
     color:#fff;
+    border:1px solid #2a354a;
     border-radius:9px;
     outline:none;
 }
+input:focus{border-color:#6d60ff}
 
-.form-group input:focus{
-    border-color:#6d60ff;
+.file{
+    padding:12px;
+    background:#090e18;
+    border:1px dashed #39455e;
+    border-radius:9px;
+    width:100%;
+    color:#8994a8;
 }
 
-.modal-btn{
+.submit{
     width:100%;
     padding:14px;
     background:#6d60ff;
     border:0;
     color:#fff;
     border-radius:10px;
-    font-weight:700;
     cursor:pointer;
-    margin-top:5px;
+    font-weight:700;
 }
-
-.close-btn{
+.cancel{
     width:100%;
     padding:12px;
-    margin-top:10px;
     background:transparent;
     border:0;
-    color:#8994a9;
+    color:#8994a8;
     cursor:pointer;
 }
 
-.success{
-    text-align:center;
-    padding:15px 0;
-}
-
+.success{text-align:center}
 .success-icon{
-    width:60px;
-    height:60px;
-    margin:0 auto 18px;
+    width:65px;
+    height:65px;
     border-radius:50%;
+    background:#15382b;
+    color:#4ee39a;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#17372a;
-    color:#4ee39a;
-    font-size:30px;
+    margin:0 auto 18px;
+    font-size:32px;
 }
 
-/* ================= FOOTER ================= */
+.dashboard{
+    max-width:1100px;
+    margin:auto;
+    padding:50px 20px;
+}
+.dashboard h1{font-size:35px}
+.dashboard p{color:#8994a8;margin-top:8px}
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:35px;
+}
+.stat{
+    background:#0e1422;
+    border:1px solid #202a3d;
+    border-radius:15px;
+    padding:25px;
+}
+.stat span{color:#8994a8;font-size:13px}
+.stat strong{display:block;font-size:30px;margin-top:8px}
+.logout{
+    margin-top:30px;
+    padding:12px 20px;
+    background:#151d2c;
+    color:#fff;
+    border:1px solid #30394e;
+    border-radius:9px;
+    cursor:pointer;
+}
 
 footer{
-    border-top:1px solid #181f30;
-    padding:30px;
     text-align:center;
+    padding:30px;
     color:#69758a;
-    font-size:13px;
+    border-top:1px solid #181f30;
 }
 
-/* ================= MOBILE ================= */
-
 @media(max-width:800px){
-
-    .hero h1{
-        font-size:40px;
-    }
-
-    .feature-grid,
-    .pricing-grid,
-    .stats{
-        grid-template-columns:1fr;
-    }
-
-    .price-card.popular{
-        transform:none;
-    }
-
-    .nav-links{
-        display:none;
-    }
-
-    .hero-buttons{
-        flex-direction:column;
-    }
-
+    .grid,.stats{grid-template-columns:1fr}
+    .card.popular{transform:none}
+    .hero h1{font-size:40px}
 }
 </style>
 </head>
 
 <body>
 
+<div id="website">
 
-<!-- =====================================================
-     MAIN WEBSITE
-===================================================== -->
-
-<div id="mainWebsite">
-
-<nav class="navbar">
-
-    <div class="logo">
-        S<span>Leads</span>
-    </div>
-
-    <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#pricing">Get Started</a>
-    </div>
-
+<nav class="nav">
+    <div class="logo">S<span>Leads</span></div>
 </nav>
 
-
 <section class="hero">
-
-    <div class="badge">
-        AI-Powered Lead Generation
-    </div>
+    <div class="badge">AI-Powered Lead Generation</div>
 
     <h1>
         Find your next
@@ -537,194 +300,101 @@ footer{
     </h1>
 
     <p>
-        SLeads helps businesses discover potential customers
-        across Reddit, Instagram, Facebook, X and LinkedIn.
+        Generate and manage leads from Reddit, Instagram,
+        Facebook, X and LinkedIn with SLeads.
     </p>
 
-    <div class="hero-buttons">
-
-        <button
-            class="primary-btn"
-            onclick="scrollToPricing()">
-            Get Started
-        </button>
-
-        <button
-            class="secondary-btn"
-            onclick="scrollToPricing()">
-            View Pricing
-        </button>
-
-    </div>
-
+    <button class="btn" onclick="goPricing()">
+        Get Started
+    </button>
 </section>
-
-
-<!-- FEATURES -->
-
-<section class="features" id="features">
-
-    <h2 class="section-title">
-        Everything you need to find leads
-    </h2>
-
-    <div class="feature-grid">
-
-        <div class="feature-card">
-
-            <div class="feature-icon">🔎</div>
-
-            <h3>Lead Discovery</h3>
-
-            <p>
-                Discover relevant prospects and potential
-                customers from multiple social platforms.
-            </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-            <div class="feature-icon">🤖</div>
-
-            <h3>AI Filtering</h3>
-
-            <p>
-                Automatically identify leads based on your
-                target audience and search criteria.
-            </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-            <div class="feature-icon">📊</div>
-
-            <h3>Lead Dashboard</h3>
-
-            <p>
-                Organize and manage your discovered leads
-                from one simple dashboard.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PRICING -->
 
 <section class="pricing" id="pricing">
 
-    <h2 class="section-title">
-        Simple pricing
-    </h2>
+    <h2 class="title">Simple Pricing</h2>
 
+    <div class="grid">
 
-    <div class="pricing-grid">
-
-
-        <!-- BASIC -->
-
-        <div class="price-card">
+        <div class="card">
 
             <h3>Basic</h3>
 
             <div class="price">
-                $19
-                <small>/month</small>
+                $19 <small>/month</small>
             </div>
 
-            <p class="price-desc">
+            <div class="desc">
                 For individuals getting started.
-            </p>
+            </div>
 
             <ul>
                 <li>Lead discovery</li>
-                <li>Social platform searches</li>
-                <li>Basic lead filtering</li>
+                <li>Social searches</li>
+                <li>Lead filtering</li>
                 <li>Lead dashboard</li>
                 <li>Basic exports</li>
             </ul>
 
-            <button
-                class="plan-btn"
-                data-plan="basic"
-                onclick="openPayment('basic',19)">
+            <button class="plan-btn"
+                onclick="openPayment('Basic',19)">
                 Get Basic
             </button>
 
         </div>
 
 
-        <!-- GROWTH -->
+        <div class="card popular">
 
-        <div class="price-card popular">
-
-            <div class="popular-tag">
-                MOST POPULAR
-            </div>
+            <div class="tag">MOST POPULAR</div>
 
             <h3>Growth</h3>
 
             <div class="price">
-                $39
-                <small>/month</small>
+                $39 <small>/month</small>
             </div>
 
-            <p class="price-desc">
+            <div class="desc">
                 For growing businesses.
-            </p>
+            </div>
 
             <ul>
                 <li>Everything in Basic</li>
-                <li>More lead searches</li>
+                <li>More searches</li>
                 <li>Advanced filtering</li>
                 <li>Lead scoring</li>
                 <li>More exports</li>
             </ul>
 
-            <button
-                class="plan-btn"
-                data-plan="growth"
-                onclick="openPayment('growth',39)">
+            <button class="plan-btn"
+                onclick="openPayment('Growth',39)">
                 Get Growth
             </button>
 
         </div>
 
 
-        <!-- PRO -->
-
-        <div class="price-card">
+        <div class="card">
 
             <h3>Pro</h3>
 
             <div class="price">
-                $89
-                <small>/month</small>
+                $89 <small>/month</small>
             </div>
 
-            <p class="price-desc">
+            <div class="desc">
                 For agencies and serious lead generation.
-            </p>
+            </div>
 
             <ul>
                 <li>Everything in Growth</li>
-                <li>High-volume lead searches</li>
+                <li>High-volume searches</li>
                 <li>Advanced AI filtering</li>
                 <li>Priority processing</li>
                 <li>Maximum exports</li>
             </ul>
 
-            <button
-                class="plan-btn"
-                data-plan="pro"
-                onclick="openPayment('pro',89)">
+            <button class="plan-btn"
+                onclick="openPayment('Pro',89)">
                 Get Pro
             </button>
 
@@ -734,7 +404,6 @@ footer{
 
 </section>
 
-
 <footer>
     © 2026 SLeads. All rights reserved.
 </footer>
@@ -742,647 +411,486 @@ footer{
 </div>
 
 
+<!-- PAYMENT -->
 
-<!-- =====================================================
-     PAYMENT MODAL
-===================================================== -->
+<div class="modal-bg hidden" id="paymentModal">
 
-<div
-    class="modal-bg hidden"
-    id="paymentModal">
+<div class="modal">
 
-    <div class="modal">
+<h2>Complete Your Payment</h2>
 
-        <h2>Complete Payment</h2>
+<p class="sub">
+Transfer the exact amount to the bank account below.
+</p>
 
-        <p class="modal-sub">
-            Choose your plan and continue.
-        </p>
+<div class="plan-box">
 
+<strong id="planName">Basic</strong>
 
-        <div class="selected-plan">
-
-            <strong id="selectedPlan">
-                Basic
-            </strong>
-
-            <span id="selectedPrice">
-                $19/month
-            </span>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Cardholder Name
-            </label>
-
-            <input
-                type="text"
-                id="cardName"
-                placeholder="Your name">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Card Number
-            </label>
-
-            <input
-                type="text"
-                id="cardNumber"
-                maxlength="19"
-                placeholder="4242 4242 4242 4242">
-
-        </div>
-
-
-        <div style="display:flex;gap:10px;">
-
-            <div
-                class="form-group"
-                style="width:50%;">
-
-                <label>
-                    Expiry
-                </label>
-
-                <input
-                    type="text"
-                    id="expiry"
-                    placeholder="MM/YY">
-
-            </div>
-
-
-            <div
-                class="form-group"
-                style="width:50%;">
-
-                <label>
-                    CVV
-                </label>
-
-                <input
-                    type="password"
-                    id="cvv"
-                    maxlength="4"
-                    placeholder="123">
-
-            </div>
-
-        </div>
-
-
-        <button
-            class="modal-btn"
-            onclick="processPayment()">
-
-            Pay Now
-
-        </button>
-
-
-        <button
-            class="close-btn"
-            onclick="closePayment()">
-
-            Cancel
-
-        </button>
-
-    </div>
+<span id="planPrice">$19</span>
 
 </div>
 
 
+<div class="bank-box">
 
-<!-- =====================================================
-     PAYMENT SUCCESS + ACCOUNT CREATION
-===================================================== -->
+<div class="bank-title">
+Bank Transfer Details
+</div>
 
-<div
-    class="modal-bg hidden"
-    id="signupModal">
+<div class="bank-row">
+<span>Bank Name</span>
+<span>Meezan Bank</span>
+</div>
 
-    <div class="modal">
+<div class="bank-row">
+<span>Account Name</span>
+<span>Syed Sameer Mehdi</span>
+</div>
 
-        <div class="success">
+<div class="bank-row">
+<span>Account Number</span>
+<span>04090115553300</span>
+</div>
 
-            <div class="success-icon">
-                ✓
-            </div>
-
-            <h2>Payment Successful</h2>
-
-            <p class="modal-sub">
-                Your plan is activated. Create your account
-                to access SLeads.
-            </p>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Full Name
-            </label>
-
-            <input
-                type="text"
-                id="signupName"
-                placeholder="Your name">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Email
-            </label>
-
-            <input
-                type="email"
-                id="signupEmail"
-                placeholder="you@example.com">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Password
-            </label>
-
-            <input
-                type="password"
-                id="signupPassword"
-                placeholder="Create password">
-
-        </div>
-
-
-        <button
-            class="modal-btn"
-            onclick="createAccount()">
-
-            Create Account & Continue
-
-        </button>
-
-    </div>
+<div class="bank-row">
+<span>Payment Email</span>
+<span>naqvishahvlog@gmail.com</span>
+</div>
 
 </div>
 
 
+<div class="form-group">
 
-<!-- =====================================================
-     DASHBOARD
-===================================================== -->
+<label>Your Full Name</label>
 
-<div
-    id="appScreen"
-    class="hidden">
-
-    <div class="app-nav">
-
-        <div class="logo">
-            S<span>Leads</span>
-        </div>
-
-        <div class="app-user" id="appUser">
-            Account
-        </div>
-
-    </div>
-
-
-    <div class="dashboard">
-
-        <div class="dashboard-header">
-
-            <div>
-
-                <h1>
-                    Dashboard
-                </h1>
-
-                <p id="welcomeText">
-                    Welcome to SLeads.
-                </p>
-
-            </div>
-
-
-            <button
-                class="logout-btn"
-                onclick="logout()">
-
-                Logout
-
-            </button>
-
-        </div>
-
-
-        <div class="stats">
-
-            <div class="stat">
-
-                <span>
-                    Current Plan
-                </span>
-
-                <strong id="dashboardPlan">
-                    Basic
-                </strong>
-
-            </div>
-
-
-            <div class="stat">
-
-                <span>
-                    Leads
-                </span>
-
-                <strong>
-                    0
-                </strong>
-
-            </div>
-
-
-            <div class="stat">
-
-                <span>
-                    Searches
-                </span>
-
-                <strong>
-                    0
-                </strong>
-
-            </div>
-
-        </div>
-
-    </div>
+<input
+type="text"
+id="customerName"
+placeholder="Enter your name">
 
 </div>
 
+
+<div class="form-group">
+
+<label>Your Email</label>
+
+<input
+type="email"
+id="customerEmail"
+placeholder="Enter your email">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Transaction ID</label>
+
+<input
+type="text"
+id="transactionId"
+placeholder="Enter bank transaction ID">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Payment Screenshot</label>
+
+<input
+class="file"
+type="file"
+id="paymentProof"
+accept="image/*">
+
+</div>
+
+
+<button class="submit"
+onclick="submitPayment()">
+
+I Have Made The Payment
+
+</button>
+
+
+<button class="cancel"
+onclick="closePayment()">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SUCCESS -->
+
+<div class="modal-bg hidden" id="successModal">
+
+<div class="modal">
+
+<div class="success">
+
+<div class="success-icon">✓</div>
+
+<h2>Payment Submitted</h2>
+
+<p class="sub">
+Your payment details have been submitted.
+Your account will be activated after payment verification.
+</p>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Create Password</label>
+
+<input
+type="password"
+id="accountPassword"
+placeholder="Create your password">
+
+</div>
+
+
+<button class="submit"
+onclick="createAccount()">
+
+Create Account
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard" class="hidden">
+
+<div class="nav">
+
+<div class="logo">S<span>Leads</span></div>
+
+<div id="userEmail"></div>
+
+</div>
+
+<div class="dashboard">
+
+<h1>Welcome to SLeads</h1>
+
+<p id="welcome"></p>
+
+<div class="stats">
+
+<div class="stat">
+<span>Current Plan</span>
+<strong id="currentPlan">-</strong>
+</div>
+
+<div class="stat">
+<span>Leads</span>
+<strong>0</strong>
+</div>
+
+<div class="stat">
+<span>Searches</span>
+<strong>0</strong>
+</div>
+
+</div>
+
+<button class="logout" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</div>
 
 
 <script>
 
-/* =====================================================
-   SLEADS APP
-===================================================== */
-
-let selectedPlan = "";
-let selectedPrice = 0;
+let selectedPlan="";
+let selectedPrice=0;
 
 
-/* ================= PRICING ================= */
+/* PRICING */
 
-function scrollToPricing(){
+function goPricing(){
 
-    document
-        .getElementById("pricing")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
+document
+.getElementById("pricing")
+.scrollIntoView({
+behavior:"smooth"
+});
 
 }
 
 
-/* ================= PAYMENT ================= */
+/* OPEN PAYMENT */
 
-function openPayment(plan, price){
+function openPayment(plan,price){
 
-    selectedPlan = plan;
-    selectedPrice = price;
+selectedPlan=plan;
+selectedPrice=price;
 
-    localStorage.setItem(
-        "selectedPlan",
-        plan
-    );
+document.getElementById("planName")
+.innerText=plan+" Plan";
 
-    localStorage.setItem(
-        "selectedPrice",
-        price
-    );
+document.getElementById("planPrice")
+.innerText="$"+price+"/month";
 
-
-    document.getElementById("selectedPlan")
-        .textContent =
-        plan.charAt(0).toUpperCase()
-        + plan.slice(1)
-        + " Plan";
-
-
-    document.getElementById("selectedPrice")
-        .textContent =
-        "$" + price + "/month";
-
-
-    document
-        .getElementById("paymentModal")
-        .classList.remove("hidden");
+document
+.getElementById("paymentModal")
+.classList.remove("hidden");
 
 }
 
+
+/* CLOSE PAYMENT */
 
 function closePayment(){
 
-    document
-        .getElementById("paymentModal")
-        .classList.add("hidden");
+document
+.getElementById("paymentModal")
+.classList.add("hidden");
 
 }
 
 
-/* ================= CARD FORMAT ================= */
+/* SUBMIT PAYMENT */
+
+function submitPayment(){
+
+let name=
+document.getElementById("customerName")
+.value.trim();
+
+let email=
+document.getElementById("customerEmail")
+.value.trim();
+
+let transaction=
+document.getElementById("transactionId")
+.value.trim();
+
+let proof=
+document.getElementById("paymentProof")
+.files.length;
+
+
+if(!name){
+
+alert("Please enter your full name.");
+return;
+
+}
+
+if(!email || !email.includes("@")){
+
+alert("Please enter a valid email.");
+return;
+
+}
+
+if(!transaction){
+
+alert("Please enter your transaction ID.");
+return;
+
+}
+
+if(!proof){
+
+alert("Please upload your payment screenshot.");
+return;
+
+}
+
+
+/*
+Save payment information locally
+for this frontend version.
+*/
+
+localStorage.setItem(
+"paymentSubmitted",
+"true"
+);
+
+localStorage.setItem(
+"selectedPlan",
+selectedPlan
+);
+
+localStorage.setItem(
+"selectedPrice",
+selectedPrice
+);
+
+localStorage.setItem(
+"customerName",
+name
+);
+
+localStorage.setItem(
+"customerEmail",
+email
+);
+
+localStorage.setItem(
+"transactionId",
+transaction
+);
+
+
+closePayment();
 
 document
-    .getElementById("cardNumber")
-    .addEventListener("input", function(){
-
-        let value =
-            this.value
-            .replace(/\D/g,"")
-            .substring(0,16);
-
-        value =
-            value.match(/.{1,4}/g);
-
-        this.value =
-            value ? value.join(" ") : "";
-
-    });
-
-
-/* ================= PROCESS PAYMENT ================= */
-
-function processPayment(){
-
-    const name =
-        document.getElementById("cardName")
-        .value.trim();
-
-    const card =
-        document.getElementById("cardNumber")
-        .value.replace(/\s/g,"");
-
-    const expiry =
-        document.getElementById("expiry")
-        .value.trim();
-
-    const cvv =
-        document.getElementById("cvv")
-        .value.trim();
-
-
-    if(!name){
-
-        alert("Please enter cardholder name.");
-        return;
-
-    }
-
-
-    if(card.length !== 16){
-
-        alert("Please enter a valid card number.");
-        return;
-
-    }
-
-
-    if(!expiry){
-
-        alert("Please enter card expiry.");
-        return;
-
-    }
-
-
-    if(cvv.length < 3){
-
-        alert("Please enter CVV.");
-        return;
-
-    }
-
-
-    /*
-       TEST PAYMENT SUCCESS
-
-       Real payment gateway will replace
-       this section in the next step.
-    */
-
-    localStorage.setItem(
-        "paymentStatus",
-        "paid"
-    );
-
-    localStorage.setItem(
-        "selectedPlan",
-        selectedPlan
-    );
-
-    localStorage.setItem(
-        "selectedPrice",
-        selectedPrice
-    );
-
-
-    closePayment();
-
-
-    document
-        .getElementById("signupModal")
-        .classList.remove("hidden");
+.getElementById("successModal")
+.classList.remove("hidden");
 
 }
 
 
-/* ================= CREATE ACCOUNT ================= */
+/* CREATE ACCOUNT */
 
 function createAccount(){
 
-    const name =
-        document.getElementById("signupName")
-        .value.trim();
+let password=
+document.getElementById("accountPassword")
+.value;
 
-    const email =
-        document.getElementById("signupEmail")
-        .value.trim();
+if(password.length<6){
 
-    const password =
-        document.getElementById("signupPassword")
-        .value;
+alert(
+"Password must be at least 6 characters."
+);
 
-
-    if(!name){
-
-        alert("Please enter your name.");
-        return;
-
-    }
-
-
-    if(!email || !email.includes("@")){
-
-        alert("Please enter a valid email.");
-        return;
-
-    }
-
-
-    if(password.length < 6){
-
-        alert(
-            "Password must contain at least 6 characters."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Store demo account locally.
-
-       Real authentication will be connected
-       to Supabase in the next step.
-    */
-
-    localStorage.setItem(
-        "sLeadsUser",
-        JSON.stringify({
-            name:name,
-            email:email,
-            plan:selectedPlan,
-            price:selectedPrice
-        })
-    );
-
-
-    localStorage.setItem(
-        "loggedIn",
-        "true"
-    );
-
-
-    showDashboard();
+return;
 
 }
 
 
-/* ================= DASHBOARD ================= */
+let user={
+
+name:
+localStorage.getItem("customerName"),
+
+email:
+localStorage.getItem("customerEmail"),
+
+plan:
+localStorage.getItem("selectedPlan"),
+
+price:
+localStorage.getItem("selectedPrice")
+
+};
+
+
+localStorage.setItem(
+"sLeadsUser",
+JSON.stringify(user)
+);
+
+localStorage.setItem(
+"loggedIn",
+"true"
+);
+
+
+showDashboard();
+
+}
+
+
+/* DASHBOARD */
 
 function showDashboard(){
 
-    const user =
-        JSON.parse(
-            localStorage.getItem("sLeadsUser")
-        );
+let user=
+JSON.parse(
+localStorage.getItem("sLeadsUser")
+);
+
+if(!user)return;
 
 
-    if(!user){
+document
+.getElementById("website")
+.classList.add("hidden");
 
-        return;
+document
+.getElementById("successModal")
+.classList.add("hidden");
 
-    }
-
-
-    document
-        .getElementById("mainWebsite")
-        .classList.add("hidden");
-
-
-    document
-        .getElementById("signupModal")
-        .classList.add("hidden");
+document
+.getElementById("dashboard")
+.classList.remove("hidden");
 
 
-    document
-        .getElementById("appScreen")
-        .classList.remove("hidden");
+document
+.getElementById("userEmail")
+.innerText=user.email;
 
+document
+.getElementById("welcome")
+.innerText=
+"Welcome, "+user.name+".";
 
-    document
-        .getElementById("appUser")
-        .textContent =
-        user.email;
-
-
-    document
-        .getElementById("welcomeText")
-        .textContent =
-        "Welcome, " + user.name + ".";
-
-
-    document
-        .getElementById("dashboardPlan")
-        .textContent =
-        user.plan.charAt(0).toUpperCase()
-        + user.plan.slice(1);
+document
+.getElementById("currentPlan")
+.innerText=
+user.plan+" Plan";
 
 }
 
 
-/* ================= LOGOUT ================= */
+/* LOGOUT */
 
 function logout(){
 
-    localStorage.removeItem("loggedIn");
+localStorage.removeItem("loggedIn");
 
-    document
-        .getElementById("appScreen")
-        .classList.add("hidden");
+document
+.getElementById("dashboard")
+.classList.add("hidden");
 
-    document
-        .getElementById("mainWebsite")
-        .classList.remove("hidden");
+document
+.getElementById("website")
+.classList.remove("hidden");
 
 }
 
 
-/* ================= AUTO LOGIN ================= */
+/* AUTO LOGIN */
 
 window.addEventListener(
-    "DOMContentLoaded",
-    function(){
+"DOMContentLoaded",
+function(){
 
-        const loggedIn =
-            localStorage.getItem("loggedIn");
+if(
+localStorage.getItem("loggedIn")==="true"
+){
 
-        const user =
-            localStorage.getItem("sLeadsUser");
+showDashboard();
 
+}
 
-        if(
-            loggedIn === "true"
-            && user
-        ){
-
-            showDashboard();
-
-        }
-
-    }
-);
+});
 
 </script>
 
