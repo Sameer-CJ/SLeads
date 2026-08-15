@@ -262,15 +262,20 @@
     }
 
     .platform-icon {
-      width: 25px;
-      height: 25px;
+      width: 30px;
+      height: 30px;
       display: grid;
       place-items: center;
-      border-radius: 7px;
-      background: #191b23;
+      border-radius: 8px;
+      background: #181a22;
       color: #8d87ff;
-      font-size: 12px;
-      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .platform-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     /* ================= DASHBOARD ================= */
@@ -507,6 +512,7 @@
       font-weight: 700;
       font-size: 14px;
       transition: .2s;
+      cursor: pointer;
     }
 
     .price-card.popular .price-btn {
@@ -537,6 +543,148 @@
       color: var(--green);
       margin-right: 9px;
       font-weight: 800;
+    }
+
+    /* ================= PAYMENT ================= */
+
+    .payment-card {
+      max-width: 760px;
+      margin: auto;
+      background: linear-gradient(145deg, #11131a, #0c0e13);
+      border: 1px solid #2a2d37;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.3);
+    }
+
+    .payment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #252832;
+    }
+
+    .payment-label {
+      color: #8e88ff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .payment-header h3 {
+      font-size: 25px;
+      margin-bottom: 3px;
+    }
+
+    .payment-header p {
+      color: #858995;
+      font-size: 13px;
+    }
+
+    .bank-logo {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: #1c1932;
+      border: 1px solid #383263;
+      color: #9a94ff;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .payment-details {
+      margin-top: 10px;
+    }
+
+    .payment-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid #20232b;
+    }
+
+    .payment-row:last-child {
+      border-bottom: 0;
+    }
+
+    .payment-row > span {
+      color: #858995;
+      font-size: 13px;
+    }
+
+    .payment-row strong {
+      color: #f4f4f6;
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .account-number {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copy-btn {
+      border: 1px solid #353844;
+      background: #181a21;
+      color: #d4d5da;
+      padding: 7px 12px;
+      border-radius: 7px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .copy-btn:hover {
+      background: #232630;
+      border-color: #4a4d58;
+    }
+
+    .payment-note {
+      display: flex;
+      gap: 13px;
+      margin-top: 22px;
+      padding: 17px;
+      border-radius: 11px;
+      background: #101c17;
+      border: 1px solid #214a37;
+    }
+
+    .payment-note-icon {
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #193b2b;
+      color: var(--green);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .payment-note strong {
+      font-size: 13px;
+    }
+
+    .payment-note p {
+      color: #8f9a94;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .payment-action {
+      margin-top: 22px;
+      text-align: center;
+    }
+
+    .payment-action .primary-btn {
+      width: 100%;
     }
 
     /* ================= CTA ================= */
@@ -658,6 +806,10 @@
         flex-direction: column;
         gap: 18px;
       }
+
+      .payment-card {
+        padding: 21px;
+      }
     }
 
     @media (max-width: 450px) {
@@ -672,6 +824,29 @@
 
       .nav-btn {
         padding: 9px 12px;
+      }
+
+      .payment-header {
+        align-items: flex-start;
+      }
+
+      .payment-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .payment-row strong {
+        text-align: left;
+      }
+
+      .account-number {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .payment-note {
+        align-items: flex-start;
       }
     }
   </style>
@@ -693,6 +868,7 @@
         <a href="#features">Features</a>
         <a href="#platforms">Platforms</a>
         <a href="#pricing">Pricing</a>
+        <a href="#payment">Payment</a>
       </div>
 
       <div class="nav-actions">
@@ -730,6 +906,7 @@
         </p>
 
         <div class="hero-buttons">
+
           <a href="#pricing" class="primary-btn">
             Start Finding Leads →
           </a>
@@ -737,6 +914,7 @@
           <a href="#platforms" class="secondary-btn">
             Explore Platforms
           </a>
+
         </div>
 
       </div>
@@ -754,29 +932,126 @@
 
       <div class="platforms">
 
+        <!-- REDDIT -->
+
         <div class="platform">
-          <div class="platform-icon">R</div>
+
+          <div class="platform-icon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M14.5 15.5c-1.8 1.7-5.8 1.8-7.5-.2-1.7-2-1.1-5.7.8-7.4 1.8-1.6 4.7-1.4 6.3.1 1.7 1.5 2 4.1.4 5.8z"/>
+            </svg>
+
+          </div>
+
           Reddit
+
         </div>
 
+
+        <!-- INSTAGRAM -->
+
         <div class="platform">
-          <div class="platform-icon">IG</div>
+
+          <div class="platform-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+
+              <circle
+                cx="12"
+                cy="12"
+                r="4.2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+
+              <circle
+                cx="17.4"
+                cy="6.7"
+                r="1.2"
+              />
+
+            </svg>
+
+          </div>
+
           Instagram
+
         </div>
 
+
+        <!-- FACEBOOK -->
+
         <div class="platform">
-          <div class="platform-icon">f</div>
+
+          <div class="platform-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path d="M14 8h3V4h-3c-2.8 0-5 2.2-5 5v3H6v4h3v5h4v-5h3.2l.8-4H13V9c0-.6.4-1 1-1z"/>
+
+            </svg>
+
+          </div>
+
           Facebook
+
         </div>
 
+
+        <!-- X -->
+
         <div class="platform">
-          <div class="platform-icon">X</div>
+
+          <div class="platform-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M5 4l14 16M19 4L5 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+
+            </svg>
+
+          </div>
+
           X
+
         </div>
 
+
+        <!-- LINKEDIN -->
+
         <div class="platform">
-          <div class="platform-icon">in</div>
+
+          <div class="platform-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path d="M5 4h3.5v16H5V4zm1.75-2C7.85 2 8.7 2.85 8.7 3.95S7.85 5.9 6.75 5.9 4.8 5.05 4.8 3.95 5.65 2 6.75 2zM11 9h3.4v1.9h.05c.5-1 1.75-2.15 3.8-2.15 4.05 0 4.75 2.65 4.75 6.1V20h-3.5v-4.55c0-1.1-.02-2.5-1.55-2.5-1.55 0-1.8 1.2-1.8 2.42V20H11V9z"/>
+
+            </svg>
+
+          </div>
+
           LinkedIn
+
         </div>
 
       </div>
@@ -803,18 +1078,33 @@
       <div class="dash-grid">
 
         <div class="dash-card">
+
           <small>Total Leads</small>
-          <strong id="totalLeads">12,482</strong>
+
+          <strong id="totalLeads">
+            12,482
+          </strong>
+
         </div>
 
         <div class="dash-card">
+
           <small>Qualified Leads</small>
-          <strong>7,931</strong>
+
+          <strong>
+            7,931
+          </strong>
+
         </div>
 
         <div class="dash-card">
+
           <small>Conversion</small>
-          <strong>21.4%</strong>
+
+          <strong>
+            21.4%
+          </strong>
+
         </div>
 
       </div>
@@ -908,9 +1198,13 @@
 
         <div class="feature">
 
-          <div class="feature-icon">⌕</div>
+          <div class="feature-icon">
+            ⌕
+          </div>
 
-          <h3>Lead Discovery</h3>
+          <h3>
+            Lead Discovery
+          </h3>
 
           <p>
             Search for relevant prospects and opportunities
@@ -922,9 +1216,13 @@
 
         <div class="feature">
 
-          <div class="feature-icon">✦</div>
+          <div class="feature-icon">
+            ✦
+          </div>
 
-          <h3>Smart Qualification</h3>
+          <h3>
+            Smart Qualification
+          </h3>
 
           <p>
             Organize prospects by relevance, source,
@@ -936,9 +1234,13 @@
 
         <div class="feature">
 
-          <div class="feature-icon">↗</div>
+          <div class="feature-icon">
+            ↗
+          </div>
 
-          <h3>Lead Management</h3>
+          <h3>
+            Lead Management
+          </h3>
 
           <p>
             Keep your prospects organized and move them
@@ -950,9 +1252,13 @@
 
         <div class="feature">
 
-          <div class="feature-icon">⚡</div>
+          <div class="feature-icon">
+            ⚡
+          </div>
 
-          <h3>Automation</h3>
+          <h3>
+            Automation
+          </h3>
 
           <p>
             Build workflows that reduce repetitive lead
@@ -964,9 +1270,13 @@
 
         <div class="feature">
 
-          <div class="feature-icon">▣</div>
+          <div class="feature-icon">
+            ▣
+          </div>
 
-          <h3>Central Dashboard</h3>
+          <h3>
+            Central Dashboard
+          </h3>
 
           <p>
             View lead activity, sources, status and
@@ -978,9 +1288,13 @@
 
         <div class="feature">
 
-          <div class="feature-icon">↓</div>
+          <div class="feature-icon">
+            ↓
+          </div>
 
-          <h3>Export Leads</h3>
+          <h3>
+            Export Leads
+          </h3>
 
           <p>
             Export your lead data for outreach,
@@ -1014,9 +1328,13 @@
 
         <div class="feature">
 
-          <div class="feature-icon">01</div>
+          <div class="feature-icon">
+            01
+          </div>
 
-          <h3>Choose your audience</h3>
+          <h3>
+            Choose your audience
+          </h3>
 
           <p>
             Define the niche, industry, keywords or
@@ -1025,11 +1343,16 @@
 
         </div>
 
+
         <div class="feature">
 
-          <div class="feature-icon">02</div>
+          <div class="feature-icon">
+            02
+          </div>
 
-          <h3>Discover leads</h3>
+          <h3>
+            Discover leads
+          </h3>
 
           <p>
             Find relevant conversations, profiles,
@@ -1038,11 +1361,16 @@
 
         </div>
 
+
         <div class="feature">
 
-          <div class="feature-icon">03</div>
+          <div class="feature-icon">
+            03
+          </div>
 
-          <h3>Qualify & organize</h3>
+          <h3>
+            Qualify & organize
+          </h3>
 
           <p>
             Review the results, qualify prospects and
@@ -1080,7 +1408,9 @@
 
         <div class="price-card">
 
-          <h3>Basic</h3>
+          <h3>
+            Basic
+          </h3>
 
           <p>
             For individuals getting started with lead generation.
@@ -1090,18 +1420,39 @@
             $19<span>/month</span>
           </div>
 
-          <a href="#" class="price-btn">
+          <a
+            href="#payment"
+            class="price-btn"
+            onclick="selectPlan('Basic', '$19/month')"
+          >
             Start Basic
           </a>
 
           <ul class="features-list">
 
-            <li>Lead discovery</li>
-            <li>Reddit leads</li>
-            <li>Instagram leads</li>
-            <li>Facebook leads</li>
-            <li>Basic lead dashboard</li>
-            <li>Lead export</li>
+            <li>
+              Lead discovery
+            </li>
+
+            <li>
+              Reddit leads
+            </li>
+
+            <li>
+              Instagram leads
+            </li>
+
+            <li>
+              Facebook leads
+            </li>
+
+            <li>
+              Basic lead dashboard
+            </li>
+
+            <li>
+              Lead export
+            </li>
 
           </ul>
 
@@ -1116,7 +1467,9 @@
             Most Popular
           </div>
 
-          <h3>Growth</h3>
+          <h3>
+            Growth
+          </h3>
 
           <p>
             For growing businesses that need more leads.
@@ -1126,19 +1479,43 @@
             $39<span>/month</span>
           </div>
 
-          <a href="#" class="price-btn">
+          <a
+            href="#payment"
+            class="price-btn"
+            onclick="selectPlan('Growth', '$39/month')"
+          >
             Start Growth
           </a>
 
           <ul class="features-list">
 
-            <li>Everything in Basic</li>
-            <li>LinkedIn leads</li>
-            <li>X leads</li>
-            <li>Advanced filters</li>
-            <li>Higher lead limits</li>
-            <li>Advanced dashboard</li>
-            <li>Priority processing</li>
+            <li>
+              Everything in Basic
+            </li>
+
+            <li>
+              LinkedIn leads
+            </li>
+
+            <li>
+              X leads
+            </li>
+
+            <li>
+              Advanced filters
+            </li>
+
+            <li>
+              Higher lead limits
+            </li>
+
+            <li>
+              Advanced dashboard
+            </li>
+
+            <li>
+              Priority processing
+            </li>
 
           </ul>
 
@@ -1149,7 +1526,9 @@
 
         <div class="price-card">
 
-          <h3>Pro</h3>
+          <h3>
+            Pro
+          </h3>
 
           <p>
             For agencies and teams running serious lead operations.
@@ -1159,21 +1538,211 @@
             $89<span>/month</span>
           </div>
 
-          <a href="#" class="price-btn">
+          <a
+            href="#payment"
+            class="price-btn"
+            onclick="selectPlan('Pro', '$89/month')"
+          >
             Start Pro
           </a>
 
           <ul class="features-list">
 
-            <li>Everything in Growth</li>
-            <li>Maximum lead limits</li>
-            <li>Advanced automation</li>
-            <li>Bulk lead processing</li>
-            <li>Advanced exports</li>
-            <li>Team-ready workflows</li>
-            <li>Priority support</li>
+            <li>
+              Everything in Growth
+            </li>
+
+            <li>
+              Maximum lead limits
+            </li>
+
+            <li>
+              Advanced automation
+            </li>
+
+            <li>
+              Bulk lead processing
+            </li>
+
+            <li>
+              Advanced exports
+            </li>
+
+            <li>
+              Team-ready workflows
+            </li>
+
+            <li>
+              Priority support
+            </li>
 
           </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= PAYMENT ================= -->
+
+    <section class="section container" id="payment">
+
+      <div class="section-heading">
+
+        <h2>
+          Complete your payment.
+        </h2>
+
+        <p>
+          Select your plan, transfer the amount to the account below,
+          and keep your payment proof for verification.
+        </p>
+
+      </div>
+
+
+      <div class="payment-card">
+
+        <div class="payment-header">
+
+          <div>
+
+            <div class="payment-label">
+              PAYMENT METHOD
+            </div>
+
+            <h3>
+              Meezan Bank
+            </h3>
+
+            <p>
+              Manual bank transfer
+            </p>
+
+          </div>
+
+          <div class="bank-logo">
+            M
+          </div>
+
+        </div>
+
+
+        <div class="payment-details">
+
+          <div class="payment-row">
+
+            <span>
+              Selected Plan
+            </span>
+
+            <strong id="selectedPlan">
+              Choose a plan above
+            </strong>
+
+          </div>
+
+
+          <div class="payment-row">
+
+            <span>
+              Payment Amount
+            </span>
+
+            <strong id="selectedPrice">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="payment-row">
+
+            <span>
+              Bank Name
+            </span>
+
+            <strong>
+              Meezan Bank
+            </strong>
+
+          </div>
+
+
+          <div class="payment-row">
+
+            <span>
+              Account Name
+            </span>
+
+            <strong>
+              Syed Sameer Mehdi
+            </strong>
+
+          </div>
+
+
+          <div class="payment-row">
+
+            <span>
+              Account Number
+            </span>
+
+            <div class="account-number">
+
+              <strong id="accountNumber">
+                04090115553300
+              </strong>
+
+              <button
+                type="button"
+                class="copy-btn"
+                onclick="copyAccountNumber()"
+              >
+                Copy
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="payment-note">
+
+          <div class="payment-note-icon">
+            ✓
+          </div>
+
+          <div>
+
+            <strong>
+              Payment verification
+            </strong>
+
+            <p>
+              After completing the bank transfer, send your payment
+              proof to the SLeads administrator for verification
+              and account activation.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="payment-action">
+
+          <button
+            type="button"
+            class="primary-btn"
+            onclick="paymentInstruction()"
+          >
+            I've Made the Payment →
+          </button>
 
         </div>
 
@@ -1198,7 +1767,10 @@
             SLeads helps you find the opportunities faster.
           </p>
 
-          <a href="#pricing" class="primary-btn">
+          <a
+            href="#pricing"
+            class="primary-btn"
+          >
             Start Finding Leads →
           </a>
 
@@ -1222,10 +1794,31 @@
       </div>
 
       <div class="footer-links">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+
+        <a href="#features">
+          Features
+        </a>
+
+        <a href="#platforms">
+          Platforms
+        </a>
+
+        <a href="#pricing">
+          Pricing
+        </a>
+
+        <a href="#payment">
+          Payment
+        </a>
+
+        <a href="#">
+          Privacy
+        </a>
+
+        <a href="#">
+          Terms
+        </a>
+
       </div>
 
     </div>
@@ -1237,8 +1830,7 @@
 
   <script>
 
-    // Demo dashboard counter.
-    // Real lead data will be connected later through the backend.
+    /* ================= DEMO DASHBOARD COUNTER ================= */
 
     let leads = 12482;
 
@@ -1246,27 +1838,125 @@
 
       leads += Math.floor(Math.random() * 3);
 
-      document.getElementById("totalLeads").textContent =
-        leads.toLocaleString();
+      const totalLeads =
+        document.getElementById("totalLeads");
+
+      if (totalLeads) {
+
+        totalLeads.textContent =
+          leads.toLocaleString();
+
+      }
 
     }, 5000);
 
 
-    // Smooth button feedback
+    /* ================= PLAN SELECTION ================= */
 
-    document.querySelectorAll(".price-btn").forEach(button => {
+    function selectPlan(plan, price) {
 
-      button.addEventListener("click", function(event) {
+      document.getElementById("selectedPlan").textContent =
+        plan;
 
-        event.preventDefault();
+      document.getElementById("selectedPrice").textContent =
+        price;
+
+    }
+
+
+    /* ================= COPY ACCOUNT NUMBER ================= */
+
+    function copyAccountNumber() {
+
+      const accountNumber =
+        "04090115553300";
+
+      const button =
+        document.querySelector(".copy-btn");
+
+      if (
+        navigator.clipboard &&
+        window.isSecureContext
+      ) {
+
+        navigator.clipboard.writeText(accountNumber);
+
+        button.textContent =
+          "Copied!";
+
+        setTimeout(() => {
+
+          button.textContent =
+            "Copy";
+
+        }, 1800);
+
+      } else {
+
+        const textarea =
+          document.createElement("textarea");
+
+        textarea.value =
+          accountNumber;
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+
+        document.execCommand("copy");
+
+        textarea.remove();
+
+        button.textContent =
+          "Copied!";
+
+        setTimeout(() => {
+
+          button.textContent =
+            "Copy";
+
+        }, 1800);
+
+      }
+
+    }
+
+
+    /* ================= PAYMENT BUTTON ================= */
+
+    function paymentInstruction() {
+
+      const selectedPlan =
+        document.getElementById("selectedPlan").textContent;
+
+      const selectedPrice =
+        document.getElementById("selectedPrice").textContent;
+
+      if (
+        selectedPlan === "Choose a plan above"
+      ) {
 
         alert(
-          "SLeads checkout will be connected in the payment setup step."
+          "Please choose a Basic, Growth or Pro plan first."
         );
 
-      });
+        document.getElementById("pricing").scrollIntoView({
+          behavior: "smooth"
+        });
 
-    });
+        return;
+
+      }
+
+      alert(
+        "Plan: " +
+        selectedPlan +
+        "\nAmount: " +
+        selectedPrice +
+        "\n\nPlease complete the bank transfer to the Meezan Bank account shown above, then submit your payment proof for verification."
+      );
+
+    }
 
   </script>
 
