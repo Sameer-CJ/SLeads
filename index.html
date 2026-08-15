@@ -689,10 +689,206 @@ button{
     }
 
 }
+
+/* ================= ACCESS APPROVAL ================= */
+
+#approvalGate{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#070911;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.approval-box{
+    width:460px;
+    max-width:100%;
+    background:#10141f;
+    border:1px solid #202738;
+    border-radius:20px;
+    padding:38px;
+    text-align:center;
+    box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.approval-icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 20px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(116,103,255,.12);
+    font-size:30px;
+}
+
+.approval-box h1{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.approval-box p{
+    color:#7f899d;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.approval-status{
+    margin:22px 0;
+    padding:13px 15px;
+    border:1px solid #202738;
+    background:#141925;
+    border-radius:10px;
+    font-size:12px;
+}
+
+.approval-status.pending{color:#f2c85b}
+.approval-status.rejected{color:#ff6262}
+.approval-status.approved{color:#35d69a}
+
+.admin-panel{
+    display:none;
+}
+
+.admin-user{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    align-items:center;
+    padding:17px;
+    margin-bottom:10px;
+    background:#10141f;
+    border:1px solid #202738;
+    border-radius:12px;
+}
+
+.admin-user-info strong{
+    font-size:13px;
+}
+
+.admin-user-info small{
+    display:block;
+    color:#7f899d;
+    margin-top:5px;
+}
+
+.admin-actions{
+    display:flex;
+    gap:7px;
+}
+
+.admin-approve,
+.admin-reject{
+    border:0;
+    border-radius:8px;
+    padding:9px 12px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.admin-approve{
+    background:#35d69a;
+    color:#06120e;
+}
+
+.admin-reject{
+    background:#ff6262;
+    color:#fff;
+}
+
+.account-card{
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+.account-card small{
+    display:block;
+    color:var(--muted);
+    margin-bottom:5px;
+    font-size:10px;
+}
+
+.account-card strong{
+    font-size:13px;
+}
+
+
 </style>
 </head>
 
 <body>
+
+<!-- ================= ACCESS APPROVAL GATE ================= -->
+
+<div id="approvalGate">
+
+    <div class="approval-box">
+
+        <div class="approval-icon" id="approvalIcon">⏳</div>
+
+        <h1 id="approvalTitle">
+            Account Pending Approval
+        </h1>
+
+        <p id="approvalMessage">
+            Your payment has been received. Your account is waiting for admin approval.
+        </p>
+
+        <div class="approval-status pending" id="approvalStatus">
+            ● Pending admin approval
+        </div>
+
+        <button class="primary" style="width:100%" onclick="approvalLogout()">
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ADMIN APPROVAL PAGE ================= -->
+
+<section class="content admin-panel" id="adminPage" style="margin-left:245px;">
+
+    <div class="page-header">
+
+        <div>
+            <h1>Access Approval</h1>
+            <p>Review paid accounts and approve dashboard access.</p>
+        </div>
+
+        <button class="primary" onclick="loadApprovalUsers()">
+            Refresh
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Pending Accounts</h3>
+            <span id="pendingCount">0</span>
+        </div>
+
+        <div class="card-body" id="approvalUsers">
+            <div style="text-align:center;padding:30px;color:var(--muted)">
+                Loading accounts...
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
 
 <!-- ================= SIDEBAR ================= -->
 
@@ -774,6 +970,17 @@ class="nav-btn"
 onclick="openSettings()">
 <span>⚙</span>
 <span>Settings</span>
+</button>
+
+
+
+<button
+class="nav-btn"
+id="adminNavButton"
+onclick="openAdminPanel()"
+style="display:none;">
+<span>✓</span>
+<span>Access Approval</span>
 </button>
 
 
@@ -1940,6 +2147,23 @@ Settings
 Manage your SLeads account.
 </p>
 
+<div class="account-card">
+    <small>ACCOUNT NAME</small>
+    <strong id="settingsAccountName">—</strong>
+</div>
+
+<div class="account-card">
+    <small>EMAIL</small>
+    <strong id="settingsEmail">—</strong>
+</div>
+
+<div class="account-card">
+    <small>PLAN</small>
+    <strong id="settingsPlan">Free</strong>
+</div>
+
+
+
 
 <button
 class="nav-btn"
@@ -2046,7 +2270,13 @@ Cancel
 </div>
 
 
+
 <script>
+
+/* =========================================================
+   SLEADS DASHBOARD + ACCESS APPROVAL
+   ========================================================= */
+
 
 /* ================= USER ================= */
 
@@ -2067,6 +2297,173 @@ function getUser(){
 }
 
 
+/* ================= APPROVAL DATA ================= */
+
+function getApprovalStatus(){
+
+    return localStorage.getItem(
+        "sLeadsAccessStatus"
+    ) || "pending";
+
+}
+
+
+function setApprovalStatus(status){
+
+    localStorage.setItem(
+        "sLeadsAccessStatus",
+        status
+    );
+
+}
+
+
+/* ================= ADMIN MODE ================= */
+
+function isAdmin(){
+
+    const user = getUser();
+
+    if(!user) return false;
+
+    return (
+        user.isAdmin === true ||
+        user.role === "admin" ||
+        user.email === "naqvishahvlog@gmail.com"
+    );
+
+}
+
+
+/* ================= ACCESS GATE ================= */
+
+function checkAccess(){
+
+    const user = getUser();
+
+    if(!user){
+
+        window.location.href = "index.html";
+
+        return false;
+
+    }
+
+    /* Admin always gets access */
+
+    if(isAdmin()){
+
+        document
+        .getElementById("adminNavButton")
+        .style.display = "flex";
+
+        return true;
+
+    }
+
+
+    const status = getApprovalStatus();
+
+
+    if(status === "approved"){
+
+        return true;
+
+    }
+
+
+    showApprovalGate(status);
+
+    return false;
+
+}
+
+
+function showApprovalGate(status){
+
+    const gate =
+    document.getElementById(
+        "approvalGate"
+    );
+
+    const icon =
+    document.getElementById(
+        "approvalIcon"
+    );
+
+    const title =
+    document.getElementById(
+        "approvalTitle"
+    );
+
+    const message =
+    document.getElementById(
+        "approvalMessage"
+    );
+
+    const statusBox =
+    document.getElementById(
+        "approvalStatus"
+    );
+
+
+    gate.style.display = "flex";
+
+
+    if(status === "rejected"){
+
+        icon.innerText = "✕";
+
+        title.innerText =
+        "Access Not Approved";
+
+        message.innerText =
+        "Your account access was not approved. Please contact support if you believe this is a mistake.";
+
+        statusBox.className =
+        "approval-status rejected";
+
+        statusBox.innerText =
+        "● Access rejected";
+
+        return;
+
+    }
+
+
+    icon.innerText = "⏳";
+
+    title.innerText =
+    "Account Pending Approval";
+
+    message.innerText =
+    "Your payment has been received. Your account is waiting for admin approval.";
+
+    statusBox.className =
+    "approval-status pending";
+
+    statusBox.innerText =
+    "● Pending admin approval";
+
+}
+
+
+function approvalLogout(){
+
+    localStorage.removeItem(
+        "loggedIn"
+    );
+
+    localStorage.removeItem(
+        "sLeadsUser"
+    );
+
+    window.location.href =
+    "index.html";
+
+}
+
+
 /* ================= LOAD ================= */
 
 window.addEventListener(
@@ -2075,44 +2472,97 @@ function(){
 
     loadTheme();
 
-    const user=getUser();
+    const user = getUser();
 
-    if(user){
 
-        const name=
-        user.name ||
-        "User";
+    if(!user){
 
-        document
-        .getElementById("userName")
-        .innerText=name;
+        window.location.href =
+        "index.html";
 
-        document
-        .getElementById("workspaceName")
-        .innerText=
-        user.business ||
-        name+"'s Workspace";
-
-        document
-        .getElementById("avatar")
-        .innerText=
-        name.charAt(0).toUpperCase();
-
-        document
-        .getElementById("planValue")
-        .innerText=
-        user.plan ||
-        "Free";
-
-        document
-        .getElementById("planName")
-        .innerText=
-        user.plan ||
-        "Free";
+        return;
 
     }
 
+
+    const name =
+    user.name ||
+    user.fullName ||
+    "User";
+
+
+    document
+    .getElementById("workspaceName")
+    .innerText =
+    user.business ||
+    name + "'s Workspace";
+
+
+    document
+    .getElementById("avatar")
+    .innerText =
+    name.charAt(0).toUpperCase();
+
+
+    document
+    .getElementById("planValue")
+    .innerText =
+    user.plan ||
+    "Free";
+
+
+    document
+    .getElementById("planName")
+    .innerText =
+    user.plan ||
+    "Free";
+
+
+    const accountName =
+    document.getElementById(
+        "settingsAccountName"
+    );
+
+    const email =
+    document.getElementById(
+        "settingsEmail"
+    );
+
+    const plan =
+    document.getElementById(
+        "settingsPlan"
+    );
+
+
+    if(accountName)
+        accountName.innerText =
+        name;
+
+
+    if(email)
+        email.innerText =
+        user.email ||
+        "—";
+
+
+    if(plan)
+        plan.innerText =
+        user.plan ||
+        "Free";
+
+
     loadKeywords();
+
+
+    const allowed =
+    checkAccess();
+
+
+    if(!allowed && !isAdmin()){
+
+        return;
+
+    }
 
 });
 
@@ -2130,15 +2580,17 @@ function showPage(page,button){
     });
 
 
-    const target=
+    const target =
     document.getElementById(
-        page+"Page"
+        page + "Page"
     );
 
 
     if(target){
 
-        target.classList.remove("hidden");
+        target.classList.remove(
+            "hidden"
+        );
 
     }
 
@@ -2147,19 +2599,23 @@ function showPage(page,button){
     .querySelectorAll(".nav-btn")
     .forEach(function(btn){
 
-        btn.classList.remove("active");
+        btn.classList.remove(
+            "active"
+        );
 
     });
 
 
     if(button){
 
-        button.classList.add("active");
+        button.classList.add(
+            "active"
+        );
 
     }
 
 
-    const names={
+    const names = {
 
         overview:"Overview",
         leads:"Leads",
@@ -2171,10 +2627,19 @@ function showPage(page,button){
     };
 
 
-    document
-    .getElementById("pageName")
-    .innerText=
-    names[page] || "Dashboard";
+    const pageName =
+    document.getElementById(
+        "pageName"
+    );
+
+
+    if(pageName){
+
+        pageName.innerText =
+        names[page] ||
+        "Dashboard";
+
+    }
 
 }
 
@@ -2184,11 +2649,14 @@ function showPage(page,button){
 function loadTheme(){
 
     if(
-        localStorage.getItem("sLeadsTheme")
-        ==="light"
+        localStorage.getItem(
+            "sLeadsTheme"
+        ) === "light"
     ){
 
-        document.body.classList.add("light");
+        document.body.classList.add(
+            "light"
+        );
 
     }
 
@@ -2197,13 +2665,19 @@ function loadTheme(){
 
 function toggleTheme(){
 
-    document.body.classList.toggle("light");
+    document.body.classList.toggle(
+        "light"
+    );
+
 
     localStorage.setItem(
         "sLeadsTheme",
-        document.body.classList.contains("light")
-        ?"light"
-        :"dark"
+
+        document.body.classList.contains(
+            "light"
+        )
+        ? "light"
+        : "dark"
     );
 
 }
@@ -2213,16 +2687,24 @@ function toggleTheme(){
 
 function runSearch(){
 
-    const keyword=
+    if(!checkAccess())
+        return;
+
+
+    const keyword =
     document
-    .getElementById("searchKeyword")
+    .getElementById(
+        "searchKeyword"
+    )
     .value
     .trim();
 
 
-    const platform=
+    const platform =
     document
-    .getElementById("searchPlatform")
+    .getElementById(
+        "searchPlatform"
+    )
     .value;
 
 
@@ -2238,14 +2720,18 @@ function runSearch(){
 
 
     document
-    .getElementById("resultStatus")
-    .innerText=
+    .getElementById(
+        "resultStatus"
+    )
+    .innerText =
     "Searching...";
 
 
     document
-    .getElementById("searchResults")
-    .innerHTML=`
+    .getElementById(
+        "searchResults"
+    )
+    .innerHTML = `
 
         <div style="
         text-align:center;
@@ -2253,38 +2739,44 @@ function runSearch(){
         color:var(--muted);
         ">
 
-        <div style="
-        font-size:28px;
-        margin-bottom:10px;
-        ">
-        ✦
-        </div>
+            <div style="
+            font-size:28px;
+            margin-bottom:10px;
+            ">
+            ✦
+            </div>
 
-        SLeads is preparing your search for
-        <strong style="color:var(--text)">
-        ${escapeHtml(keyword)}
-        </strong>
-        on ${escapeHtml(platform)}.
+            SLeads is preparing your search for
 
-        <br><br>
+            <strong style="color:var(--text)">
+            ${escapeHtml(keyword)}
+            </strong>
 
-        <span style="font-size:10px;">
-        Connect your real lead-generation backend
-        to return live results.
-        </span>
+            on
+            ${escapeHtml(platform)}.
+
+            <br><br>
+
+            <span style="font-size:10px;">
+            Connect the live lead-generation backend
+            to return real results.
+            </span>
 
         </div>
 
     `;
 
 
-    let usage=
+    let usage =
     parseInt(
-        localStorage.getItem("sLeadsSearches") ||
-        "0"
+        localStorage.getItem(
+            "sLeadsSearches"
+        ) || "0"
     );
 
+
     usage++;
+
 
     localStorage.setItem(
         "sLeadsSearches",
@@ -2292,9 +2784,15 @@ function runSearch(){
     );
 
 
-    document
-    .getElementById("searchUsage")
-    .innerText=usage;
+    const usageBox =
+    document.getElementById(
+        "searchUsage"
+    );
+
+
+    if(usageBox)
+        usageBox.innerText =
+        usage;
 
 }
 
@@ -2303,34 +2801,65 @@ function runSearch(){
 
 function loadKeywords(){
 
-    let keywords=
-    JSON.parse(
-        localStorage.getItem("sLeadsKeywords") ||
-        "[]"
+    const box =
+    document.getElementById(
+        "keywordList"
     );
 
 
-    renderKeywords(keywords);
+    const count =
+    document.getElementById(
+        "keywordCount"
+    );
+
+
+    if(!box || !count)
+        return;
+
+
+    let keywords =
+    JSON.parse(
+        localStorage.getItem(
+            "sLeadsKeywords"
+        ) || "[]"
+    );
+
+
+    renderKeywords(
+        keywords
+    );
 
 }
 
 
-function renderKeywords(keywords){
+function renderKeywords(
+    keywords
+){
 
-    const box=
-    document
-    .getElementById("keywordList");
+    const box =
+    document.getElementById(
+        "keywordList"
+    );
 
 
-    document
-    .getElementById("keywordCount")
-    .innerText=
-    keywords.length+" / 20";
+    const count =
+    document.getElementById(
+        "keywordCount"
+    );
+
+
+    if(!box || !count)
+        return;
+
+
+    count.innerText =
+    keywords.length +
+    " / 20";
 
 
     if(!keywords.length){
 
-        box.innerHTML=`
+        box.innerHTML = `
 
             <span class="filter">
             No keywords added
@@ -2343,45 +2872,49 @@ function renderKeywords(keywords){
     }
 
 
-    box.innerHTML=
-    keywords.map(function(keyword){
+    box.innerHTML =
+    keywords.map(
+        function(keyword){
 
-        return `
+            return `
 
-            <span class="filter">
-            ${escapeHtml(keyword)}
-            </span>
+                <span class="filter">
+                ${escapeHtml(keyword)}
+                </span>
 
-        `;
+            `;
 
-    }).join("");
+        }
+    ).join("");
 
 }
 
 
 function addKeyword(){
 
-    const keyword=
+    if(!checkAccess())
+        return;
+
+
+    const keyword =
     prompt(
         "Enter a buyer-intent keyword:"
     );
 
 
-    if(!keyword){
-
+    if(!keyword)
         return;
 
-    }
 
-
-    let keywords=
+    let keywords =
     JSON.parse(
-        localStorage.getItem("sLeadsKeywords") ||
-        "[]"
+        localStorage.getItem(
+            "sLeadsKeywords"
+        ) || "[]"
     );
 
 
-    if(keywords.length>=20){
+    if(keywords.length >= 20){
 
         alert(
             "You have reached your keyword limit."
@@ -2399,11 +2932,15 @@ function addKeyword(){
 
     localStorage.setItem(
         "sLeadsKeywords",
-        JSON.stringify(keywords)
+        JSON.stringify(
+            keywords
+        )
     );
 
 
-    renderKeywords(keywords);
+    renderKeywords(
+        keywords
+    );
 
 }
 
@@ -2413,8 +2950,12 @@ function addKeyword(){
 function openSettings(){
 
     document
-    .getElementById("settingsModal")
-    .classList.remove("hidden");
+    .getElementById(
+        "settingsModal"
+    )
+    .classList.remove(
+        "hidden"
+    );
 
 }
 
@@ -2422,8 +2963,12 @@ function openSettings(){
 function closeSettings(){
 
     document
-    .getElementById("settingsModal")
-    .classList.add("hidden");
+    .getElementById(
+        "settingsModal"
+    )
+    .classList.add(
+        "hidden"
+    );
 
 }
 
@@ -2433,8 +2978,12 @@ function closeSettings(){
 function openUpgrade(){
 
     document
-    .getElementById("upgradeModal")
-    .classList.remove("hidden");
+    .getElementById(
+        "upgradeModal"
+    )
+    .classList.remove(
+        "hidden"
+    );
 
 }
 
@@ -2442,8 +2991,12 @@ function openUpgrade(){
 function closeUpgrade(){
 
     document
-    .getElementById("upgradeModal")
-    .classList.add("hidden");
+    .getElementById(
+        "upgradeModal"
+    )
+    .classList.add(
+        "hidden"
+    );
 
 }
 
@@ -2453,9 +3006,278 @@ function upgrade(plan){
     closeUpgrade();
 
     alert(
-        "Payment setup for the "+plan+
-        " plan will be connected next."
+        "Payment setup for " +
+        plan +
+        " will be connected next."
     );
+
+}
+
+
+/* ================= ADMIN PANEL ================= */
+
+function openAdminPanel(){
+
+    if(!isAdmin()){
+
+        alert(
+            "Admin access required."
+        );
+
+        return;
+
+    }
+
+
+    document
+    .querySelectorAll(".page")
+    .forEach(function(el){
+
+        el.classList.add(
+            "hidden"
+        );
+
+    });
+
+
+    document
+    .getElementById(
+        "adminPage"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "pageName"
+    )
+    .innerText =
+    "Access Approval";
+
+
+    loadApprovalUsers();
+
+}
+
+
+function loadApprovalUsers(){
+
+    if(!isAdmin())
+        return;
+
+
+    const user =
+    getUser();
+
+
+    const users =
+    JSON.parse(
+        localStorage.getItem(
+            "sLeadsAllUsers"
+        ) || "[]"
+    );
+
+
+    const box =
+    document.getElementById(
+        "approvalUsers"
+    );
+
+
+    const count =
+    document.getElementById(
+        "pendingCount"
+    );
+
+
+    if(!box)
+        return;
+
+
+    const pending =
+    users.filter(
+        u =>
+        (
+            u.access_status ||
+            "pending"
+        ) === "pending"
+    );
+
+
+    if(count)
+        count.innerText =
+        pending.length;
+
+
+    if(!users.length){
+
+        box.innerHTML = `
+
+            <div style="
+            text-align:center;
+            padding:30px;
+            color:var(--muted);
+            ">
+
+            No registered users found.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+    users.map(
+        function(item){
+
+            const status =
+            item.access_status ||
+            "pending";
+
+
+            return `
+
+            <div class="admin-user">
+
+                <div class="admin-user-info">
+
+                    <strong>
+                    ${escapeHtml(
+                        item.name ||
+                        item.fullName ||
+                        "User"
+                    )}
+                    </strong>
+
+                    <small>
+                    ${escapeHtml(
+                        item.email ||
+                        "No email"
+                    )}
+                    </small>
+
+                    <small>
+                    Plan:
+                    ${escapeHtml(
+                        item.plan ||
+                        "Free"
+                    )}
+                    · Status:
+                    ${escapeHtml(status)}
+                    </small>
+
+                </div>
+
+
+                <div class="admin-actions">
+
+                    ${
+                    status === "approved"
+                    ?
+
+                    `<button
+                    class="admin-reject"
+                    onclick="
+                    updateApproval(
+                        '${escapeJs(item.email)}',
+                        'rejected'
+                    )">
+                    Revoke
+                    </button>`
+
+                    :
+
+                    `
+                    <button
+                    class="admin-approve"
+                    onclick="
+                    updateApproval(
+                        '${escapeJs(item.email)}',
+                        'approved'
+                    )">
+                    Approve
+                    </button>
+
+                    <button
+                    class="admin-reject"
+                    onclick="
+                    updateApproval(
+                        '${escapeJs(item.email)}',
+                        'rejected'
+                    )">
+                    Reject
+                    </button>
+                    `
+                    }
+
+                </div>
+
+            </div>
+
+            `;
+
+        }
+    ).join("");
+
+}
+
+
+function updateApproval(
+    email,
+    status
+){
+
+    if(!isAdmin())
+        return;
+
+
+    let users =
+    JSON.parse(
+        localStorage.getItem(
+            "sLeadsAllUsers"
+        ) || "[]"
+    );
+
+
+    users =
+    users.map(
+        function(user){
+
+            if(
+                user.email === email
+            ){
+
+                user.access_status =
+                status;
+
+            }
+
+            return user;
+
+        }
+    );
+
+
+    localStorage.setItem(
+        "sLeadsAllUsers",
+        JSON.stringify(
+            users
+        )
+    );
+
+
+    alert(
+        "Account status changed to " +
+        status
+    );
+
+
+    loadApprovalUsers();
 
 }
 
@@ -2464,9 +3286,12 @@ function upgrade(plan){
 
 function logout(){
 
-    localStorage.removeItem("loggedIn");
+    localStorage.removeItem(
+        "loggedIn"
+    );
 
-    window.location.href="index.html";
+    window.location.href =
+    "index.html";
 
 }
 
@@ -2497,12 +3322,68 @@ function deleteAccount(){
     }
 
 
-    localStorage.removeItem("sLeadsUser");
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("sLeadsBusiness");
-    localStorage.removeItem("sLeadsKeywords");
-    localStorage.removeItem("sLeadsSearches");
-    localStorage.removeItem("pendingPayment");
+    const user =
+    getUser();
+
+
+    if(user){
+
+        let users =
+        JSON.parse(
+            localStorage.getItem(
+                "sLeadsAllUsers"
+            ) || "[]"
+        );
+
+
+        users =
+        users.filter(
+            function(item){
+
+                return item.email !==
+                user.email;
+
+            }
+        );
+
+
+        localStorage.setItem(
+            "sLeadsAllUsers",
+            JSON.stringify(
+                users
+            )
+        );
+
+    }
+
+
+    localStorage.removeItem(
+        "sLeadsUser"
+    );
+
+    localStorage.removeItem(
+        "loggedIn"
+    );
+
+    localStorage.removeItem(
+        "sLeadsBusiness"
+    );
+
+    localStorage.removeItem(
+        "sLeadsKeywords"
+    );
+
+    localStorage.removeItem(
+        "sLeadsSearches"
+    );
+
+    localStorage.removeItem(
+        "pendingPayment"
+    );
+
+    localStorage.removeItem(
+        "sLeadsAccessStatus"
+    );
 
 
     alert(
@@ -2510,7 +3391,8 @@ function deleteAccount(){
     );
 
 
-    window.location.href="index.html";
+    window.location.href =
+    "index.html";
 
 }
 
@@ -2519,7 +3401,7 @@ function deleteAccount(){
 
 function escapeHtml(value){
 
-    return String(value)
+    return String(value || "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -2528,7 +3410,17 @@ function escapeHtml(value){
 
 }
 
+
+function escapeJs(value){
+
+    return String(value || "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+
+}
+
 </script>
+
 
 </body>
 </html>
