@@ -3,527 +3,680 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SLeads - AI Lead Generation</title>
+<title>SLeads Dashboard</title>
 
 <style>
 :root{
---bg:#060914;
---card:#0e1422;
---card2:#101725;
---text:#fff;
---muted:#929db1;
---border:#222c40;
---primary:#6d60ff;
---input:#090e18;
+    --bg:#070a12;
+    --sidebar:#0b0f19;
+    --card:#101521;
+    --card2:#141a27;
+    --border:#20283a;
+    --text:#f5f7fb;
+    --muted:#7f8ba0;
+    --primary:#7567ff;
+    --green:#35d69a;
+    --yellow:#f4c95d;
+    --red:#ff6868;
 }
 
 body.light{
---bg:#f5f7fb;
---card:#fff;
---card2:#fff;
---text:#111827;
---muted:#667085;
---border:#dce1ea;
---input:#f8fafc;
+    --bg:#f5f7fb;
+    --sidebar:#ffffff;
+    --card:#ffffff;
+    --card2:#f8f9fc;
+    --border:#e1e5ed;
+    --text:#111827;
+    --muted:#667085;
 }
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-font-family:Arial,sans-serif;
-background:var(--bg);
-color:var(--text);
-transition:.25s;
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
 }
 
-button,input{
-font-family:inherit;
+button,input,textarea,select{
+    font-family:inherit;
 }
 
 button{
-cursor:pointer;
+    cursor:pointer;
 }
 
 .hidden{
-display:none!important;
+    display:none!important;
 }
 
-/* NAV */
+/* ================= SIDEBAR ================= */
 
-.nav{
-height:70px;
-padding:0 7%;
-display:flex;
-align-items:center;
-justify-content:space-between;
-border-bottom:1px solid var(--border);
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:245px;
+    background:var(--sidebar);
+    border-right:1px solid var(--border);
+    padding:24px 15px;
+    z-index:20;
 }
 
 .logo{
-font-size:25px;
-font-weight:800;
+    font-size:25px;
+    font-weight:800;
+    padding:0 12px 30px;
 }
 
 .logo span{
-color:var(--primary);
+    color:var(--primary);
 }
 
-.nav-right{
-display:flex;
-align-items:center;
-gap:10px;
+.workspace{
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:25px;
 }
 
-.nav-btn{
-padding:10px 16px;
-border-radius:9px;
-background:transparent;
-color:var(--text);
-border:1px solid var(--border);
+.workspace small{
+    color:var(--muted);
+    display:block;
+    margin-bottom:5px;
+    font-size:11px;
 }
 
-.nav-btn:hover{
-border-color:var(--primary);
+.workspace strong{
+    font-size:14px;
 }
 
-.signup-nav{
-background:var(--primary);
-color:#fff;
-border-color:var(--primary);
+.nav-title{
+    color:#596579;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    padding:0 12px;
+    margin:20px 0 8px;
 }
 
-/* HERO */
-
-.hero{
-text-align:center;
-padding:85px 20px 65px;
+.side-link{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px;
+    margin-bottom:4px;
+    background:transparent;
+    color:var(--muted);
+    border:0;
+    border-radius:9px;
+    text-align:left;
+    font-size:14px;
 }
 
-.badge{
-display:inline-block;
-padding:8px 15px;
-border-radius:30px;
-background:var(--card2);
-border:1px solid var(--border);
-color:#9f96ff;
-font-size:13px;
-margin-bottom:20px;
+.side-link:hover,
+.side-link.active{
+    background:rgba(117,103,255,.12);
+    color:var(--text);
 }
 
-.hero h1{
-max-width:850px;
-margin:auto;
-font-size:56px;
-line-height:1.05;
+.side-link.active{
+    border-left:3px solid var(--primary);
 }
 
-.hero h1 span{
-color:var(--primary);
+.sidebar-bottom{
+    position:absolute;
+    bottom:20px;
+    left:15px;
+    right:15px;
 }
 
-.hero p{
-max-width:650px;
-margin:22px auto;
-color:var(--muted);
-line-height:1.7;
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:245px;
+    min-height:100vh;
 }
 
-.primary{
-padding:14px 25px;
-background:var(--primary);
-color:#fff;
-border:0;
-border-radius:10px;
-font-weight:700;
+/* ================= TOPBAR ================= */
+
+.topbar{
+    height:72px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 32px;
 }
 
-/* FEATURES */
-
-.features,
-.pricing{
-max-width:1150px;
-margin:auto;
-padding:50px 20px 90px;
+.top-title{
+    font-size:14px;
+    color:var(--muted);
 }
 
-.section-title{
-text-align:center;
-font-size:35px;
-margin-bottom:40px;
+.top-actions{
+    display:flex;
+    gap:9px;
+    align-items:center;
 }
 
-.feature-grid,
-.pricing-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
+.icon-btn{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
 }
 
-.feature,
-.price-card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:18px;
-padding:30px;
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:var(--primary);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-weight:800;
 }
 
-.feature h3{
-margin:15px 0 10px;
+/* ================= CONTENT ================= */
+
+.content{
+    padding:30px;
+    max-width:1500px;
 }
 
-.feature p{
-color:var(--muted);
-line-height:1.6;
+.welcome{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:28px;
 }
 
-.icon{
-font-size:28px;
+.welcome h1{
+    font-size:29px;
+    letter-spacing:-.7px;
 }
 
-/* PRICING */
-
-.price-card.popular{
-border-color:var(--primary);
-transform:translateY(-7px);
+.welcome p{
+    color:var(--muted);
+    margin-top:7px;
+    font-size:14px;
 }
 
-.tag{
-display:inline-block;
-background:var(--primary);
-color:#fff;
-padding:6px 11px;
-border-radius:20px;
-font-size:11px;
-margin-bottom:14px;
+.primary-btn{
+    background:var(--primary);
+    border:0;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:9px;
+    font-weight:700;
 }
 
-.price{
-font-size:45px;
-font-weight:800;
-margin:15px 0;
+.primary-btn:hover{
+    opacity:.9;
 }
 
-.price small{
-font-size:14px;
-color:var(--muted);
-}
-
-.desc{
-color:var(--muted);
-margin-bottom:22px;
-}
-
-.price-card ul{
-list-style:none;
-margin-bottom:25px;
-}
-
-.price-card li{
-color:var(--muted);
-margin:12px 0;
-font-size:14px;
-}
-
-.price-card li:before{
-content:"✓";
-color:var(--primary);
-margin-right:8px;
-}
-
-.plan-btn{
-width:100%;
-padding:14px;
-background:transparent;
-color:var(--text);
-border:1px solid var(--border);
-border-radius:10px;
-font-weight:700;
-}
-
-.plan-btn:hover{
-background:var(--primary);
-color:#fff;
-}
-
-/* MODALS */
-
-.modal-bg{
-position:fixed;
-inset:0;
-z-index:100;
-background:rgba(0,0,0,.78);
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-overflow:auto;
-}
-
-.modal{
-width:450px;
-max-width:100%;
-background:var(--card2);
-border:1px solid var(--border);
-border-radius:20px;
-padding:30px;
-}
-
-.modal h2{
-margin-bottom:8px;
-}
-
-.sub{
-color:var(--muted);
-font-size:14px;
-margin-bottom:22px;
-}
-
-.input-group{
-margin-bottom:15px;
-}
-
-.input-group label{
-display:block;
-color:var(--muted);
-font-size:13px;
-margin-bottom:7px;
-}
-
-.input-group input{
-width:100%;
-padding:13px;
-background:var(--input);
-color:var(--text);
-border:1px solid var(--border);
-border-radius:9px;
-outline:none;
-}
-
-.input-group input:focus{
-border-color:var(--primary);
-}
-
-.modal-primary{
-width:100%;
-padding:14px;
-background:var(--primary);
-border:0;
-color:#fff;
-border-radius:10px;
-font-weight:700;
-}
-
-.close{
-width:100%;
-background:transparent;
-border:0;
-color:var(--muted);
-padding:12px;
-}
-
-/* BANK */
-
-.bank-box{
-background:var(--input);
-border:1px solid var(--border);
-border-radius:12px;
-padding:17px;
-margin-bottom:20px;
-}
-
-.bank-title{
-color:#9f96ff;
-font-weight:700;
-margin-bottom:10px;
-}
-
-.bank-row{
-display:flex;
-justify-content:space-between;
-padding:8px 0;
-border-bottom:1px solid var(--border);
-font-size:13px;
-gap:10px;
-}
-
-.bank-row:last-child{
-border:0;
-}
-
-.bank-row span:first-child{
-color:var(--muted);
-}
-
-.bank-row span:last-child{
-text-align:right;
-font-weight:600;
-}
-
-/* DASHBOARD */
-
-.dashboard{
-min-height:100vh;
-}
-
-.dashboard-nav{
-height:70px;
-padding:0 5%;
-display:flex;
-align-items:center;
-justify-content:space-between;
-border-bottom:1px solid var(--border);
-}
-
-.account-area{
-position:relative;
-}
-
-.account-btn{
-padding:10px 14px;
-border:1px solid var(--border);
-background:var(--card);
-color:var(--text);
-border-radius:10px;
-}
-
-.account-menu{
-position:absolute;
-right:0;
-top:48px;
-width:220px;
-background:var(--card2);
-border:1px solid var(--border);
-border-radius:12px;
-padding:8px;
-z-index:50;
-box-shadow:0 15px 40px rgba(0,0,0,.25);
-}
-
-.account-menu button{
-width:100%;
-text-align:left;
-background:transparent;
-border:0;
-color:var(--text);
-padding:12px;
-border-radius:7px;
-}
-
-.account-menu button:hover{
-background:var(--input);
-}
-
-.dash-content{
-max-width:1150px;
-margin:auto;
-padding:45px 20px;
-}
-
-.dash-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:30px;
-}
-
-.dash-header p{
-color:var(--muted);
-margin-top:7px;
-}
+/* ================= STATS ================= */
 
 .stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
 }
 
 .stat{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:15px;
-padding:25px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
 }
 
-.stat span{
-color:var(--muted);
-font-size:13px;
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.stat strong{
-display:block;
-font-size:30px;
-margin-top:8px;
+.stat-label{
+    color:var(--muted);
+    font-size:12px;
 }
 
-/* SETTINGS */
-
-.settings-option{
-width:100%;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:15px;
-margin-bottom:10px;
-background:var(--input);
-border:1px solid var(--border);
-color:var(--text);
-border-radius:10px;
-text-align:left;
+.stat-icon{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:rgba(117,103,255,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.settings-option:hover{
-border-color:var(--primary);
+.stat-number{
+    font-size:27px;
+    font-weight:800;
+    margin-top:15px;
 }
 
-.settings-option small{
-display:block;
-color:var(--muted);
-margin-top:4px;
+.stat-change{
+    color:var(--green);
+    font-size:11px;
+    margin-top:6px;
 }
 
-.danger-option{
-color:#ff6464;
-border-color:#4b282c;
+/* ================= GRID ================= */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.45fr .8fr;
+    gap:18px;
+    margin-bottom:18px;
 }
 
-.danger-option:hover{
-background:#28171a;
+.panel{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    overflow:hidden;
 }
 
-/* FOOTER */
-
-footer{
-text-align:center;
-color:var(--muted);
-padding:30px;
-border-top:1px solid var(--border);
+.panel-header{
+    padding:19px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-/* MOBILE */
-
-@media(max-width:800px){
-
-.feature-grid,
-.pricing-grid,
-.stats{
-grid-template-columns:1fr;
+.panel-header h3{
+    font-size:15px;
 }
 
-.price-card.popular{
-transform:none;
+.panel-header span{
+    color:var(--muted);
+    font-size:11px;
 }
 
-.hero h1{
-font-size:40px;
+.panel-body{
+    padding:20px;
 }
 
-.login-nav{
-display:none;
+/* ================= SETUP ================= */
+
+.setup-progress{
+    height:7px;
+    background:var(--card2);
+    border-radius:20px;
+    overflow:hidden;
+    margin:14px 0 20px;
 }
+
+.setup-progress div{
+    width:60%;
+    height:100%;
+    background:var(--primary);
+}
+
+.setup-item{
+    display:flex;
+    gap:13px;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.setup-item:last-child{
+    border:0;
+}
+
+.check{
+    width:26px;
+    height:26px;
+    border-radius:8px;
+    background:rgba(53,214,154,.12);
+    color:var(--green);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:12px;
+}
+
+.check.pending{
+    background:rgba(117,103,255,.12);
+    color:#aaa2ff;
+}
+
+.setup-item strong{
+    font-size:13px;
+}
+
+.setup-item p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
+}
+
+/* ================= PLATFORMS ================= */
+
+.platform{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.platform:last-child{
+    border:0;
+}
+
+.platform-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.platform-icon{
+    width:35px;
+    height:35px;
+    border-radius:9px;
+    background:var(--card2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.platform-name{
+    font-size:13px;
+    font-weight:600;
+}
+
+.platform-status{
+    font-size:10px;
+    color:var(--green);
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    background:var(--green);
+    border-radius:50%;
+    display:inline-block;
+    margin-right:5px;
+}
+
+/* ================= LEADS ================= */
+
+.lead{
+    display:flex;
+    gap:14px;
+    padding:17px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.lead:last-child{
+    border:0;
+}
+
+.lead-source{
+    width:38px;
+    height:38px;
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:9px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-shrink:0;
+}
+
+.lead-main{
+    flex:1;
+}
+
+.lead-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.lead-top strong{
+    font-size:13px;
+}
+
+.score{
+    color:var(--green);
+    background:rgba(53,214,154,.1);
+    padding:4px 8px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.lead-text{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+    margin-top:6px;
+}
+
+.lead-meta{
+    color:#596579;
+    font-size:10px;
+    margin-top:7px;
+}
+
+/* ================= KEYWORDS ================= */
+
+.keyword-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.keyword{
+    padding:7px 10px;
+    background:var(--card2);
+    border:1px solid var(--border);
+    color:var(--muted);
+    border-radius:20px;
+    font-size:11px;
+}
+
+/* ================= ACTIVITY ================= */
+
+.activity{
+    display:flex;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.activity:last-child{
+    border:0;
+}
+
+.activity-dot{
+    width:9px;
+    height:9px;
+    margin-top:5px;
+    background:var(--primary);
+    border-radius:50%;
+}
+
+.activity p{
+    font-size:12px;
+}
+
+.activity small{
+    display:block;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+/* ================= EMPTY LEADS ================= */
+
+.empty{
+    text-align:center;
+    padding:35px 15px;
+}
+
+.empty-icon{
+    width:55px;
+    height:55px;
+    margin:0 auto 12px;
+    border-radius:15px;
+    background:rgba(117,103,255,.1);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+}
+
+.empty h3{
+    font-size:15px;
+}
+
+.empty p{
+    color:var(--muted);
+    font-size:12px;
+    max-width:350px;
+    margin:7px auto 18px;
+}
+
+/* ================= MODAL ================= */
+
+.modal-bg{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:100;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal{
+    width:430px;
+    max-width:100%;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:25px;
+}
+
+.modal h2{
+    font-size:20px;
+    margin-bottom:7px;
+}
+
+.modal p{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.input{
+    width:100%;
+    background:var(--card2);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:12px;
+    margin-bottom:12px;
+    outline:0;
+}
+
+.modal-btn{
+    width:100%;
+    padding:13px;
+    background:var(--primary);
+    border:0;
+    border-radius:9px;
+    color:#fff;
+    font-weight:700;
+}
+
+.close{
+    width:100%;
+    padding:11px;
+    background:transparent;
+    border:0;
+    color:var(--muted);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:750px){
+
+    .sidebar{
+        width:70px;
+        padding:20px 8px;
+    }
+
+    .main{
+        margin-left:70px;
+    }
+
+    .logo{
+        font-size:0;
+        text-align:center;
+    }
+
+    .logo span{
+        font-size:24px;
+    }
+
+    .workspace,
+    .nav-title,
+    .side-link span,
+    .sidebar-bottom .side-link span{
+        display:none;
+    }
+
+    .side-link{
+        justify-content:center;
+    }
+
+    .content{
+        padding:20px 14px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .welcome{
+        flex-direction:column;
+        gap:15px;
+    }
 
 }
 </style>
@@ -531,526 +684,319 @@ display:none;
 
 <body>
 
+<!-- ================= SIDEBAR ================= -->
 
-<!-- =====================================================
-MAIN WEBSITE
-===================================================== -->
-
-<div id="mainWebsite">
-
-<nav class="nav">
+<aside class="sidebar">
 
 <div class="logo">
 S<span>Leads</span>
 </div>
 
-<div class="nav-right">
+<div class="workspace">
+
+<small>WORKSPACE</small>
+
+<strong id="workspaceName">
+My Business
+</strong>
+
+</div>
+
+
+<div class="nav-title">
+Overview
+</div>
+
+<button class="side-link active">
+<span>▦</span>
+<span>Dashboard</span>
+</button>
+
+<button class="side-link">
+<span>◎</span>
+<span>Leads</span>
+</button>
+
+<button class="side-link">
+<span>⌕</span>
+<span>Search</span>
+</button>
+
+
+<div class="nav-title">
+Manage
+</div>
+
+<button class="side-link">
+<span>◆</span>
+<span>Businesses</span>
+</button>
+
+<button class="side-link">
+<span>⌁</span>
+<span>Keywords</span>
+</button>
+
+<button class="side-link">
+<span>◉</span>
+<span>Alerts</span>
+</button>
+
+
+<div class="nav-title">
+Account
+</div>
 
 <button
-class="nav-btn"
+class="side-link"
+onclick="openSettings()">
+
+<span>⚙</span>
+<span>Settings</span>
+
+</button>
+
+
+<div class="sidebar-bottom">
+
+<button
+class="side-link"
 onclick="toggleTheme()">
-🌙
+
+<span>☼</span>
+<span>Theme</span>
+
 </button>
 
 <button
-class="nav-btn login-nav"
-onclick="openLogin()">
-Login
+class="side-link"
+onclick="logout()">
+
+<span>↪</span>
+<span>Logout</span>
+
+</button>
+
+</div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+<!-- TOPBAR -->
+
+<header class="topbar">
+
+<div class="top-title">
+Dashboard / Overview
+</div>
+
+<div class="top-actions">
+
+<button
+class="icon-btn"
+onclick="toggleTheme()">
+☼
 </button>
 
 <button
-class="nav-btn signup-nav"
-onclick="openSignup()">
-Sign Up
+class="icon-btn">
+🔔
 </button>
 
-</div>
-
-</nav>
-
-
-<section class="hero">
-
-<div class="badge">
-AI-Powered Lead Generation
-</div>
-
-<h1>
-Find your next
-<span>customers automatically.</span>
-</h1>
-
-<p>
-Generate and manage leads from Reddit, Instagram,
-Facebook, X and LinkedIn with SLeads.
-</p>
-
-<button
-class="primary"
-onclick="goPricing()">
-Get Started
-</button>
-
-</section>
-
-
-<section class="features">
-
-<h2 class="section-title">
-Everything You Need
-</h2>
-
-<div class="feature-grid">
-
-<div class="feature">
-
-<div class="icon">🔎</div>
-
-<h3>Lead Discovery</h3>
-
-<p>
-Discover potential customers across multiple
-social platforms.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<div class="icon">🤖</div>
-
-<h3>AI Filtering</h3>
-
-<p>
-Find relevant prospects based on your target
-audience and requirements.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<div class="icon">📊</div>
-
-<h3>Lead Dashboard</h3>
-
-<p>
-Manage your leads from one simple dashboard.
-</p>
-
+<div class="avatar"
+id="avatar">
+S
 </div>
 
 </div>
 
-</section>
+</header>
 
 
-<section
-class="pricing"
-id="pricing">
+<!-- CONTENT -->
 
-<h2 class="section-title">
-Simple Pricing
-</h2>
+<div class="content">
 
-<div class="pricing-grid">
 
-
-<!-- BASIC -->
-
-<div class="price-card">
-
-<h3>Basic</h3>
-
-<div class="price">
-$19 <small>/month</small>
-</div>
-
-<div class="desc">
-For individuals getting started.
-</div>
-
-<ul>
-<li>Lead discovery</li>
-<li>Social searches</li>
-<li>Lead filtering</li>
-<li>Dashboard</li>
-<li>Basic exports</li>
-</ul>
-
-<button
-class="plan-btn"
-onclick="openPayment('Basic',19)">
-Get Basic
-</button>
-
-</div>
-
-
-<!-- GROWTH -->
-
-<div class="price-card popular">
-
-<div class="tag">
-MOST POPULAR
-</div>
-
-<h3>Growth</h3>
-
-<div class="price">
-$39 <small>/month</small>
-</div>
-
-<div class="desc">
-For growing businesses.
-</div>
-
-<ul>
-<li>Everything in Basic</li>
-<li>More searches</li>
-<li>Advanced filtering</li>
-<li>Lead scoring</li>
-<li>More exports</li>
-</ul>
-
-<button
-class="plan-btn"
-onclick="openPayment('Growth',39)">
-Get Growth
-</button>
-
-</div>
-
-
-<!-- PRO -->
-
-<div class="price-card">
-
-<h3>Pro</h3>
-
-<div class="price">
-$89 <small>/month</small>
-</div>
-
-<div class="desc">
-For agencies and serious lead generation.
-</div>
-
-<ul>
-<li>Everything in Growth</li>
-<li>High-volume searches</li>
-<li>Advanced AI filtering</li>
-<li>Priority processing</li>
-<li>Maximum exports</li>
-</ul>
-
-<button
-class="plan-btn"
-onclick="openPayment('Pro',89)">
-Get Pro
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<footer>
-© 2026 SLeads. All rights reserved.
-</footer>
-
-</div>
-
-
-<!-- =====================================================
-LOGIN
-===================================================== -->
-
-<div
-class="modal-bg hidden"
-id="loginModal">
-
-<div class="modal">
-
-<h2>Welcome Back</h2>
-
-<p class="sub">
-Login to your SLeads account.
-</p>
-
-<div class="input-group">
-
-<label>Email</label>
-
-<input
-type="email"
-id="loginEmail"
-placeholder="you@example.com">
-
-</div>
-
-<div class="input-group">
-
-<label>Password</label>
-
-<input
-type="password"
-id="loginPassword"
-placeholder="Your password">
-
-</div>
-
-<button
-class="modal-primary"
-onclick="login()">
-Login
-</button>
-
-<button
-class="close"
-onclick="closeAllModals()">
-Cancel
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-SIGNUP
-===================================================== -->
-
-<div
-class="modal-bg hidden"
-id="signupModal">
-
-<div class="modal">
-
-<h2>Create Account</h2>
-
-<p class="sub">
-Create your SLeads account.
-</p>
-
-<div class="input-group">
-
-<label>Full Name</label>
-
-<input
-type="text"
-id="signupName"
-placeholder="Your name">
-
-</div>
-
-<div class="input-group">
-
-<label>Email</label>
-
-<input
-type="email"
-id="signupEmail"
-placeholder="you@example.com">
-
-</div>
-
-<div class="input-group">
-
-<label>Password</label>
-
-<input
-type="password"
-id="signupPassword"
-placeholder="Minimum 6 characters">
-
-</div>
-
-<button
-class="modal-primary"
-onclick="signup()">
-Create Account
-</button>
-
-<button
-class="close"
-onclick="closeAllModals()">
-Cancel
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-PAYMENT
-===================================================== -->
-
-<div
-class="modal-bg hidden"
-id="paymentModal">
-
-<div class="modal">
-
-<h2>Complete Payment</h2>
-
-<p class="sub">
-Transfer the exact amount to the account below.
-</p>
-
-<div class="bank-box">
-
-<div class="bank-title">
-Bank Transfer Details
-</div>
-
-<div class="bank-row">
-<span>Plan</span>
-<span id="selectedPlan">Basic</span>
-</div>
-
-<div class="bank-row">
-<span>Amount</span>
-<span id="selectedPrice">$19/month</span>
-</div>
-
-<div class="bank-row">
-<span>Bank</span>
-<span>Meezan Bank</span>
-</div>
-
-<div class="bank-row">
-<span>Account Name</span>
-<span>Syed Sameer Mehdi</span>
-</div>
-
-<div class="bank-row">
-<span>Account Number</span>
-<span>04090115553300</span>
-</div>
-
-<div class="bank-row">
-<span>Payment Email</span>
-<span>naqvishahvlog@gmail.com</span>
-</div>
-
-</div>
-
-
-<div class="input-group">
-
-<label>Your Name</label>
-
-<input
-type="text"
-id="customerName"
-placeholder="Your full name">
-
-</div>
-
-
-<div class="input-group">
-
-<label>Your Email</label>
-
-<input
-type="email"
-id="customerEmail"
-placeholder="Your email">
-
-</div>
-
-
-<div class="input-group">
-
-<label>Transaction ID</label>
-
-<input
-type="text"
-id="transactionId"
-placeholder="Bank transaction ID">
-
-</div>
-
-
-<button
-class="modal-primary"
-onclick="submitPayment()">
-I Have Made The Payment
-</button>
-
-<button
-class="close"
-onclick="closeAllModals()">
-Cancel
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-DASHBOARD
-===================================================== -->
-
-<div
-id="dashboard"
-class="dashboard hidden">
-
-
-<nav class="dashboard-nav">
-
-<div class="logo">
-S<span>Leads</span>
-</div>
-
-
-<div class="account-area">
-
-<button
-class="account-btn"
-onclick="toggleAccountMenu()">
-👤 Account ▾
-</button>
-
-
-<div
-class="account-menu hidden"
-id="accountMenu">
-
-<button onclick="openSettings()">
-⚙️ Settings
-</button>
-
-<button onclick="logout()">
-↪ Logout
-</button>
-
-</div>
-
-</div>
-
-</nav>
-
-
-<div class="dash-content">
-
-<div class="dash-header">
+<div class="welcome">
 
 <div>
 
 <h1>
-Dashboard
+Good morning, <span id="userName">Sameer</span> 👋
 </h1>
 
-<p id="welcomeText">
-Welcome to SLeads.
+<p>
+Here's what's happening with your lead generation today.
+</p>
+
+</div>
+
+<button
+class="primary-btn"
+onclick="openSetup()">
++ Add Business
+</button>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+
+<div class="stat">
+
+<div class="stat-top">
+
+<span class="stat-label">
+Leads Found
+</span>
+
+<div class="stat-icon">
+◎
+</div>
+
+</div>
+
+<div class="stat-number">
+0
+</div>
+
+<div class="stat-change">
+Waiting for your first scan
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-top">
+
+<span class="stat-label">
+AI Matches
+</span>
+
+<div class="stat-icon">
+✦
+</div>
+
+</div>
+
+<div class="stat-number">
+0
+</div>
+
+<div class="stat-change">
+High-intent opportunities
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-top">
+
+<span class="stat-label">
+Keywords
+</span>
+
+<div class="stat-icon">
+⌁
+</div>
+
+</div>
+
+<div class="stat-number">
+0/20
+</div>
+
+<div class="stat-change">
+Basic plan limit
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-top">
+
+<span class="stat-label">
+Current Plan
+</span>
+
+<div class="stat-icon">
+◆
+</div>
+
+</div>
+
+<div class="stat-number"
+id="planDisplay">
+Free
+</div>
+
+<div class="stat-change">
+Manage subscription
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FIRST GRID -->
+
+<div class="dashboard-grid">
+
+
+<!-- SETUP -->
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>Get your lead engine ready</h3>
+
+<span>3 of 5 complete</span>
+
+</div>
+
+<div class="panel-body">
+
+<p style="color:var(--muted);font-size:12px;">
+Complete your setup so SLeads knows exactly what kind
+of customers to find.
+</p>
+
+<div class="setup-progress">
+<div></div>
+</div>
+
+
+<div class="setup-item">
+
+<div class="check">
+✓
+</div>
+
+<div>
+
+<strong>
+Create your account
+</strong>
+
+<p>
+Your SLeads account is ready.
 </p>
 
 </div>
@@ -1058,44 +1004,321 @@ Welcome to SLeads.
 </div>
 
 
-<div class="stats">
+<div class="setup-item">
 
-<div class="stat">
-
-<span>
-Current Plan
-</span>
-
-<strong id="dashboardPlan">
-Free
-</strong>
-
+<div class="check">
+✓
 </div>
 
-
-<div class="stat">
-
-<span>
-Leads
-</span>
+<div>
 
 <strong>
-0
+Choose your plan
 </strong>
+
+<p>
+Your subscription has been selected.
+</p>
+
+</div>
 
 </div>
 
 
-<div class="stat">
+<div class="setup-item">
 
-<span>
-Searches
-</span>
+<div class="check pending">
+3
+</div>
+
+<div>
 
 <strong>
-0
+Tell us what you sell
 </strong>
 
+<p>
+Add your business and describe your ideal customer.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="setup-item">
+
+<div class="check pending">
+4
+</div>
+
+<div>
+
+<strong>
+Add buyer-intent keywords
+</strong>
+
+<p>
+Add phrases your customers actually search for.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="setup-item">
+
+<div class="check pending">
+5
+</div>
+
+<div>
+
+<strong>
+Choose your alerts
+</strong>
+
+<p>
+Decide how you want to receive new leads.
+</p>
+
+</div>
+
+</div>
+
+<br>
+
+<button
+class="primary-btn"
+onclick="openSetup()">
+Continue Setup
+</button>
+
+</div>
+
+</div>
+
+
+<!-- PLATFORMS -->
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>Platforms</h3>
+
+<span>5 sources</span>
+
+</div>
+
+<div class="panel-body">
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+R
+</div>
+
+<div>
+<div class="platform-name">
+Reddit
+</div>
+
+<div class="platform-status">
+<span class="dot"></span>Ready
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+in
+</div>
+
+<div>
+<div class="platform-name">
+LinkedIn
+</div>
+
+<div class="platform-status">
+<span class="dot"></span>Ready
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+𝕏
+</div>
+
+<div>
+<div class="platform-name">
+X
+</div>
+
+<div class="platform-status">
+<span class="dot"></span>Ready
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+f
+</div>
+
+<div>
+<div class="platform-name">
+Facebook
+</div>
+
+<div class="platform-status">
+<span class="dot"></span>Ready
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+◎
+</div>
+
+<div>
+<div class="platform-name">
+Instagram
+</div>
+
+<div class="platform-status">
+<span class="dot"></span>Ready
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SECOND GRID -->
+
+<div class="dashboard-grid">
+
+
+<!-- LIVE LEADS -->
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>Latest Lead Opportunities</h3>
+
+<span>Live feed</span>
+
+</div>
+
+<div class="panel-body">
+
+
+<div class="empty">
+
+<div class="empty-icon">
+✦
+</div>
+
+<h3>
+No leads yet
+</h3>
+
+<p>
+Complete your business setup and add buyer-intent
+keywords. SLeads will show matching conversations here.
+</p>
+
+<button
+class="primary-btn"
+onclick="openSetup()">
+Start Finding Leads
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- KEYWORDS -->
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>Buyer Keywords</h3>
+
+<span>0 / 20</span>
+
+</div>
+
+<div class="panel-body">
+
+<div class="empty">
+
+<div class="empty-icon">
+⌁
+</div>
+
+<h3>
+No keywords added
+</h3>
+
+<p>
+Add phrases your customers use when they need your service.
+</p>
+
+<button
+class="primary-btn"
+onclick="openSetup()">
+Add Keywords
+</button>
+
 </div>
 
 </div>
@@ -1105,9 +1328,150 @@ Searches
 </div>
 
 
-<!-- =====================================================
-SETTINGS
-===================================================== -->
+<!-- ACTIVITY -->
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>Recent Activity</h3>
+
+<span>Today</span>
+
+</div>
+
+<div class="panel-body">
+
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+
+<p>
+Your SLeads workspace was created.
+</p>
+
+<small>
+Just now
+</small>
+
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+
+<p>
+Your lead engine is waiting for setup.
+</p>
+
+<small>
+Complete business information to begin.
+</small>
+
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+
+<p>
+Five social platforms are ready.
+</p>
+
+<small>
+Reddit · LinkedIn · X · Facebook · Instagram
+</small>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+</main>
+
+
+<!-- ================= SETUP MODAL ================= -->
+
+<div
+class="modal-bg hidden"
+id="setupModal">
+
+<div class="modal">
+
+<h2>
+Set up your lead engine
+</h2>
+
+<p>
+Tell SLeads about your business so we can find relevant
+conversations.
+</p>
+
+
+<input
+class="input"
+id="businessName"
+placeholder="Business name">
+
+
+<input
+class="input"
+id="businessWebsite"
+placeholder="Website">
+
+
+<textarea
+class="input"
+id="businessDescription"
+rows="4"
+placeholder="What do you sell? Who are your ideal customers?"></textarea>
+
+
+<input
+class="input"
+id="keywords"
+placeholder="Buyer keywords, e.g. lead generation, CRM, marketing">
+
+
+<button
+class="modal-btn"
+onclick="saveSetup()">
+Save & Start Finding Leads
+</button>
+
+
+<button
+class="close"
+onclick="closeSetup()">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= SETTINGS ================= -->
 
 <div
 class="modal-bg hidden"
@@ -1119,61 +1483,40 @@ id="settingsModal">
 Settings
 </h2>
 
-<p class="sub">
+<p>
 Manage your SLeads account.
 </p>
 
 
 <button
-class="settings-option"
-onclick="toggleTheme()">
+class="side-link"
+onclick="toggleTheme()"
+style="background:var(--card2);margin-bottom:8px;">
 
-<div>
-🌙 Dark / Light Mode
-<small>
-Change website appearance
-</small>
-</div>
-
-<div>
-›
-</div>
+<span>☼</span>
+<span>Dark / Light Mode</span>
 
 </button>
 
 
 <button
-class="settings-option"
-onclick="logout();closeSettings()">
+class="side-link"
+onclick="logout()"
+style="background:var(--card2);margin-bottom:8px;">
 
-<div>
-↪ Logout
-<small>
-Sign out of your account
-</small>
-</div>
-
-<div>
-›
-</div>
+<span>↪</span>
+<span>Logout</span>
 
 </button>
 
 
 <button
-class="settings-option danger-option"
-onclick="deleteAccount()">
+class="side-link"
+onclick="deleteAccount()"
+style="background:rgba(255,80,80,.07);color:#ff6868;">
 
-<div>
-🗑 Delete Account
-<small>
-Permanently remove your account
-</small>
-</div>
-
-<div>
-›
-</div>
+<span>🗑</span>
+<span>Delete Account</span>
 
 </button>
 
@@ -1191,565 +1534,284 @@ Close
 
 <script>
 
-/* =====================================================
-THEME
-===================================================== */
+/* ================= USER ================= */
+
+function getUser(){
+
+    return JSON.parse(
+        localStorage.getItem("sLeadsUser")
+    );
+
+}
+
+
+/* ================= LOAD ================= */
+
+window.addEventListener(
+"DOMContentLoaded",
+function(){
+
+    loadTheme();
+
+    const user=getUser();
+
+    if(user){
+
+        document.getElementById("userName")
+        .innerText=user.name || "there";
+
+        document.getElementById("avatar")
+        .innerText=
+        (user.name || "S")
+        .charAt(0)
+        .toUpperCase();
+
+        document.getElementById("planDisplay")
+        .innerText=
+        user.plan || "Free";
+
+    }
+
+    loadSetup();
+
+});
+
+
+/* ================= THEME ================= */
 
 function loadTheme(){
 
-const theme=
-localStorage.getItem("sLeadsTheme");
+    if(
+        localStorage.getItem("sLeadsTheme")
+        ==="light"
+    ){
 
-if(theme==="light"){
+        document.body.classList.add("light");
 
-document.body.classList.add("light");
-
-}
+    }
 
 }
 
 
 function toggleTheme(){
 
-document.body.classList.toggle("light");
+    document.body.classList.toggle("light");
 
-const light=
-document.body.classList.contains("light");
-
-localStorage.setItem(
-"sLeadsTheme",
-light ? "light" : "dark"
-);
-
-}
-
-
-/* =====================================================
-PRICING
-===================================================== */
-
-function goPricing(){
-
-document
-.getElementById("pricing")
-.scrollIntoView({
-behavior:"smooth"
-});
+    localStorage.setItem(
+        "sLeadsTheme",
+        document.body.classList.contains("light")
+        ?"light"
+        :"dark"
+    );
 
 }
 
 
-/* =====================================================
-MODALS
-===================================================== */
+/* ================= SETUP ================= */
 
-function closeAllModals(){
+function openSetup(){
 
-document
-.querySelectorAll(".modal-bg")
-.forEach(function(modal){
-
-modal.classList.add("hidden");
-
-});
+    document
+    .getElementById("setupModal")
+    .classList.remove("hidden");
 
 }
 
 
-function openLogin(){
+function closeSetup(){
 
-closeAllModals();
-
-document
-.getElementById("loginModal")
-.classList.remove("hidden");
+    document
+    .getElementById("setupModal")
+    .classList.add("hidden");
 
 }
 
 
-function openSignup(){
+function saveSetup(){
 
-closeAllModals();
+    const business={
+        name:
+        document
+        .getElementById("businessName")
+        .value.trim(),
 
-document
-.getElementById("signupModal")
-.classList.remove("hidden");
+        website:
+        document
+        .getElementById("businessWebsite")
+        .value.trim(),
 
-}
+        description:
+        document
+        .getElementById("businessDescription")
+        .value.trim(),
 
+        keywords:
+        document
+        .getElementById("keywords")
+        .value.trim()
+        .split(",")
+        .map(x=>x.trim())
+        .filter(Boolean)
 
-/* =====================================================
-SIGNUP
-===================================================== */
-
-function signup(){
-
-const name=
-document
-.getElementById("signupName")
-.value.trim();
-
-const email=
-document
-.getElementById("signupEmail")
-.value.trim();
-
-const password=
-document
-.getElementById("signupPassword")
-.value;
+    };
 
 
-if(!name){
+    if(!business.name){
 
-alert("Enter your name.");
+        alert("Please enter your business name.");
 
-return;
+        return;
 
-}
-
-
-if(!email || !email.includes("@")){
-
-alert("Enter a valid email.");
-
-return;
-
-}
+    }
 
 
-if(password.length<6){
-
-alert(
-"Password must be at least 6 characters."
-);
-
-return;
-
-}
+    localStorage.setItem(
+        "sLeadsBusiness",
+        JSON.stringify(business)
+    );
 
 
-const pending=
-JSON.parse(
-localStorage.getItem("pendingPayment")
-);
+    document
+    .getElementById("workspaceName")
+    .innerText=business.name;
 
 
-let plan="Free";
-let price=0;
+    closeSetup();
 
 
-if(pending){
+    alert(
+        "Business setup saved successfully."
+    );
 
-plan=pending.plan;
-price=pending.price;
+    location.reload();
 
 }
 
 
-const user={
+/* ================= LOAD SETUP ================= */
 
-name:name,
-email:email,
-password:password,
-plan:plan,
-price:price
+function loadSetup(){
 
-};
-
-
-localStorage.setItem(
-"sLeadsUser",
-JSON.stringify(user)
-);
-
-localStorage.setItem(
-"loggedIn",
-"true"
-);
+    const business=
+    JSON.parse(
+        localStorage.getItem("sLeadsBusiness")
+    );
 
 
-closeAllModals();
+    if(!business){
 
-showDashboard();
+        return;
 
-}
-
-
-/* =====================================================
-LOGIN
-===================================================== */
-
-function login(){
-
-const email=
-document
-.getElementById("loginEmail")
-.value.trim();
-
-const password=
-document
-.getElementById("loginPassword")
-.value;
+    }
 
 
-const user=
-JSON.parse(
-localStorage.getItem("sLeadsUser")
-);
+    document
+    .getElementById("workspaceName")
+    .innerText=
+    business.name;
 
 
-if(!user){
+    document
+    .getElementById("businessName")
+    .value=
+    business.name || "";
 
-alert(
-"No account found. Please sign up first."
-);
 
-return;
+    document
+    .getElementById("businessWebsite")
+    .value=
+    business.website || "";
+
+
+    document
+    .getElementById("businessDescription")
+    .value=
+    business.description || "";
+
+
+    document
+    .getElementById("keywords")
+    .value=
+    (business.keywords || []).join(", ");
 
 }
 
 
-if(
-email!==user.email ||
-password!==user.password
-){
-
-alert(
-"Incorrect email or password."
-);
-
-return;
-
-}
-
-
-localStorage.setItem(
-"loggedIn",
-"true"
-);
-
-
-closeAllModals();
-
-showDashboard();
-
-}
-
-
-/* =====================================================
-PAYMENT
-===================================================== */
-
-let selectedPlan="";
-let selectedPrice=0;
-
-
-function openPayment(plan,price){
-
-selectedPlan=plan;
-selectedPrice=price;
-
-
-document
-.getElementById("selectedPlan")
-.innerText=
-plan+" Plan";
-
-
-document
-.getElementById("selectedPrice")
-.innerText=
-"$"+price+"/month";
-
-
-closeAllModals();
-
-
-document
-.getElementById("paymentModal")
-.classList.remove("hidden");
-
-}
-
-
-function submitPayment(){
-
-const name=
-document
-.getElementById("customerName")
-.value.trim();
-
-const email=
-document
-.getElementById("customerEmail")
-.value.trim();
-
-const transaction=
-document
-.getElementById("transactionId")
-.value.trim();
-
-
-if(!name){
-
-alert("Enter your name.");
-
-return;
-
-}
-
-
-if(!email || !email.includes("@")){
-
-alert("Enter a valid email.");
-
-return;
-
-}
-
-
-if(!transaction){
-
-alert("Enter transaction ID.");
-
-return;
-
-}
-
-
-const payment={
-
-name:name,
-email:email,
-transactionId:transaction,
-plan:selectedPlan,
-price:selectedPrice,
-status:"pending"
-
-};
-
-
-localStorage.setItem(
-"pendingPayment",
-JSON.stringify(payment)
-);
-
-
-closeAllModals();
-
-openSignup();
-
-
-document
-.getElementById("signupName")
-.value=name;
-
-
-document
-.getElementById("signupEmail")
-.value=email;
-
-}
-
-
-/* =====================================================
-DASHBOARD
-===================================================== */
-
-function showDashboard(){
-
-const user=
-JSON.parse(
-localStorage.getItem("sLeadsUser")
-);
-
-
-if(!user){
-
-return;
-
-}
-
-
-document
-.getElementById("mainWebsite")
-.classList.add("hidden");
-
-
-document
-.getElementById("dashboard")
-.classList.remove("hidden");
-
-
-document
-.getElementById("welcomeText")
-.innerText=
-"Welcome, "+user.name+".";
-
-
-document
-.getElementById("dashboardPlan")
-.innerText=
-user.plan+" Plan";
-
-}
-
-
-/* =====================================================
-ACCOUNT MENU
-===================================================== */
-
-function toggleAccountMenu(){
-
-document
-.getElementById("accountMenu")
-.classList.toggle("hidden");
-
-}
-
-
-/* =====================================================
-SETTINGS
-===================================================== */
+/* ================= SETTINGS ================= */
 
 function openSettings(){
 
-document
-.getElementById("accountMenu")
-.classList.add("hidden");
-
-
-document
-.getElementById("settingsModal")
-.classList.remove("hidden");
+    document
+    .getElementById("settingsModal")
+    .classList.remove("hidden");
 
 }
 
 
 function closeSettings(){
 
-document
-.getElementById("settingsModal")
-.classList.add("hidden");
+    document
+    .getElementById("settingsModal")
+    .classList.add("hidden");
 
 }
 
 
-/* =====================================================
-LOGOUT
-===================================================== */
+/* ================= LOGOUT ================= */
 
 function logout(){
 
-localStorage.removeItem("loggedIn");
+    localStorage.removeItem("loggedIn");
 
-
-document
-.getElementById("dashboard")
-.classList.add("hidden");
-
-
-document
-.getElementById("mainWebsite")
-.classList.remove("hidden");
-
-
-document
-.getElementById("accountMenu")
-.classList.add("hidden");
-
-
-closeSettings();
+    window.location.href="index.html";
 
 }
 
 
-/* =====================================================
-DELETE ACCOUNT
-===================================================== */
+/* ================= DELETE ================= */
 
 function deleteAccount(){
 
-const confirmation=
-confirm(
-"Are you sure you want to permanently delete your SLeads account?"
-);
+    const first=
+    confirm(
+        "Are you sure you want to delete your SLeads account?"
+    );
 
 
-if(!confirmation){
+    if(!first){
 
-return;
+        return;
 
-}
-
-
-const confirmation2=
-confirm(
-"This action cannot be undone. Delete your account?"
-);
+    }
 
 
-if(!confirmation2){
-
-return;
-
-}
-
-
-localStorage.removeItem("sLeadsUser");
-localStorage.removeItem("loggedIn");
-localStorage.removeItem("pendingPayment");
+    const second=
+    confirm(
+        "This will permanently remove your local account data. Continue?"
+    );
 
 
-closeSettings();
+    if(!second){
+
+        return;
+
+    }
 
 
-document
-.getElementById("dashboard")
-.classList.add("hidden");
+    localStorage.removeItem("sLeadsUser");
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("sLeadsBusiness");
+    localStorage.removeItem("pendingPayment");
 
 
-document
-.getElementById("mainWebsite")
-.classList.remove("hidden");
+    alert(
+        "Your account has been deleted."
+    );
 
 
-alert(
-"Your SLeads account has been deleted."
-);
+    window.location.href="index.html";
 
 }
-
-
-/* =====================================================
-AUTO LOGIN
-===================================================== */
-
-window.addEventListener(
-"DOMContentLoaded",
-function(){
-
-loadTheme();
-
-
-const loggedIn=
-localStorage.getItem("loggedIn");
-
-const user=
-localStorage.getItem("sLeadsUser");
-
-
-if(
-loggedIn==="true" &&
-user
-){
-
-showDashboard();
-
-}
-
-});
 
 </script>
 
