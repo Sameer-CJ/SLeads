@@ -3,31 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SLeads Dashboard</title>
+<title>SLeads — Dashboard</title>
 
 <style>
 :root{
-    --bg:#070a12;
-    --sidebar:#0b0f19;
-    --card:#101521;
-    --card2:#141a27;
-    --border:#20283a;
-    --text:#f5f7fb;
-    --muted:#7f8ba0;
-    --primary:#7567ff;
+    --bg:#070911;
+    --sidebar:#0b0e17;
+    --card:#10141f;
+    --card2:#141925;
+    --border:#202738;
+    --text:#f4f6fb;
+    --muted:#7f899d;
+    --primary:#7467ff;
     --green:#35d69a;
-    --yellow:#f4c95d;
-    --red:#ff6868;
-}
-
-body.light{
-    --bg:#f5f7fb;
-    --sidebar:#ffffff;
-    --card:#ffffff;
-    --card2:#f8f9fc;
-    --border:#e1e5ed;
-    --text:#111827;
-    --muted:#667085;
+    --red:#ff6262;
+    --yellow:#f2c85b;
 }
 
 *{
@@ -37,12 +27,12 @@ body.light{
 }
 
 body{
-    font-family:Inter,Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:var(--bg);
     color:var(--text);
 }
 
-button,input,textarea,select{
+button,input,select{
     font-family:inherit;
 }
 
@@ -54,7 +44,7 @@ button{
     display:none!important;
 }
 
-/* ================= SIDEBAR ================= */
+/* SIDEBAR */
 
 .sidebar{
     position:fixed;
@@ -64,14 +54,13 @@ button{
     width:245px;
     background:var(--sidebar);
     border-right:1px solid var(--border);
-    padding:24px 15px;
-    z-index:20;
+    padding:24px 14px;
 }
 
 .logo{
     font-size:25px;
     font-weight:800;
-    padding:0 12px 30px;
+    padding:0 13px 28px;
 }
 
 .logo span{
@@ -79,7 +68,7 @@ button{
 }
 
 .workspace{
-    background:var(--card2);
+    background:var(--card);
     border:1px solid var(--border);
     border-radius:12px;
     padding:12px;
@@ -87,18 +76,18 @@ button{
 }
 
 .workspace small{
-    color:var(--muted);
     display:block;
+    color:var(--muted);
+    font-size:10px;
     margin-bottom:5px;
-    font-size:11px;
 }
 
 .workspace strong{
-    font-size:14px;
+    font-size:13px;
 }
 
-.nav-title{
-    color:#596579;
+.nav-label{
+    color:#555f73;
     font-size:10px;
     text-transform:uppercase;
     letter-spacing:1px;
@@ -106,7 +95,7 @@ button{
     margin:20px 0 8px;
 }
 
-.side-link{
+.nav-btn{
     width:100%;
     display:flex;
     align-items:center;
@@ -118,115 +107,118 @@ button{
     border:0;
     border-radius:9px;
     text-align:left;
-    font-size:14px;
+    font-size:13px;
 }
 
-.side-link:hover,
-.side-link.active{
-    background:rgba(117,103,255,.12);
+.nav-btn:hover,
+.nav-btn.active{
+    background:rgba(116,103,255,.12);
     color:var(--text);
 }
 
-.side-link.active{
+.nav-btn.active{
     border-left:3px solid var(--primary);
 }
 
 .sidebar-bottom{
     position:absolute;
-    bottom:20px;
-    left:15px;
-    right:15px;
+    left:14px;
+    right:14px;
+    bottom:18px;
 }
 
-/* ================= MAIN ================= */
+/* MAIN */
 
 .main{
     margin-left:245px;
     min-height:100vh;
 }
 
-/* ================= TOPBAR ================= */
+/* TOPBAR */
 
 .topbar{
     height:72px;
-    border-bottom:1px solid var(--border);
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:0 32px;
+    padding:0 30px;
+    border-bottom:1px solid var(--border);
 }
 
-.top-title{
-    font-size:14px;
+.page-name{
     color:var(--muted);
+    font-size:13px;
 }
 
-.top-actions{
+.top-right{
     display:flex;
-    gap:9px;
     align-items:center;
+    gap:9px;
 }
 
 .icon-btn{
     width:38px;
     height:38px;
-    border-radius:9px;
     border:1px solid var(--border);
     background:var(--card);
     color:var(--text);
+    border-radius:9px;
 }
 
 .avatar{
     width:38px;
     height:38px;
-    border-radius:10px;
     background:var(--primary);
+    border-radius:10px;
     display:flex;
-    justify-content:center;
     align-items:center;
-    color:#fff;
+    justify-content:center;
     font-weight:800;
 }
 
-/* ================= CONTENT ================= */
+/* CONTENT */
 
 .content{
     padding:30px;
     max-width:1500px;
 }
 
-.welcome{
+.page-header{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    margin-bottom:28px;
+    margin-bottom:25px;
 }
 
-.welcome h1{
+.page-header h1{
     font-size:29px;
-    letter-spacing:-.7px;
+    letter-spacing:-.5px;
 }
 
-.welcome p{
+.page-header p{
     color:var(--muted);
     margin-top:7px;
-    font-size:14px;
+    font-size:13px;
 }
 
-.primary-btn{
-    background:var(--primary);
-    border:0;
-    color:#fff;
+.primary{
     padding:12px 18px;
+    border:0;
     border-radius:9px;
+    background:var(--primary);
+    color:white;
     font-weight:700;
 }
 
-.primary-btn:hover{
-    opacity:.9;
+.secondary{
+    padding:12px 18px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    background:var(--card);
+    color:var(--text);
 }
 
-/* ================= STATS ================= */
+/* STATS */
 
 .stats{
     display:grid;
@@ -242,131 +234,217 @@ button{
     padding:20px;
 }
 
-.stat-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
 .stat-label{
     color:var(--muted);
     font-size:12px;
 }
 
-.stat-icon{
-    width:34px;
-    height:34px;
-    border-radius:9px;
-    background:rgba(117,103,255,.12);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.stat-number{
-    font-size:27px;
+.stat-value{
+    font-size:29px;
     font-weight:800;
-    margin-top:15px;
+    margin-top:12px;
 }
 
-.stat-change{
+.stat-bottom{
     color:var(--green);
-    font-size:11px;
-    margin-top:6px;
+    font-size:10px;
+    margin-top:7px;
 }
 
-/* ================= GRID ================= */
+/* GRID */
 
-.dashboard-grid{
+.grid{
     display:grid;
     grid-template-columns:1.45fr .8fr;
     gap:18px;
     margin-bottom:18px;
 }
 
-.panel{
+.card{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:15px;
     overflow:hidden;
 }
 
-.panel-header{
-    padding:19px 20px;
+.card-header{
+    padding:18px 20px;
     border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.card-header h3{
+    font-size:15px;
+}
+
+.card-header span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.card-body{
+    padding:20px;
+}
+
+/* SEARCH */
+
+.search-box{
+    display:flex;
+    gap:10px;
+}
+
+.search-box input{
+    flex:1;
+    padding:13px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:var(--card2);
+    color:var(--text);
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:var(--primary);
+}
+
+.filters{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+    flex-wrap:wrap;
+}
+
+.filter{
+    padding:7px 11px;
+    border:1px solid var(--border);
+    background:var(--card2);
+    color:var(--muted);
+    border-radius:20px;
+    font-size:11px;
+}
+
+/* LEAD */
+
+.lead{
+    display:flex;
+    align-items:flex-start;
+    gap:13px;
+    padding:15px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.lead:last-child{
+    border-bottom:0;
+}
+
+.source{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    background:var(--card2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-shrink:0;
+    font-weight:700;
+}
+
+.lead-main{
+    flex:1;
+}
+
+.lead-title{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.lead-title strong{
+    font-size:13px;
+}
+
+.score{
+    color:var(--green);
+    background:rgba(53,214,154,.1);
+    padding:4px 8px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:700;
+}
+
+.lead-text{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.5;
+    margin-top:5px;
+}
+
+.lead-meta{
+    color:#596477;
+    font-size:9px;
+    margin-top:7px;
+}
+
+/* PLAN */
+
+.plan{
+    background:linear-gradient(
+        135deg,
+        rgba(116,103,255,.17),
+        rgba(116,103,255,.04)
+    );
+    border:1px solid rgba(116,103,255,.3);
+    border-radius:14px;
+    padding:20px;
+}
+
+.plan-top{
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
-.panel-header h3{
-    font-size:15px;
+.plan-name{
+    font-size:20px;
+    font-weight:800;
 }
 
-.panel-header span{
+.plan-badge{
+    background:var(--primary);
+    color:white;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:9px;
+}
+
+.usage{
+    margin-top:20px;
+}
+
+.usage-row{
+    display:flex;
+    justify-content:space-between;
     color:var(--muted);
-    font-size:11px;
+    font-size:10px;
+    margin-bottom:7px;
 }
 
-.panel-body{
-    padding:20px;
-}
-
-/* ================= SETUP ================= */
-
-.setup-progress{
-    height:7px;
-    background:var(--card2);
+.progress{
+    height:6px;
+    background:#202638;
     border-radius:20px;
     overflow:hidden;
-    margin:14px 0 20px;
 }
 
-.setup-progress div{
-    width:60%;
+.progress div{
     height:100%;
+    width:35%;
     background:var(--primary);
 }
 
-.setup-item{
-    display:flex;
-    gap:13px;
-    padding:13px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.setup-item:last-child{
-    border:0;
-}
-
-.check{
-    width:26px;
-    height:26px;
-    border-radius:8px;
-    background:rgba(53,214,154,.12);
-    color:var(--green);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:12px;
-}
-
-.check.pending{
-    background:rgba(117,103,255,.12);
-    color:#aaa2ff;
-}
-
-.setup-item strong{
-    font-size:13px;
-}
-
-.setup-item p{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
-}
-
-/* ================= PLATFORMS ================= */
+/* PLATFORMS */
 
 .platform{
     display:flex;
@@ -377,7 +455,7 @@ button{
 }
 
 .platform:last-child{
-    border:0;
+    border-bottom:0;
 }
 
 .platform-left{
@@ -392,108 +470,66 @@ button{
     border-radius:9px;
     background:var(--card2);
     display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.platform-name{
-    font-size:13px;
-    font-weight:600;
-}
-
-.platform-status{
-    font-size:10px;
-    color:var(--green);
-}
-
-.dot{
-    width:7px;
-    height:7px;
-    background:var(--green);
-    border-radius:50%;
-    display:inline-block;
-    margin-right:5px;
-}
-
-/* ================= LEADS ================= */
-
-.lead{
-    display:flex;
-    gap:14px;
-    padding:17px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.lead:last-child{
-    border:0;
-}
-
-.lead-source{
-    width:38px;
-    height:38px;
-    background:var(--card2);
-    border:1px solid var(--border);
-    border-radius:9px;
-    display:flex;
     justify-content:center;
     align-items:center;
-    flex-shrink:0;
-}
-
-.lead-main{
-    flex:1;
-}
-
-.lead-top{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.lead-top strong{
-    font-size:13px;
-}
-
-.score{
-    color:var(--green);
-    background:rgba(53,214,154,.1);
-    padding:4px 8px;
-    border-radius:20px;
-    font-size:10px;
+    font-size:12px;
     font-weight:700;
 }
 
-.lead-text{
-    color:var(--muted);
+.platform-name{
     font-size:12px;
-    line-height:1.5;
-    margin-top:6px;
 }
 
-.lead-meta{
-    color:#596579;
+.status{
+    font-size:9px;
+    color:var(--green);
+    margin-top:3px;
+}
+
+.dot{
+    display:inline-block;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--green);
+    margin-right:4px;
+}
+
+/* TABLE */
+
+.table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table th{
+    text-align:left;
+    color:#626d81;
     font-size:10px;
-    margin-top:7px;
+    font-weight:500;
+    padding:12px 10px;
+    border-bottom:1px solid var(--border);
 }
 
-/* ================= KEYWORDS ================= */
-
-.keyword-list{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-}
-
-.keyword{
-    padding:7px 10px;
-    background:var(--card2);
-    border:1px solid var(--border);
-    color:var(--muted);
-    border-radius:20px;
+.table td{
+    padding:15px 10px;
+    border-bottom:1px solid var(--border);
     font-size:11px;
 }
 
-/* ================= ACTIVITY ================= */
+.table td:nth-child(2){
+    color:var(--muted);
+}
+
+.high{
+    color:var(--green);
+}
+
+.medium{
+    color:var(--yellow);
+}
+
+/* ACTIVITY */
 
 .activity{
     display:flex;
@@ -507,59 +543,30 @@ button{
 }
 
 .activity-dot{
-    width:9px;
-    height:9px;
-    margin-top:5px;
+    width:8px;
+    height:8px;
+    margin-top:4px;
     background:var(--primary);
     border-radius:50%;
 }
 
 .activity p{
-    font-size:12px;
+    font-size:11px;
 }
 
 .activity small{
+    color:var(--muted);
     display:block;
-    color:var(--muted);
     margin-top:4px;
+    font-size:9px;
 }
 
-/* ================= EMPTY LEADS ================= */
-
-.empty{
-    text-align:center;
-    padding:35px 15px;
-}
-
-.empty-icon{
-    width:55px;
-    height:55px;
-    margin:0 auto 12px;
-    border-radius:15px;
-    background:rgba(117,103,255,.1);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:24px;
-}
-
-.empty h3{
-    font-size:15px;
-}
-
-.empty p{
-    color:var(--muted);
-    font-size:12px;
-    max-width:350px;
-    margin:7px auto 18px;
-}
-
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal-bg{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.75);
+    background:rgba(0,0,0,.78);
     z-index:100;
     display:flex;
     justify-content:center;
@@ -583,28 +590,28 @@ button{
 
 .modal p{
     color:var(--muted);
-    font-size:13px;
+    font-size:12px;
     margin-bottom:20px;
 }
 
 .input{
     width:100%;
+    padding:13px;
+    margin-bottom:12px;
     background:var(--card2);
-    color:var(--text);
     border:1px solid var(--border);
     border-radius:9px;
-    padding:12px;
-    margin-bottom:12px;
-    outline:0;
+    color:var(--text);
+    outline:none;
 }
 
-.modal-btn{
+.modal-primary{
     width:100%;
     padding:13px;
     background:var(--primary);
+    color:#fff;
     border:0;
     border-radius:9px;
-    color:#fff;
     font-weight:700;
 }
 
@@ -612,11 +619,11 @@ button{
     width:100%;
     padding:11px;
     background:transparent;
-    border:0;
     color:var(--muted);
+    border:0;
 }
 
-/* ================= RESPONSIVE ================= */
+/* RESPONSIVE */
 
 @media(max-width:1050px){
 
@@ -624,21 +631,21 @@ button{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .dashboard-grid{
+    .grid{
         grid-template-columns:1fr;
     }
 
 }
 
-@media(max-width:750px){
+@media(max-width:700px){
 
     .sidebar{
-        width:70px;
-        padding:20px 8px;
+        width:68px;
+        padding:20px 7px;
     }
 
     .main{
-        margin-left:70px;
+        margin-left:68px;
     }
 
     .logo{
@@ -647,35 +654,38 @@ button{
     }
 
     .logo span{
-        font-size:24px;
+        font-size:23px;
     }
 
     .workspace,
-    .nav-title,
-    .side-link span,
-    .sidebar-bottom .side-link span{
+    .nav-label,
+    .nav-btn span:last-child{
         display:none;
     }
 
-    .side-link{
+    .nav-btn{
         justify-content:center;
     }
 
     .content{
-        padding:20px 14px;
+        padding:20px 13px;
     }
 
     .topbar{
-        padding:0 15px;
+        padding:0 13px;
     }
 
     .stats{
         grid-template-columns:1fr;
     }
 
-    .welcome{
+    .page-header{
         flex-direction:column;
         gap:15px;
+    }
+
+    .search-box{
+        flex-direction:column;
     }
 
 }
@@ -697,84 +707,90 @@ S<span>Leads</span>
 <small>WORKSPACE</small>
 
 <strong id="workspaceName">
-My Business
+My Workspace
 </strong>
 
 </div>
 
 
-<div class="nav-title">
-Overview
+<div class="nav-label">
+Main
 </div>
 
-<button class="side-link active">
+<button
+class="nav-btn active"
+onclick="showPage('overview',this)">
 <span>▦</span>
-<span>Dashboard</span>
+<span>Overview</span>
 </button>
 
-<button class="side-link">
+<button
+class="nav-btn"
+onclick="showPage('leads',this)">
 <span>◎</span>
 <span>Leads</span>
 </button>
 
-<button class="side-link">
+<button
+class="nav-btn"
+onclick="showPage('search',this)">
 <span>⌕</span>
-<span>Search</span>
+<span>Find Leads</span>
 </button>
 
 
-<div class="nav-title">
+<div class="nav-label">
 Manage
 </div>
 
-<button class="side-link">
-<span>◆</span>
-<span>Businesses</span>
+<button
+class="nav-btn"
+onclick="showPage('platforms',this)">
+<span>◉</span>
+<span>Platforms</span>
 </button>
 
-<button class="side-link">
+<button
+class="nav-btn"
+onclick="showPage('keywords',this)">
 <span>⌁</span>
 <span>Keywords</span>
 </button>
 
-<button class="side-link">
-<span>◉</span>
-<span>Alerts</span>
+<button
+class="nav-btn"
+onclick="showPage('analytics',this)">
+<span>▥</span>
+<span>Analytics</span>
 </button>
 
 
-<div class="nav-title">
+<div class="nav-label">
 Account
 </div>
 
 <button
-class="side-link"
+class="nav-btn"
 onclick="openSettings()">
-
 <span>⚙</span>
 <span>Settings</span>
-
 </button>
 
 
 <div class="sidebar-bottom">
 
 <button
-class="side-link"
+class="nav-btn"
 onclick="toggleTheme()">
-
 <span>☼</span>
 <span>Theme</span>
-
 </button>
 
 <button
-class="side-link"
+class="nav-btn"
 onclick="logout()">
-
 <span>↪</span>
 <span>Logout</span>
-
 </button>
 
 </div>
@@ -787,15 +803,15 @@ onclick="logout()">
 <main class="main">
 
 
-<!-- TOPBAR -->
-
 <header class="topbar">
 
-<div class="top-title">
-Dashboard / Overview
+<div
+class="page-name"
+id="pageName">
+Overview
 </div>
 
-<div class="top-actions">
+<div class="top-right">
 
 <button
 class="icon-btn"
@@ -803,12 +819,12 @@ onclick="toggleTheme()">
 ☼
 </button>
 
-<button
-class="icon-btn">
+<button class="icon-btn">
 🔔
 </button>
 
-<div class="avatar"
+<div
+class="avatar"
 id="avatar">
 S
 </div>
@@ -818,59 +834,49 @@ S
 </header>
 
 
-<!-- CONTENT -->
+<!-- ================= OVERVIEW ================= -->
 
-<div class="content">
+<section
+class="content page"
+id="overviewPage">
 
-
-<div class="welcome">
+<div class="page-header">
 
 <div>
 
 <h1>
-Good morning, <span id="userName">Sameer</span> 👋
+Overview
 </h1>
 
 <p>
-Here's what's happening with your lead generation today.
+Monitor your lead generation activity from one place.
 </p>
 
 </div>
 
 <button
-class="primary-btn"
-onclick="openSetup()">
-+ Add Business
+class="primary"
+onclick="showPage('search')">
++ Find Leads
 </button>
 
 </div>
 
 
-<!-- STATS -->
-
 <div class="stats">
 
-
 <div class="stat">
 
-<div class="stat-top">
-
-<span class="stat-label">
-Leads Found
-</span>
-
-<div class="stat-icon">
-◎
+<div class="stat-label">
+Total Leads
 </div>
 
-</div>
-
-<div class="stat-number">
+<div class="stat-value">
 0
 </div>
 
-<div class="stat-change">
-Waiting for your first scan
+<div class="stat-bottom">
+No leads generated yet
 </div>
 
 </div>
@@ -878,24 +884,16 @@ Waiting for your first scan
 
 <div class="stat">
 
-<div class="stat-top">
-
-<span class="stat-label">
-AI Matches
-</span>
-
-<div class="stat-icon">
-✦
+<div class="stat-label">
+Qualified Leads
 </div>
 
-</div>
-
-<div class="stat-number">
+<div class="stat-value">
 0
 </div>
 
-<div class="stat-change">
-High-intent opportunities
+<div class="stat-bottom">
+AI qualified
 </div>
 
 </div>
@@ -903,24 +901,18 @@ High-intent opportunities
 
 <div class="stat">
 
-<div class="stat-top">
-
-<span class="stat-label">
-Keywords
-</span>
-
-<div class="stat-icon">
-⌁
+<div class="stat-label">
+Searches Used
 </div>
 
+<div
+class="stat-value"
+id="searchUsage">
+0
 </div>
 
-<div class="stat-number">
-0/20
-</div>
-
-<div class="stat-change">
-Basic plan limit
+<div class="stat-bottom">
+This billing period
 </div>
 
 </div>
@@ -928,25 +920,18 @@ Basic plan limit
 
 <div class="stat">
 
-<div class="stat-top">
-
-<span class="stat-label">
+<div class="stat-label">
 Current Plan
-</span>
-
-<div class="stat-icon">
-◆
 </div>
 
-</div>
-
-<div class="stat-number"
-id="planDisplay">
+<div
+class="stat-value"
+id="planValue">
 Free
 </div>
 
-<div class="stat-change">
-Manage subscription
+<div class="stat-bottom">
+Active subscription
 </div>
 
 </div>
@@ -954,135 +939,165 @@ Manage subscription
 </div>
 
 
-<!-- FIRST GRID -->
-
-<div class="dashboard-grid">
+<div class="grid">
 
 
-<!-- SETUP -->
+<div class="card">
 
-<div class="panel">
+<div class="card-header">
 
-<div class="panel-header">
+<h3>
+Latest Leads
+</h3>
 
-<h3>Get your lead engine ready</h3>
-
-<span>3 of 5 complete</span>
+<span>
+Live
+</span>
 
 </div>
 
-<div class="panel-body">
+<div class="card-body">
 
-<p style="color:var(--muted);font-size:12px;">
-Complete your setup so SLeads knows exactly what kind
-of customers to find.
-</p>
+<div class="lead">
 
-<div class="setup-progress">
+<div class="source">
+R
+</div>
+
+<div class="lead-main">
+
+<div class="lead-title">
+
+<strong>
+Reddit conversations
+</strong>
+
+<span class="score">
+AI 92%
+</span>
+
+</div>
+
+<div class="lead-text">
+Potential customers will appear here after you run
+your first lead search.
+</div>
+
+<div class="lead-meta">
+Reddit · Waiting for search
+</div>
+
+</div>
+
+</div>
+
+
+<div class="lead">
+
+<div class="source">
+in
+</div>
+
+<div class="lead-main">
+
+<div class="lead-title">
+
+<strong>
+LinkedIn opportunities
+</strong>
+
+<span class="score">
+AI 88%
+</span>
+
+</div>
+
+<div class="lead-text">
+SLeads will analyze relevant conversations and identify
+potential buyers.
+</div>
+
+<div class="lead-meta">
+LinkedIn · Waiting for search
+</div>
+
+</div>
+
+</div>
+
+
+<div style="text-align:center;padding:20px">
+
+<button
+class="secondary"
+onclick="showPage('leads')">
+View All Leads
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div>
+
+<div class="plan">
+
+<div class="plan-top">
+
+<div class="plan-name"
+id="planName">
+Free
+</div>
+
+<div class="plan-badge">
+ACTIVE
+</div>
+
+</div>
+
+<div style="color:var(--muted);font-size:11px;margin-top:7px;">
+Your current SLeads subscription
+</div>
+
+<div class="usage">
+
+<div class="usage-row">
+
+<span>
+Lead searches
+</span>
+
+<span>
+0 / 10
+</span>
+
+</div>
+
+<div class="progress">
 <div></div>
 </div>
 
-
-<div class="setup-item">
-
-<div class="check">
-✓
 </div>
 
-<div>
+<div class="usage">
 
-<strong>
-Create your account
-</strong>
+<div class="usage-row">
 
-<p>
-Your SLeads account is ready.
-</p>
+<span>
+Lead exports
+</span>
+
+<span>
+0 / 5
+</span>
 
 </div>
 
-</div>
-
-
-<div class="setup-item">
-
-<div class="check">
-✓
-</div>
-
-<div>
-
-<strong>
-Choose your plan
-</strong>
-
-<p>
-Your subscription has been selected.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="setup-item">
-
-<div class="check pending">
-3
-</div>
-
-<div>
-
-<strong>
-Tell us what you sell
-</strong>
-
-<p>
-Add your business and describe your ideal customer.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="setup-item">
-
-<div class="check pending">
-4
-</div>
-
-<div>
-
-<strong>
-Add buyer-intent keywords
-</strong>
-
-<p>
-Add phrases your customers actually search for.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="setup-item">
-
-<div class="check pending">
-5
-</div>
-
-<div>
-
-<strong>
-Choose your alerts
-</strong>
-
-<p>
-Decide how you want to receive new leads.
-</p>
-
+<div class="progress">
+<div style="width:10%"></div>
 </div>
 
 </div>
@@ -1090,30 +1105,91 @@ Decide how you want to receive new leads.
 <br>
 
 <button
-class="primary-btn"
-onclick="openSetup()">
-Continue Setup
+class="primary"
+style="width:100%"
+onclick="openUpgrade()">
+Upgrade Plan
 </button>
 
 </div>
 
+
+<div class="card" style="margin-top:18px;">
+
+<div class="card-header">
+
+<h3>
+Recent Activity
+</h3>
+
+<span>
+Today
+</span>
+
+</div>
+
+<div class="card-body">
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+
+<p>
+Dashboard initialized
+</p>
+
+<small>
+Just now
+</small>
+
+</div>
+
+</div>
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+
+<p>
+Lead engine ready
+</p>
+
+<small>
+Waiting for first search
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 
-<!-- PLATFORMS -->
+<div class="card">
 
-<div class="panel">
+<div class="card-header">
 
-<div class="panel-header">
+<h3>
+Connected Platforms
+</h3>
 
-<h3>Platforms</h3>
-
-<span>5 sources</span>
+<span>
+5 available
+</span>
 
 </div>
 
-<div class="panel-body">
-
+<div class="card-body">
 
 <div class="platform">
 
@@ -1124,13 +1200,15 @@ R
 </div>
 
 <div>
+
 <div class="platform-name">
 Reddit
 </div>
 
-<div class="platform-status">
+<div class="status">
 <span class="dot"></span>Ready
 </div>
+
 </div>
 
 </div>
@@ -1147,13 +1225,15 @@ in
 </div>
 
 <div>
+
 <div class="platform-name">
 LinkedIn
 </div>
 
-<div class="platform-status">
+<div class="status">
 <span class="dot"></span>Ready
 </div>
+
 </div>
 
 </div>
@@ -1170,13 +1250,15 @@ LinkedIn
 </div>
 
 <div>
+
 <div class="platform-name">
 X
 </div>
 
-<div class="platform-status">
+<div class="status">
 <span class="dot"></span>Ready
 </div>
+
 </div>
 
 </div>
@@ -1193,13 +1275,15 @@ f
 </div>
 
 <div>
+
 <div class="platform-name">
 Facebook
 </div>
 
-<div class="platform-status">
+<div class="status">
 <span class="dot"></span>Ready
 </div>
+
 </div>
 
 </div>
@@ -1216,19 +1300,14 @@ Facebook
 </div>
 
 <div>
+
 <div class="platform-name">
 Instagram
 </div>
 
-<div class="platform-status">
+<div class="status">
 <span class="dot"></span>Ready
 </div>
-</div>
-
-</div>
-
-</div>
-
 
 </div>
 
@@ -1236,87 +1315,424 @@ Instagram
 
 </div>
 
-
-<!-- SECOND GRID -->
-
-<div class="dashboard-grid">
-
-
-<!-- LIVE LEADS -->
-
-<div class="panel">
-
-<div class="panel-header">
-
-<h3>Latest Lead Opportunities</h3>
-
-<span>Live feed</span>
+</div>
 
 </div>
 
-<div class="panel-body">
-
-
-<div class="empty">
-
-<div class="empty-icon">
-✦
 </div>
+
+</section>
+
+
+<!-- ================= LEADS ================= -->
+
+<section
+class="content page hidden"
+id="leadsPage">
+
+<div class="page-header">
+
+<div>
+
+<h1>
+Leads
+</h1>
+
+<p>
+All prospects discovered by SLeads.
+</p>
+
+</div>
+
+<button
+class="primary"
+onclick="showPage('search')">
++ Find New Leads
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
 
 <h3>
+Lead Database
+</h3>
+
+<span>
+0 leads
+</span>
+
+</div>
+
+<div class="card-body">
+
+<div class="search-box">
+
+<input
+placeholder="Search your leads...">
+
+<button
+class="primary">
+Search
+</button>
+
+</div>
+
+
+<table class="table" style="margin-top:20px;">
+
+<thead>
+
+<tr>
+
+<th>LEAD</th>
+<th>SOURCE</th>
+<th>INTENT</th>
+<th>STATUS</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
 No leads yet
-</h3>
+</td>
+
+<td>
+—
+</td>
+
+<td>
+—
+</td>
+
+<td>
+<span style="color:var(--muted)">
+Waiting
+</span>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<section
+class="content page hidden"
+id="searchPage">
+
+<div class="page-header">
+
+<div>
+
+<h1>
+Find Leads
+</h1>
 
 <p>
-Complete your business setup and add buyer-intent
-keywords. SLeads will show matching conversations here.
+Search social conversations for people who need your service.
 </p>
 
-<button
-class="primary-btn"
-onclick="openSetup()">
-Start Finding Leads
-</button>
-
-</div>
-
 </div>
 
 </div>
 
 
-<!-- KEYWORDS -->
+<div class="card">
 
-<div class="panel">
-
-<div class="panel-header">
-
-<h3>Buyer Keywords</h3>
-
-<span>0 / 20</span>
-
-</div>
-
-<div class="panel-body">
-
-<div class="empty">
-
-<div class="empty-icon">
-⌁
-</div>
+<div class="card-header">
 
 <h3>
-No keywords added
+Create Lead Search
 </h3>
 
-<p>
-Add phrases your customers use when they need your service.
-</p>
+<span>
+AI powered
+</span>
+
+</div>
+
+<div class="card-body">
+
+<input
+class="input"
+id="searchKeyword"
+placeholder="What are people looking for? e.g. need a marketing agency">
+
+
+<select
+class="input"
+id="searchPlatform">
+
+<option>
+All Platforms
+</option>
+
+<option>
+Reddit
+</option>
+
+<option>
+LinkedIn
+</option>
+
+<option>
+X
+</option>
+
+<option>
+Facebook
+</option>
+
+<option>
+Instagram
+</option>
+
+</select>
+
 
 <button
-class="primary-btn"
-onclick="openSetup()">
-Add Keywords
+class="primary"
+onclick="runSearch()">
+Start AI Lead Search
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="card"
+style="margin-top:18px;">
+
+<div class="card-header">
+
+<h3>
+Search Results
+</h3>
+
+<span id="resultStatus">
+No search running
+</span>
+
+</div>
+
+<div
+class="card-body"
+id="searchResults">
+
+<div style="text-align:center;padding:35px;color:var(--muted);">
+
+Enter a keyword above to start discovering opportunities.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PLATFORMS ================= -->
+
+<section
+class="content page hidden"
+id="platformsPage">
+
+<div class="page-header">
+
+<div>
+
+<h1>
+Platforms
+</h1>
+
+<p>
+Manage the social platforms used for lead discovery.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-header">
+
+<h3>
+Lead Sources
+</h3>
+
+<span>
+5 platforms
+</span>
+
+</div>
+
+<div class="card-body">
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+R
+</div>
+
+<div>
+
+<div class="platform-name">
+Reddit
+</div>
+
+<div class="status">
+<span class="dot"></span>Available
+</div>
+
+</div>
+
+</div>
+
+<button class="secondary">
+Configure
+</button>
+
+</div>
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+in
+</div>
+
+<div>
+
+<div class="platform-name">
+LinkedIn
+</div>
+
+<div class="status">
+<span class="dot"></span>Available
+</div>
+
+</div>
+
+</div>
+
+<button class="secondary">
+Configure
+</button>
+
+</div>
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+𝕏
+</div>
+
+<div>
+
+<div class="platform-name">
+X
+</div>
+
+<div class="status">
+<span class="dot"></span>Available
+</div>
+
+</div>
+
+</div>
+
+<button class="secondary">
+Configure
+</button>
+
+</div>
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+f
+</div>
+
+<div>
+
+<div class="platform-name">
+Facebook
+</div>
+
+<div class="status">
+<span class="dot"></span>Available
+</div>
+
+</div>
+
+</div>
+
+<button class="secondary">
+Configure
+</button>
+
+</div>
+
+
+<div class="platform">
+
+<div class="platform-left">
+
+<div class="platform-icon">
+◎
+</div>
+
+<div>
+
+<div class="platform-name">
+Instagram
+</div>
+
+<div class="status">
+<span class="dot"></span>Available
+</div>
+
+</div>
+
+</div>
+
+<button class="secondary">
+Configure
 </button>
 
 </div>
@@ -1327,151 +1743,188 @@ Add Keywords
 
 </div>
 
-
-<!-- ACTIVITY -->
-
-<div class="panel">
-
-<div class="panel-header">
-
-<h3>Recent Activity</h3>
-
-<span>Today</span>
-
-</div>
-
-<div class="panel-body">
+</section>
 
 
-<div class="activity">
+<!-- ================= KEYWORDS ================= -->
 
-<div class="activity-dot"></div>
+<section
+class="content page hidden"
+id="keywordsPage">
+
+<div class="page-header">
 
 <div>
 
+<h1>
+Keywords
+</h1>
+
 <p>
-Your SLeads workspace was created.
+Tell SLeads what buying intent to look for.
 </p>
 
-<small>
-Just now
-</small>
+</div>
+
+<button
+class="primary"
+onclick="addKeyword()">
++ Add Keyword
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
+
+<h3>
+Your Buyer Keywords
+</h3>
+
+<span id="keywordCount">
+0 / 20
+</span>
+
+</div>
+
+<div class="card-body">
+
+<div
+id="keywordList"
+style="display:flex;gap:9px;flex-wrap:wrap;">
+
+<span
+class="filter">
+No keywords added
+</span>
 
 </div>
 
 </div>
 
+</div>
 
-<div class="activity">
+</section>
 
-<div class="activity-dot"></div>
+
+<!-- ================= ANALYTICS ================= -->
+
+<section
+class="content page hidden"
+id="analyticsPage">
+
+<div class="page-header">
 
 <div>
 
-<p>
-Your lead engine is waiting for setup.
-</p>
-
-<small>
-Complete business information to begin.
-</small>
-
-</div>
-
-</div>
-
-
-<div class="activity">
-
-<div class="activity-dot"></div>
-
-<div>
+<h1>
+Analytics
+</h1>
 
 <p>
-Five social platforms are ready.
+Track your lead generation performance.
 </p>
 
-<small>
-Reddit · LinkedIn · X · Facebook · Instagram
-</small>
-
 </div>
 
 </div>
 
 
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-label">
+Total Searches
+</div>
+
+<div class="stat-value">
+0
 </div>
 
 </div>
 
+<div class="stat">
+
+<div class="stat-label">
+Leads Found
+</div>
+
+<div class="stat-value">
+0
+</div>
 
 </div>
+
+<div class="stat">
+
+<div class="stat-label">
+Qualified
+</div>
+
+<div class="stat-value">
+0
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-label">
+Conversion
+</div>
+
+<div class="stat-value">
+0%
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
+
+<h3>
+Lead Generation Activity
+</h3>
+
+<span>
+Last 30 days
+</span>
+
+</div>
+
+<div class="card-body">
+
+<div style="
+height:250px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:var(--muted);
+font-size:12px;
+">
+
+Analytics will appear after your first lead search.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
 
 </main>
 
 
-<!-- ================= SETUP MODAL ================= -->
-
-<div
-class="modal-bg hidden"
-id="setupModal">
-
-<div class="modal">
-
-<h2>
-Set up your lead engine
-</h2>
-
-<p>
-Tell SLeads about your business so we can find relevant
-conversations.
-</p>
-
-
-<input
-class="input"
-id="businessName"
-placeholder="Business name">
-
-
-<input
-class="input"
-id="businessWebsite"
-placeholder="Website">
-
-
-<textarea
-class="input"
-id="businessDescription"
-rows="4"
-placeholder="What do you sell? Who are your ideal customers?"></textarea>
-
-
-<input
-class="input"
-id="keywords"
-placeholder="Buyer keywords, e.g. lead generation, CRM, marketing">
-
-
-<button
-class="modal-btn"
-onclick="saveSetup()">
-Save & Start Finding Leads
-</button>
-
-
-<button
-class="close"
-onclick="closeSetup()">
-Cancel
-</button>
-
-</div>
-
-</div>
-
-
-<!-- ================= SETTINGS ================= -->
+<!-- ================= SETTINGS MODAL ================= -->
 
 <div
 class="modal-bg hidden"
@@ -1489,9 +1942,9 @@ Manage your SLeads account.
 
 
 <button
-class="side-link"
+class="nav-btn"
 onclick="toggleTheme()"
-style="background:var(--card2);margin-bottom:8px;">
+style="background:var(--card2);margin-bottom:7px;">
 
 <span>☼</span>
 <span>Dark / Light Mode</span>
@@ -1500,9 +1953,9 @@ style="background:var(--card2);margin-bottom:8px;">
 
 
 <button
-class="side-link"
+class="nav-btn"
 onclick="logout()"
-style="background:var(--card2);margin-bottom:8px;">
+style="background:var(--card2);margin-bottom:7px;">
 
 <span>↪</span>
 <span>Logout</span>
@@ -1511,9 +1964,9 @@ style="background:var(--card2);margin-bottom:8px;">
 
 
 <button
-class="side-link"
+class="nav-btn"
 onclick="deleteAccount()"
-style="background:rgba(255,80,80,.07);color:#ff6868;">
+style="background:rgba(255,70,70,.08);color:var(--red);">
 
 <span>🗑</span>
 <span>Delete Account</span>
@@ -1532,15 +1985,84 @@ Close
 </div>
 
 
+<!-- ================= UPGRADE MODAL ================= -->
+
+<div
+class="modal-bg hidden"
+id="upgradeModal">
+
+<div class="modal">
+
+<h2>
+Upgrade SLeads
+</h2>
+
+<p>
+Choose a plan to increase your lead generation limits.
+</p>
+
+
+<button
+class="nav-btn"
+style="background:var(--card2);margin-bottom:8px;"
+onclick="upgrade('Basic')">
+
+<span>◆</span>
+<span>Basic — $19/month</span>
+
+</button>
+
+
+<button
+class="nav-btn"
+style="background:var(--card2);margin-bottom:8px;"
+onclick="upgrade('Growth')">
+
+<span>◆</span>
+<span>Growth — $39/month</span>
+
+</button>
+
+
+<button
+class="nav-btn"
+style="background:var(--card2);"
+onclick="upgrade('Pro')">
+
+<span>◆</span>
+<span>Pro — $89/month</span>
+
+</button>
+
+
+<button
+class="close"
+onclick="closeUpgrade()">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+
 <script>
 
 /* ================= USER ================= */
 
 function getUser(){
 
-    return JSON.parse(
-        localStorage.getItem("sLeadsUser")
-    );
+    try{
+
+        return JSON.parse(
+            localStorage.getItem("sLeadsUser")
+        );
+
+    }catch(e){
+
+        return null;
+
+    }
 
 }
 
@@ -1557,24 +2079,104 @@ function(){
 
     if(user){
 
-        document.getElementById("userName")
-        .innerText=user.name || "there";
+        const name=
+        user.name ||
+        "User";
 
-        document.getElementById("avatar")
-        .innerText=
-        (user.name || "S")
-        .charAt(0)
-        .toUpperCase();
+        document
+        .getElementById("userName")
+        .innerText=name;
 
-        document.getElementById("planDisplay")
+        document
+        .getElementById("workspaceName")
         .innerText=
-        user.plan || "Free";
+        user.business ||
+        name+"'s Workspace";
+
+        document
+        .getElementById("avatar")
+        .innerText=
+        name.charAt(0).toUpperCase();
+
+        document
+        .getElementById("planValue")
+        .innerText=
+        user.plan ||
+        "Free";
+
+        document
+        .getElementById("planName")
+        .innerText=
+        user.plan ||
+        "Free";
 
     }
 
-    loadSetup();
+    loadKeywords();
 
 });
+
+
+/* ================= PAGE NAVIGATION ================= */
+
+function showPage(page,button){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(function(el){
+
+        el.classList.add("hidden");
+
+    });
+
+
+    const target=
+    document.getElementById(
+        page+"Page"
+    );
+
+
+    if(target){
+
+        target.classList.remove("hidden");
+
+    }
+
+
+    document
+    .querySelectorAll(".nav-btn")
+    .forEach(function(btn){
+
+        btn.classList.remove("active");
+
+    });
+
+
+    if(button){
+
+        button.classList.add("active");
+
+    }
+
+
+    const names={
+
+        overview:"Overview",
+        leads:"Leads",
+        search:"Find Leads",
+        platforms:"Platforms",
+        keywords:"Keywords",
+        analytics:"Analytics"
+
+    };
+
+
+    document
+    .getElementById("pageName")
+    .innerText=
+    names[page] || "Dashboard";
+
+}
 
 
 /* ================= THEME ================= */
@@ -1607,132 +2209,201 @@ function toggleTheme(){
 }
 
 
-/* ================= SETUP ================= */
+/* ================= SEARCH ================= */
 
-function openSetup(){
+function runSearch(){
 
+    const keyword=
     document
-    .getElementById("setupModal")
-    .classList.remove("hidden");
+    .getElementById("searchKeyword")
+    .value
+    .trim();
 
-}
 
-
-function closeSetup(){
-
+    const platform=
     document
-    .getElementById("setupModal")
-    .classList.add("hidden");
-
-}
+    .getElementById("searchPlatform")
+    .value;
 
 
-function saveSetup(){
+    if(!keyword){
 
-    const business={
-        name:
-        document
-        .getElementById("businessName")
-        .value.trim(),
-
-        website:
-        document
-        .getElementById("businessWebsite")
-        .value.trim(),
-
-        description:
-        document
-        .getElementById("businessDescription")
-        .value.trim(),
-
-        keywords:
-        document
-        .getElementById("keywords")
-        .value.trim()
-        .split(",")
-        .map(x=>x.trim())
-        .filter(Boolean)
-
-    };
-
-
-    if(!business.name){
-
-        alert("Please enter your business name.");
+        alert(
+            "Enter a keyword or buyer intent first."
+        );
 
         return;
 
     }
+
+
+    document
+    .getElementById("resultStatus")
+    .innerText=
+    "Searching...";
+
+
+    document
+    .getElementById("searchResults")
+    .innerHTML=`
+
+        <div style="
+        text-align:center;
+        padding:35px;
+        color:var(--muted);
+        ">
+
+        <div style="
+        font-size:28px;
+        margin-bottom:10px;
+        ">
+        ✦
+        </div>
+
+        SLeads is preparing your search for
+        <strong style="color:var(--text)">
+        ${escapeHtml(keyword)}
+        </strong>
+        on ${escapeHtml(platform)}.
+
+        <br><br>
+
+        <span style="font-size:10px;">
+        Connect your real lead-generation backend
+        to return live results.
+        </span>
+
+        </div>
+
+    `;
+
+
+    let usage=
+    parseInt(
+        localStorage.getItem("sLeadsSearches") ||
+        "0"
+    );
+
+    usage++;
+
+    localStorage.setItem(
+        "sLeadsSearches",
+        usage
+    );
+
+
+    document
+    .getElementById("searchUsage")
+    .innerText=usage;
+
+}
+
+
+/* ================= KEYWORDS ================= */
+
+function loadKeywords(){
+
+    let keywords=
+    JSON.parse(
+        localStorage.getItem("sLeadsKeywords") ||
+        "[]"
+    );
+
+
+    renderKeywords(keywords);
+
+}
+
+
+function renderKeywords(keywords){
+
+    const box=
+    document
+    .getElementById("keywordList");
+
+
+    document
+    .getElementById("keywordCount")
+    .innerText=
+    keywords.length+" / 20";
+
+
+    if(!keywords.length){
+
+        box.innerHTML=`
+
+            <span class="filter">
+            No keywords added
+            </span>
+
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML=
+    keywords.map(function(keyword){
+
+        return `
+
+            <span class="filter">
+            ${escapeHtml(keyword)}
+            </span>
+
+        `;
+
+    }).join("");
+
+}
+
+
+function addKeyword(){
+
+    const keyword=
+    prompt(
+        "Enter a buyer-intent keyword:"
+    );
+
+
+    if(!keyword){
+
+        return;
+
+    }
+
+
+    let keywords=
+    JSON.parse(
+        localStorage.getItem("sLeadsKeywords") ||
+        "[]"
+    );
+
+
+    if(keywords.length>=20){
+
+        alert(
+            "You have reached your keyword limit."
+        );
+
+        return;
+
+    }
+
+
+    keywords.push(
+        keyword.trim()
+    );
 
 
     localStorage.setItem(
-        "sLeadsBusiness",
-        JSON.stringify(business)
+        "sLeadsKeywords",
+        JSON.stringify(keywords)
     );
 
 
-    document
-    .getElementById("workspaceName")
-    .innerText=business.name;
-
-
-    closeSetup();
-
-
-    alert(
-        "Business setup saved successfully."
-    );
-
-    location.reload();
-
-}
-
-
-/* ================= LOAD SETUP ================= */
-
-function loadSetup(){
-
-    const business=
-    JSON.parse(
-        localStorage.getItem("sLeadsBusiness")
-    );
-
-
-    if(!business){
-
-        return;
-
-    }
-
-
-    document
-    .getElementById("workspaceName")
-    .innerText=
-    business.name;
-
-
-    document
-    .getElementById("businessName")
-    .value=
-    business.name || "";
-
-
-    document
-    .getElementById("businessWebsite")
-    .value=
-    business.website || "";
-
-
-    document
-    .getElementById("businessDescription")
-    .value=
-    business.description || "";
-
-
-    document
-    .getElementById("keywords")
-    .value=
-    (business.keywords || []).join(", ");
+    renderKeywords(keywords);
 
 }
 
@@ -1757,6 +2428,38 @@ function closeSettings(){
 }
 
 
+/* ================= UPGRADE ================= */
+
+function openUpgrade(){
+
+    document
+    .getElementById("upgradeModal")
+    .classList.remove("hidden");
+
+}
+
+
+function closeUpgrade(){
+
+    document
+    .getElementById("upgradeModal")
+    .classList.add("hidden");
+
+}
+
+
+function upgrade(plan){
+
+    closeUpgrade();
+
+    alert(
+        "Payment setup for the "+plan+
+        " plan will be connected next."
+    );
+
+}
+
+
 /* ================= LOGOUT ================= */
 
 function logout(){
@@ -1768,30 +2471,26 @@ function logout(){
 }
 
 
-/* ================= DELETE ================= */
+/* ================= DELETE ACCOUNT ================= */
 
 function deleteAccount(){
 
-    const first=
-    confirm(
-        "Are you sure you want to delete your SLeads account?"
-    );
-
-
-    if(!first){
+    if(
+        !confirm(
+            "Are you sure you want to delete your account?"
+        )
+    ){
 
         return;
 
     }
 
 
-    const second=
-    confirm(
-        "This will permanently remove your local account data. Continue?"
-    );
-
-
-    if(!second){
+    if(
+        !confirm(
+            "This cannot be undone. Delete account?"
+        )
+    ){
 
         return;
 
@@ -1801,6 +2500,8 @@ function deleteAccount(){
     localStorage.removeItem("sLeadsUser");
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("sLeadsBusiness");
+    localStorage.removeItem("sLeadsKeywords");
+    localStorage.removeItem("sLeadsSearches");
     localStorage.removeItem("pendingPayment");
 
 
@@ -1810,6 +2511,20 @@ function deleteAccount(){
 
 
     window.location.href="index.html";
+
+}
+
+
+/* ================= SECURITY ================= */
+
+function escapeHtml(value){
+
+    return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
