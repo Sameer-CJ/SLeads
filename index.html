@@ -4,36 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SLeads — Social Lead Generation</title>
-  <meta name="description" content="SLeads helps you discover and organize leads from Reddit, Instagram, Facebook, X and LinkedIn.">
+  <title>SLeads — Automated Lead Generation</title>
+  <meta name="description" content="SLeads helps businesses discover, organize and manage qualified leads.">
 
   <style>
-    :root {
-      --bg: #07080b;
-      --card: #101218;
-      --card2: #14161d;
-      --border: #242731;
-      --text: #f7f7f8;
-      --muted: #9296a4;
-      --primary: #756cff;
-      --primary2: #918aff;
-      --green: #54d98b;
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      background: #08090c;
+      color: #ffffff;
       line-height: 1.6;
     }
 
@@ -42,581 +26,259 @@
       color: inherit;
     }
 
-    button {
-      font: inherit;
-    }
-
     .container {
-      width: min(1160px, 92%);
+      width: min(1120px, 92%);
       margin: auto;
     }
 
-    /* ================= NAVBAR ================= */
+    /* NAVBAR */
 
     nav {
-      height: 78px;
+      height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #191b21;
+      border-bottom: 1px solid #1c1e24;
     }
 
     .logo {
       font-size: 25px;
-      font-weight: 850;
-      letter-spacing: -1.2px;
+      font-weight: 800;
+      letter-spacing: -1px;
     }
 
     .logo span {
-      color: var(--primary);
+      color: #6c63ff;
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
       gap: 30px;
-      color: #a7aab5;
+      color: #a8abb5;
       font-size: 14px;
-    }
-
-    .nav-links a {
-      transition: .2s;
     }
 
     .nav-links a:hover {
       color: white;
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .login {
-      color: #b8bbc5;
-      font-size: 14px;
-      padding: 9px 13px;
-    }
-
     .nav-btn {
       background: white;
       color: #08090c;
-      padding: 10px 17px;
+      padding: 10px 18px;
       border-radius: 9px;
+      font-weight: 700;
       font-size: 14px;
-      font-weight: 750;
     }
 
-    /* ================= HERO ================= */
+    /* HERO */
 
     .hero {
-      position: relative;
       text-align: center;
-      padding: 105px 20px 75px;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 550px;
-      height: 350px;
-      left: 50%;
-      top: 50px;
-      transform: translateX(-50%);
-      background: rgba(117,108,255,.12);
-      filter: blur(100px);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
+      padding: 110px 20px 90px;
     }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      display: inline-block;
       padding: 7px 13px;
-      border: 1px solid #292c36;
-      background: #101117;
-      border-radius: 50px;
-      color: #b7bac5;
+      border: 1px solid #292c35;
+      background: #111218;
+      border-radius: 30px;
+      color: #aaaeba;
       font-size: 13px;
       margin-bottom: 25px;
     }
 
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 12px rgba(84,217,139,.6);
-    }
-
     .hero h1 {
-      max-width: 900px;
+      max-width: 850px;
       margin: auto;
       font-size: clamp(45px, 7vw, 78px);
-      line-height: 1.01;
+      line-height: 1.02;
       letter-spacing: -4px;
     }
 
-    .gradient-text {
-      background: linear-gradient(90deg, #8179ff, #a69fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .hero h1 span {
+      color: #756cff;
     }
 
     .hero p {
-      max-width: 680px;
+      max-width: 650px;
       margin: 28px auto;
-      color: var(--muted);
+      color: #a6a9b3;
       font-size: 18px;
     }
 
     .hero-buttons {
       display: flex;
       justify-content: center;
-      gap: 13px;
-      margin-top: 32px;
+      gap: 14px;
+      margin-top: 35px;
     }
 
-    .primary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--primary);
-      color: white;
-      padding: 14px 22px;
+    .primary {
+      background: #6c63ff;
+      padding: 14px 24px;
       border-radius: 10px;
-      font-weight: 750;
-      border: 0;
-      cursor: pointer;
-      transition: .2s;
+      font-weight: 700;
     }
 
-    .primary-btn:hover {
-      background: var(--primary2);
-      transform: translateY(-1px);
+    .primary:hover {
+      background: #8179ff;
     }
 
-    .secondary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #30333d;
-      color: #d1d3da;
-      padding: 14px 22px;
+    .secondary {
+      border: 1px solid #2b2e37;
+      padding: 14px 24px;
       border-radius: 10px;
-      font-weight: 650;
-      transition: .2s;
+      color: #d4d5da;
     }
 
-    .secondary-btn:hover {
+    .secondary:hover {
       background: #12141a;
     }
 
-    /* ================= PLATFORMS ================= */
-
-    .platform-strip {
-      padding: 30px 0 80px;
-    }
-
-    .platform-title {
-      text-align: center;
-      color: #737783;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 25px;
-    }
-
-    .platforms {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-    }
-
-    .platform {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 16px 10px;
-      background: #0d0f14;
-      border: 1px solid #20232b;
-      border-radius: 11px;
-      color: #c5c7cf;
-      font-size: 14px;
-      font-weight: 650;
-      transition: .2s;
-    }
-
-    .platform:hover {
-      border-color: #454955;
-      transform: translateY(-2px);
-    }
-
-    .platform-icon {
-      width: 25px;
-      height: 25px;
-      display: grid;
-      place-items: center;
-      border-radius: 7px;
-      background: #191b23;
-      color: #8d87ff;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    /* ================= DASHBOARD ================= */
+    /* DASHBOARD */
 
     .dashboard {
-      margin: 0 auto 100px;
-      max-width: 1040px;
-      padding: 20px;
-      border-radius: 18px;
-      background: #0e1015;
+      margin: 10px auto 100px;
+      max-width: 1000px;
+      background: #101218;
       border: 1px solid #252832;
-      box-shadow: 0 35px 100px rgba(0,0,0,.45);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.45);
     }
 
-    .dashboard-top {
+    .dash-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
-    .dash-brand {
-      font-weight: 750;
+    .dash-title {
+      font-weight: 700;
     }
 
-    .live {
-      color: var(--green);
-      font-size: 12px;
+    .status {
+      color: #6ee7a0;
+      font-size: 13px;
     }
 
-    .dash-grid {
+    .stats {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 13px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
 
-    .dash-card {
-      background: var(--card2);
-      border: 1px solid #252832;
-      padding: 21px;
+    .stat {
+      background: #15171e;
+      border: 1px solid #242731;
+      padding: 22px;
       border-radius: 12px;
     }
 
-    .dash-card small {
+    .stat small {
       color: #858995;
-      font-size: 12px;
     }
 
-    .dash-card strong {
+    .stat strong {
       display: block;
-      font-size: 28px;
-      margin-top: 4px;
+      font-size: 30px;
+      margin-top: 5px;
     }
 
-    .dash-bottom {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 13px;
-      margin-top: 13px;
-    }
-
-    .activity,
-    .sources {
-      background: var(--card2);
-      border: 1px solid #252832;
-      border-radius: 12px;
-      padding: 21px;
-    }
-
-    .box-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 17px;
-    }
-
-    .activity-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 11px 0;
-      border-bottom: 1px solid #22242c;
-      font-size: 13px;
-    }
-
-    .activity-row:last-child {
-      border-bottom: 0;
-    }
-
-    .source-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 9px 0;
-      color: #b7bac4;
-      font-size: 13px;
-    }
-
-    .source-row span:last-child {
-      color: white;
-      font-weight: 700;
-    }
-
-    /* ================= SECTION ================= */
+    /* FEATURES */
 
     .section {
       padding: 90px 0;
     }
 
     .section-heading {
-      max-width: 700px;
-      margin: 0 auto 48px;
       text-align: center;
+      margin-bottom: 50px;
     }
 
     .section-heading h2 {
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: 42px;
       letter-spacing: -2px;
-      line-height: 1.1;
     }
 
     .section-heading p {
-      color: var(--muted);
-      margin-top: 14px;
+      color: #9296a2;
+      margin-top: 12px;
     }
-
-    /* ================= FEATURES ================= */
 
     .features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 18px;
     }
 
     .feature {
-      background: var(--card);
-      border: 1px solid var(--border);
+      padding: 30px;
+      background: #101218;
+      border: 1px solid #242731;
       border-radius: 15px;
-      padding: 28px;
-      transition: .2s;
     }
 
-    .feature:hover {
-      border-color: #3a3d49;
-      transform: translateY(-3px);
-    }
-
-    .feature-icon {
-      width: 43px;
-      height: 43px;
+    .icon {
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
       border-radius: 10px;
-      background: #1b1930;
-      color: #8982ff;
-      font-size: 18px;
+      background: #1a192b;
+      color: #8179ff;
       margin-bottom: 20px;
-    }
-
-    .feature h3 {
-      margin-bottom: 9px;
-      font-size: 17px;
-    }
-
-    .feature p {
-      color: #8f939f;
-      font-size: 14px;
-    }
-
-    /* ================= PRICING ================= */
-
-    .pricing {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-      align-items: stretch;
-    }
-
-    .price-card {
-      position: relative;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    .price-card.popular {
-      border-color: #655dce;
-      box-shadow: 0 0 45px rgba(117,108,255,.10);
-    }
-
-    .popular-label {
-      position: absolute;
-      top: 17px;
-      right: 17px;
-      background: #28244e;
-      color: #a8a2ff;
-      border: 1px solid #4c467e;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .price-card h3 {
       font-size: 20px;
     }
 
-    .price-card > p {
-      color: #858995;
-      font-size: 13px;
-      margin: 7px 0 22px;
-      min-height: 40px;
+    .feature h3 {
+      margin-bottom: 10px;
     }
 
-    .price {
-      font-size: 44px;
-      font-weight: 800;
-      letter-spacing: -2px;
-    }
-
-    .price span {
-      color: #7f838e;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0;
-    }
-
-    .price-btn {
-      display: block;
-      text-align: center;
-      margin: 22px 0;
-      padding: 12px;
-      border-radius: 9px;
-      border: 1px solid #30333c;
-      font-weight: 700;
+    .feature p {
+      color: #9296a2;
       font-size: 14px;
-      transition: .2s;
     }
 
-    .price-card.popular .price-btn {
-      background: var(--primary);
-      border-color: var(--primary);
-    }
-
-    .price-btn:hover {
-      background: #191b22;
-    }
-
-    .price-card.popular .price-btn:hover {
-      background: var(--primary2);
-    }
-
-    .features-list {
-      list-style: none;
-    }
-
-    .features-list li {
-      color: #a6a9b4;
-      font-size: 13px;
-      margin: 12px 0;
-    }
-
-    .features-list li::before {
-      content: "✓";
-      color: var(--green);
-      margin-right: 9px;
-      font-weight: 800;
-    }
-
-    /* ================= CTA ================= */
+    /* CTA */
 
     .cta {
-      position: relative;
-      overflow: hidden;
       text-align: center;
-      padding: 90px 25px;
-      margin: 70px 0 90px;
+      padding: 90px 20px;
+      margin: 40px 0 80px;
       border: 1px solid #292c36;
       border-radius: 20px;
-      background: linear-gradient(145deg, #11131b, #0b0c10);
-    }
-
-    .cta::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 200px;
-      background: rgba(117,108,255,.13);
-      filter: blur(80px);
-      left: 50%;
-      top: 30%;
-      transform: translateX(-50%);
-    }
-
-    .cta-content {
-      position: relative;
-      z-index: 1;
+      background: linear-gradient(145deg, #11131a, #0b0c10);
     }
 
     .cta h2 {
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: 42px;
       letter-spacing: -2px;
     }
 
     .cta p {
-      color: var(--muted);
-      margin: 14px auto 28px;
+      color: #9296a2;
+      margin: 15px auto 30px;
     }
 
-    /* ================= FOOTER ================= */
+    /* FOOTER */
 
     footer {
-      border-top: 1px solid #191b21;
-      padding: 35px 0;
-      color: #6f737e;
+      border-top: 1px solid #1c1e24;
+      padding: 30px 0;
+      color: #737681;
       font-size: 13px;
+      text-align: center;
     }
 
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    /* MOBILE */
 
-    .footer-logo {
-      color: #bfc1c9;
-      font-weight: 750;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 22px;
-    }
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 800px) {
+    @media (max-width: 750px) {
 
       .nav-links {
-        display: none;
-      }
-
-      .nav-actions .login {
         display: none;
       }
 
@@ -625,53 +287,21 @@
       }
 
       .hero h1 {
-        letter-spacing: -2.5px;
+        letter-spacing: -2px;
       }
 
       .hero-buttons {
         flex-direction: column;
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
       }
 
-      .platforms {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .platform:last-child {
-        grid-column: span 2;
-      }
-
-      .dash-grid,
-      .dash-bottom,
-      .features,
-      .pricing {
+      .stats,
+      .features {
         grid-template-columns: 1fr;
       }
 
-      .dashboard {
-        padding: 13px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        gap: 18px;
-      }
-    }
-
-    @media (max-width: 450px) {
-
-      .platforms {
-        grid-template-columns: 1fr;
-      }
-
-      .platform:last-child {
-        grid-column: auto;
-      }
-
-      .nav-btn {
-        padding: 9px 12px;
+      .section-heading h2,
+      .cta h2 {
+        font-size: 32px;
       }
     }
   </style>
@@ -679,207 +309,85 @@
 
 <body>
 
-  <!-- ================= NAVBAR ================= -->
-
   <div class="container">
 
+    <!-- NAVBAR -->
     <nav>
-
-      <a href="#" class="logo">
-        S<span>Leads</span>
-      </a>
+      <a href="#" class="logo">S<span>Leads</span></a>
 
       <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="#platforms">Platforms</a>
+        <a href="#how">How it works</a>
         <a href="#pricing">Pricing</a>
       </div>
 
-      <div class="nav-actions">
-        <a href="#" class="login">Log in</a>
-        <a href="#pricing" class="nav-btn">Get Started</a>
-      </div>
-
+      <a href="#start" class="nav-btn">Get Started</a>
     </nav>
 
   </div>
 
-
-  <!-- ================= HERO ================= -->
+  <!-- HERO -->
 
   <main>
 
     <section class="hero">
 
-      <div class="hero-content">
+      <div class="badge">
+        ⚡ Smart Lead Generation
+      </div>
 
-        <div class="badge">
-          <span class="badge-dot"></span>
-          Social lead generation, simplified
-        </div>
+      <h1>
+        Find more leads.<br>
+        <span>Grow faster.</span>
+      </h1>
 
-        <h1>
-          Find the people who are
-          <span class="gradient-text">ready to buy.</span>
-        </h1>
+      <p>
+        SLeads helps you discover potential customers,
+        organize prospects and build a consistent lead pipeline.
+      </p>
 
-        <p>
-          Discover potential customers across Reddit, Instagram,
-          Facebook, X and LinkedIn — all from one powerful lead
-          generation platform.
-        </p>
+      <div class="hero-buttons">
+        <a href="#start" class="primary">
+          Start Finding Leads →
+        </a>
 
-        <div class="hero-buttons">
-          <a href="#pricing" class="primary-btn">
-            Start Finding Leads →
-          </a>
-
-          <a href="#platforms" class="secondary-btn">
-            Explore Platforms
-          </a>
-        </div>
-
+        <a href="#features" class="secondary">
+          Explore Features
+        </a>
       </div>
 
     </section>
 
 
-    <!-- ================= PLATFORMS ================= -->
-
-    <section class="platform-strip container" id="platforms">
-
-      <div class="platform-title">
-        Find opportunities across
-      </div>
-
-      <div class="platforms">
-
-        <div class="platform">
-          <div class="platform-icon">R</div>
-          Reddit
-        </div>
-
-        <div class="platform">
-          <div class="platform-icon">IG</div>
-          Instagram
-        </div>
-
-        <div class="platform">
-          <div class="platform-icon">f</div>
-          Facebook
-        </div>
-
-        <div class="platform">
-          <div class="platform-icon">X</div>
-          X
-        </div>
-
-        <div class="platform">
-          <div class="platform-icon">in</div>
-          LinkedIn
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= DASHBOARD PREVIEW ================= -->
+    <!-- DASHBOARD PREVIEW -->
 
     <section class="container dashboard">
 
-      <div class="dashboard-top">
-
-        <div class="dash-brand">
-          SLeads Overview
+      <div class="dash-top">
+        <div class="dash-title">
+          SLeads Dashboard
         </div>
 
-        <div class="live">
-          ● Live system
+        <div class="status">
+          ● System Active
         </div>
-
       </div>
 
-      <div class="dash-grid">
+      <div class="stats">
 
-        <div class="dash-card">
-          <small>Total Leads</small>
-          <strong id="totalLeads">12,482</strong>
+        <div class="stat">
+          <small>Leads Found</small>
+          <strong id="leadsCount">2,481</strong>
         </div>
 
-        <div class="dash-card">
+        <div class="stat">
           <small>Qualified Leads</small>
-          <strong>7,931</strong>
+          <strong>1,842</strong>
         </div>
 
-        <div class="dash-card">
-          <small>Conversion</small>
-          <strong>21.4%</strong>
-        </div>
-
-      </div>
-
-      <div class="dash-bottom">
-
-        <div class="activity">
-
-          <div class="box-title">
-            Recent lead activity
-          </div>
-
-          <div class="activity-row">
-            <span>New Reddit opportunity</span>
-            <span>Just now</span>
-          </div>
-
-          <div class="activity-row">
-            <span>Instagram prospect found</span>
-            <span>2m ago</span>
-          </div>
-
-          <div class="activity-row">
-            <span>LinkedIn lead qualified</span>
-            <span>5m ago</span>
-          </div>
-
-          <div class="activity-row">
-            <span>X prospect discovered</span>
-            <span>8m ago</span>
-          </div>
-
-        </div>
-
-        <div class="sources">
-
-          <div class="box-title">
-            Lead sources
-          </div>
-
-          <div class="source-row">
-            <span>Reddit</span>
-            <span>3,284</span>
-          </div>
-
-          <div class="source-row">
-            <span>Instagram</span>
-            <span>2,941</span>
-          </div>
-
-          <div class="source-row">
-            <span>LinkedIn</span>
-            <span>2,713</span>
-          </div>
-
-          <div class="source-row">
-            <span>Facebook</span>
-            <span>1,984</span>
-          </div>
-
-          <div class="source-row">
-            <span>X</span>
-            <span>1,560</span>
-          </div>
-
+        <div class="stat">
+          <small>Conversion Rate</small>
+          <strong>18.7%</strong>
         </div>
 
       </div>
@@ -887,106 +395,44 @@
     </section>
 
 
-    <!-- ================= FEATURES ================= -->
+    <!-- FEATURES -->
 
     <section class="section container" id="features">
 
       <div class="section-heading">
-
-        <h2>
-          One system for your entire lead pipeline.
-        </h2>
-
+        <h2>Everything you need to build your pipeline.</h2>
         <p>
-          Stop searching five platforms manually.
-          Bring your lead discovery workflow into one place.
+          Simple tools designed to turn prospects into opportunities.
         </p>
-
       </div>
 
       <div class="features">
 
         <div class="feature">
-
-          <div class="feature-icon">⌕</div>
-
+          <div class="icon">⌕</div>
           <h3>Lead Discovery</h3>
-
           <p>
-            Search for relevant prospects and opportunities
-            across the social platforms you already use.
+            Discover potential businesses and prospects
+            based on the criteria you choose.
           </p>
-
         </div>
 
-
         <div class="feature">
-
-          <div class="feature-icon">✦</div>
-
-          <h3>Smart Qualification</h3>
-
+          <div class="icon">✦</div>
+          <h3>Smart Filtering</h3>
           <p>
-            Organize prospects by relevance, source,
-            status and other lead information.
+            Organize and filter prospects so you can
+            focus on the leads that matter.
           </p>
-
         </div>
 
-
         <div class="feature">
-
-          <div class="feature-icon">↗</div>
-
+          <div class="icon">↗</div>
           <h3>Lead Management</h3>
-
           <p>
-            Keep your prospects organized and move them
-            through your pipeline without messy spreadsheets.
+            Keep your prospects organized and manage
+            your entire pipeline from one place.
           </p>
-
-        </div>
-
-
-        <div class="feature">
-
-          <div class="feature-icon">⚡</div>
-
-          <h3>Automation</h3>
-
-          <p>
-            Build workflows that reduce repetitive lead
-            research and help your team work faster.
-          </p>
-
-        </div>
-
-
-        <div class="feature">
-
-          <div class="feature-icon">▣</div>
-
-          <h3>Central Dashboard</h3>
-
-          <p>
-            View lead activity, sources, status and
-            performance from a single dashboard.
-          </p>
-
-        </div>
-
-
-        <div class="feature">
-
-          <div class="feature-icon">↓</div>
-
-          <h3>Export Leads</h3>
-
-          <p>
-            Export your lead data for outreach,
-            CRM workflows and other business processes.
-          </p>
-
         </div>
 
       </div>
@@ -994,61 +440,42 @@
     </section>
 
 
-    <!-- ================= HOW IT WORKS ================= -->
+    <!-- HOW IT WORKS -->
 
-    <section class="section container">
+    <section class="section container" id="how">
 
       <div class="section-heading">
-
-        <h2>
-          From discovery to opportunity.
-        </h2>
-
-        <p>
-          A simple workflow designed around how modern teams find customers.
-        </p>
-
+        <h2>How SLeads works</h2>
+        <p>Three simple steps to start building your pipeline.</p>
       </div>
 
       <div class="features">
 
         <div class="feature">
-
-          <div class="feature-icon">01</div>
-
-          <h3>Choose your audience</h3>
-
+          <div class="icon">01</div>
+          <h3>Choose your target</h3>
           <p>
-            Define the niche, industry, keywords or
-            customer type you want to target.
+            Define the type of businesses or customers
+            you want to find.
           </p>
-
         </div>
 
         <div class="feature">
-
-          <div class="feature-icon">02</div>
-
-          <h3>Discover leads</h3>
-
+          <div class="icon">02</div>
+          <h3>Discover prospects</h3>
           <p>
-            Find relevant conversations, profiles,
-            businesses and potential opportunities.
+            SLeads organizes potential prospects into
+            an easy-to-manage list.
           </p>
-
         </div>
 
         <div class="feature">
-
-          <div class="feature-icon">03</div>
-
-          <h3>Qualify & organize</h3>
-
+          <div class="icon">03</div>
+          <h3>Start outreach</h3>
           <p>
-            Review the results, qualify prospects and
-            organize them inside your SLeads dashboard.
+            Export and manage your leads so you can
+            start conversations and close deals.
           </p>
-
         </div>
 
       </div>
@@ -1056,153 +483,21 @@
     </section>
 
 
-    <!-- ================= PRICING ================= -->
+    <!-- CTA -->
 
-    <section class="section container" id="pricing">
-
-      <div class="section-heading">
-
-        <h2>
-          Simple pricing. Start small, scale up.
-        </h2>
-
-        <p>
-          Choose the plan that matches your lead-generation needs.
-        </p>
-
-      </div>
-
-
-      <div class="pricing">
-
-
-        <!-- BASIC -->
-
-        <div class="price-card">
-
-          <h3>Basic</h3>
-
-          <p>
-            For individuals getting started with lead generation.
-          </p>
-
-          <div class="price">
-            $19<span>/month</span>
-          </div>
-
-          <a href="#" class="price-btn">
-            Start Basic
-          </a>
-
-          <ul class="features-list">
-
-            <li>Lead discovery</li>
-            <li>Reddit leads</li>
-            <li>Instagram leads</li>
-            <li>Facebook leads</li>
-            <li>Basic lead dashboard</li>
-            <li>Lead export</li>
-
-          </ul>
-
-        </div>
-
-
-        <!-- GROWTH -->
-
-        <div class="price-card popular">
-
-          <div class="popular-label">
-            Most Popular
-          </div>
-
-          <h3>Growth</h3>
-
-          <p>
-            For growing businesses that need more leads.
-          </p>
-
-          <div class="price">
-            $39<span>/month</span>
-          </div>
-
-          <a href="#" class="price-btn">
-            Start Growth
-          </a>
-
-          <ul class="features-list">
-
-            <li>Everything in Basic</li>
-            <li>LinkedIn leads</li>
-            <li>X leads</li>
-            <li>Advanced filters</li>
-            <li>Higher lead limits</li>
-            <li>Advanced dashboard</li>
-            <li>Priority processing</li>
-
-          </ul>
-
-        </div>
-
-
-        <!-- PRO -->
-
-        <div class="price-card">
-
-          <h3>Pro</h3>
-
-          <p>
-            For agencies and teams running serious lead operations.
-          </p>
-
-          <div class="price">
-            $89<span>/month</span>
-          </div>
-
-          <a href="#" class="price-btn">
-            Start Pro
-          </a>
-
-          <ul class="features-list">
-
-            <li>Everything in Growth</li>
-            <li>Maximum lead limits</li>
-            <li>Advanced automation</li>
-            <li>Bulk lead processing</li>
-            <li>Advanced exports</li>
-            <li>Team-ready workflows</li>
-            <li>Priority support</li>
-
-          </ul>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= CTA ================= -->
-
-    <section class="container">
+    <section class="container" id="start">
 
       <div class="cta">
 
-        <div class="cta-content">
+        <h2>Ready to find your next customer?</h2>
 
-          <h2>
-            Your next customer is already out there.
-          </h2>
+        <p>
+          Start building your lead pipeline with SLeads.
+        </p>
 
-          <p>
-            SLeads helps you find the opportunities faster.
-          </p>
-
-          <a href="#pricing" class="primary-btn">
-            Start Finding Leads →
-          </a>
-
-        </div>
+        <a href="#" class="primary">
+          Get Started Free →
+        </a>
 
       </div>
 
@@ -1211,62 +506,26 @@
   </main>
 
 
-  <!-- ================= FOOTER ================= -->
+  <!-- FOOTER -->
 
   <footer>
-
-    <div class="container footer-content">
-
-      <div class="footer-logo">
-        © 2026 SLeads
-      </div>
-
-      <div class="footer-links">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-      </div>
-
-    </div>
-
+    © 2026 SLeads. All rights reserved.
   </footer>
 
 
-  <!-- ================= JAVASCRIPT ================= -->
-
   <script>
 
-    // Demo dashboard counter.
-    // Real lead data will be connected later through the backend.
-
-    let leads = 12482;
+    // Demo live counter
+    let leads = 2481;
 
     setInterval(() => {
 
-      leads += Math.floor(Math.random() * 3);
+      leads += Math.floor(Math.random() * 2);
 
-      document.getElementById("totalLeads").textContent =
+      document.getElementById("leadsCount").textContent =
         leads.toLocaleString();
 
     }, 5000);
-
-
-    // Smooth button feedback
-
-    document.querySelectorAll(".price-btn").forEach(button => {
-
-      button.addEventListener("click", function(event) {
-
-        event.preventDefault();
-
-        alert(
-          "SLeads checkout will be connected in the payment setup step."
-        );
-
-      });
-
-    });
 
   </script>
 
