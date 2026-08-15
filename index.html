@@ -3,18 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SLeads — Dashboard</title>
+
+<title>SLeads — AI Lead Generation</title>
 
 <style>
+
 :root{
     --bg:#070911;
-    --sidebar:#0b0e17;
+    --bg2:#0b0e17;
     --card:#10141f;
     --card2:#141925;
     --border:#202738;
     --text:#f4f6fb;
     --muted:#7f899d;
     --primary:#7467ff;
+    --primary2:#9187ff;
     --green:#35d69a;
     --red:#ff6262;
     --yellow:#f2c85b;
@@ -26,13 +29,20 @@
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:Arial,Helvetica,sans-serif;
     background:var(--bg);
     color:var(--text);
+    line-height:1.5;
 }
 
-button,input,select{
+button,
+input,
+select{
     font-family:inherit;
 }
 
@@ -44,996 +54,607 @@ button{
     display:none!important;
 }
 
-/* SIDEBAR */
+.container{
+    width:min(1180px,calc(100% - 40px));
+    margin:auto;
+}
 
-.sidebar{
-    position:fixed;
-    left:0;
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position:sticky;
     top:0;
-    bottom:0;
-    width:245px;
-    background:var(--sidebar);
-    border-right:1px solid var(--border);
-    padding:24px 14px;
+    z-index:50;
+    height:72px;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    background:rgba(7,9,17,.88);
+    backdrop-filter:blur(18px);
+}
+
+.nav-inner{
+    width:min(1180px,calc(100% - 40px));
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
     font-size:25px;
-    font-weight:800;
-    padding:0 13px 28px;
+    font-weight:900;
+    letter-spacing:-.7px;
 }
 
 .logo span{
     color:var(--primary);
 }
 
-.workspace{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:12px;
-    margin-bottom:25px;
-}
-
-.workspace small{
-    display:block;
-    color:var(--muted);
-    font-size:10px;
-    margin-bottom:5px;
-}
-
-.workspace strong{
-    font-size:13px;
-}
-
-.nav-label{
-    color:#555f73;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    padding:0 12px;
-    margin:20px 0 8px;
-}
-
-.nav-btn{
-    width:100%;
+.nav-links{
     display:flex;
+    gap:28px;
     align-items:center;
-    gap:12px;
-    padding:12px;
-    margin-bottom:4px;
-    background:transparent;
+}
+
+.nav-links a{
     color:var(--muted);
-    border:0;
-    border-radius:9px;
-    text-align:left;
+    text-decoration:none;
     font-size:13px;
 }
 
-.nav-btn:hover,
-.nav-btn.active{
-    background:rgba(116,103,255,.12);
+.nav-links a:hover{
     color:var(--text);
 }
 
-.nav-btn.active{
-    border-left:3px solid var(--primary);
-}
-
-.sidebar-bottom{
-    position:absolute;
-    left:14px;
-    right:14px;
-    bottom:18px;
-}
-
-/* MAIN */
-
-.main{
-    margin-left:245px;
-    min-height:100vh;
-}
-
-/* TOPBAR */
-
-.topbar{
-    height:72px;
+.nav-actions{
     display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 30px;
-    border-bottom:1px solid var(--border);
-}
-
-.page-name{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.top-right{
-    display:flex;
-    align-items:center;
     gap:9px;
 }
 
-.icon-btn{
-    width:38px;
-    height:38px;
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    border-radius:9px;
-}
+/* ================= BUTTONS ================= */
 
-.avatar{
-    width:38px;
-    height:38px;
-    background:var(--primary);
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-}
-
-/* CONTENT */
-
-.content{
-    padding:30px;
-    max-width:1500px;
-}
-
-.page-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:25px;
-}
-
-.page-header h1{
-    font-size:29px;
-    letter-spacing:-.5px;
-}
-
-.page-header p{
-    color:var(--muted);
-    margin-top:7px;
-    font-size:13px;
-}
-
-.primary{
-    padding:12px 18px;
+.btn{
     border:0;
     border-radius:9px;
-    background:var(--primary);
-    color:white;
+    padding:11px 17px;
     font-weight:700;
-}
-
-.secondary{
-    padding:12px 18px;
-    border:1px solid var(--border);
-    border-radius:9px;
-    background:var(--card);
-    color:var(--text);
-}
-
-/* STATS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:20px;
-}
-
-.stat{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:20px;
-}
-
-.stat-label{
-    color:var(--muted);
     font-size:12px;
 }
 
-.stat-value{
-    font-size:29px;
-    font-weight:800;
-    margin-top:12px;
+.btn-primary{
+    background:var(--primary);
+    color:#fff;
 }
 
-.stat-bottom{
-    color:var(--green);
-    font-size:10px;
-    margin-top:7px;
+.btn-primary:hover{
+    background:var(--primary2);
 }
 
-/* GRID */
-
-.grid{
-    display:grid;
-    grid-template-columns:1.45fr .8fr;
-    gap:18px;
-    margin-bottom:18px;
-}
-
-.card{
+.btn-secondary{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:15px;
-    overflow:hidden;
-}
-
-.card-header{
-    padding:18px 20px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.card-header h3{
-    font-size:15px;
-}
-
-.card-header span{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.card-body{
-    padding:20px;
-}
-
-/* SEARCH */
-
-.search-box{
-    display:flex;
-    gap:10px;
-}
-
-.search-box input{
-    flex:1;
-    padding:13px;
-    border-radius:9px;
-    border:1px solid var(--border);
-    background:var(--card2);
     color:var(--text);
-    outline:none;
 }
 
-.search-box input:focus{
-    border-color:var(--primary);
-}
-
-.filters{
-    display:flex;
-    gap:8px;
-    margin-top:12px;
-    flex-wrap:wrap;
-}
-
-.filter{
-    padding:7px 11px;
-    border:1px solid var(--border);
-    background:var(--card2);
-    color:var(--muted);
-    border-radius:20px;
-    font-size:11px;
-}
-
-/* LEAD */
-
-.lead{
-    display:flex;
-    align-items:flex-start;
-    gap:13px;
-    padding:15px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.lead:last-child{
-    border-bottom:0;
-}
-
-.source{
-    width:38px;
-    height:38px;
-    border-radius:9px;
-    background:var(--card2);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-shrink:0;
-    font-weight:700;
-}
-
-.lead-main{
-    flex:1;
-}
-
-.lead-title{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.lead-title strong{
+.btn-large{
+    padding:14px 22px;
     font-size:13px;
 }
 
-.score{
-    color:var(--green);
-    background:rgba(53,214,154,.1);
-    padding:4px 8px;
-    border-radius:20px;
-    font-size:9px;
-    font-weight:700;
-}
+/* ================= HERO ================= */
 
-.lead-text{
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.5;
-    margin-top:5px;
-}
-
-.lead-meta{
-    color:#596477;
-    font-size:9px;
-    margin-top:7px;
-}
-
-/* PLAN */
-
-.plan{
-    background:linear-gradient(
-        135deg,
-        rgba(116,103,255,.17),
-        rgba(116,103,255,.04)
-    );
-    border:1px solid rgba(116,103,255,.3);
-    border-radius:14px;
-    padding:20px;
-}
-
-.plan-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.plan-name{
-    font-size:20px;
-    font-weight:800;
-}
-
-.plan-badge{
-    background:var(--primary);
-    color:white;
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:9px;
-}
-
-.usage{
-    margin-top:20px;
-}
-
-.usage-row{
-    display:flex;
-    justify-content:space-between;
-    color:var(--muted);
-    font-size:10px;
-    margin-bottom:7px;
-}
-
-.progress{
-    height:6px;
-    background:#202638;
-    border-radius:20px;
+.hero{
+    padding:100px 0 90px;
+    text-align:center;
+    position:relative;
     overflow:hidden;
 }
 
-.progress div{
-    height:100%;
-    width:35%;
-    background:var(--primary);
+.hero:before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(116,103,255,.12);
+    filter:blur(100px);
+    border-radius:50%;
+    left:50%;
+    top:-180px;
+    transform:translateX(-50%);
+    pointer-events:none;
 }
 
-/* PLATFORMS */
-
-.platform{
-    display:flex;
+.badge{
+    position:relative;
+    display:inline-flex;
     align-items:center;
-    justify-content:space-between;
-    padding:13px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.platform:last-child{
-    border-bottom:0;
-}
-
-.platform-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.platform-icon{
-    width:35px;
-    height:35px;
-    border-radius:9px;
-    background:var(--card2);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:12px;
+    gap:7px;
+    padding:7px 12px;
+    border:1px solid rgba(116,103,255,.3);
+    background:rgba(116,103,255,.08);
+    border-radius:30px;
+    color:#b6afff;
+    font-size:10px;
     font-weight:700;
+    margin-bottom:22px;
 }
 
-.platform-name{
-    font-size:12px;
-}
-
-.status{
-    font-size:9px;
-    color:var(--green);
-    margin-top:3px;
-}
-
-.dot{
-    display:inline-block;
+.badge-dot{
     width:6px;
     height:6px;
     border-radius:50%;
     background:var(--green);
-    margin-right:4px;
 }
 
-/* TABLE */
-
-.table{
-    width:100%;
-    border-collapse:collapse;
+.hero h1{
+    position:relative;
+    max-width:850px;
+    margin:auto;
+    font-size:58px;
+    line-height:1.05;
+    letter-spacing:-2.5px;
 }
 
-.table th{
-    text-align:left;
-    color:#626d81;
-    font-size:10px;
-    font-weight:500;
-    padding:12px 10px;
-    border-bottom:1px solid var(--border);
+.hero h1 span{
+    color:var(--primary);
 }
 
-.table td{
-    padding:15px 10px;
-    border-bottom:1px solid var(--border);
-    font-size:11px;
-}
-
-.table td:nth-child(2){
+.hero p{
+    position:relative;
+    max-width:650px;
+    margin:22px auto 30px;
     color:var(--muted);
+    font-size:16px;
 }
 
-.high{
-    color:var(--green);
-}
-
-.medium{
-    color:var(--yellow);
-}
-
-/* ACTIVITY */
-
-.activity{
-    display:flex;
-    gap:12px;
-    padding:13px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.activity:last-child{
-    border:0;
-}
-
-.activity-dot{
-    width:8px;
-    height:8px;
-    margin-top:4px;
-    background:var(--primary);
-    border-radius:50%;
-}
-
-.activity p{
-    font-size:11px;
-}
-
-.activity small{
-    color:var(--muted);
-    display:block;
-    margin-top:4px;
-    font-size:9px;
-}
-
-/* MODAL */
-
-.modal-bg{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.78);
-    z-index:100;
+.hero-buttons{
+    position:relative;
     display:flex;
     justify-content:center;
-    align-items:center;
-    padding:20px;
+    gap:10px;
 }
 
-.modal{
-    width:430px;
-    max-width:100%;
+/* ================= SOCIALS ================= */
+
+.platform-strip{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:45px;
+}
+
+.platform-chip{
+    padding:8px 12px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:9px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* ================= SECTIONS ================= */
+
+.section{
+    padding:80px 0;
+}
+
+.section-head{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section-head h2{
+    font-size:34px;
+    letter-spacing:-1px;
+}
+
+.section-head p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:8px;
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.feature{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:16px;
+    border-radius:15px;
     padding:25px;
 }
 
-.modal h2{
-    font-size:20px;
-    margin-bottom:7px;
+.feature-icon{
+    width:42px;
+    height:42px;
+    border-radius:11px;
+    background:rgba(116,103,255,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:18px;
 }
 
-.modal p{
+.feature h3{
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.feature p{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.7;
+}
+
+/* ================= PRICING ================= */
+
+.pricing{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.price-card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:28px;
+}
+
+.price-card.featured{
+    border-color:rgba(116,103,255,.65);
+    box-shadow:0 20px 70px rgba(116,103,255,.1);
+}
+
+.popular{
+    position:absolute;
+    right:15px;
+    top:15px;
+    background:var(--primary);
+    color:white;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:8px;
+    font-weight:800;
+}
+
+.price-card h3{
+    font-size:18px;
+}
+
+.price{
+    margin:15px 0;
+    font-size:38px;
+    font-weight:900;
+}
+
+.price small{
+    color:var(--muted);
+    font-size:11px;
+    font-weight:400;
+}
+
+.price-desc{
+    color:var(--muted);
+    font-size:11px;
+    min-height:35px;
+}
+
+.price-list{
+    list-style:none;
+    margin:22px 0;
+}
+
+.price-list li{
+    color:#aeb5c4;
+    font-size:11px;
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.price-list li:before{
+    content:"✓";
+    color:var(--green);
+    margin-right:8px;
+}
+
+.price-card .btn{
+    width:100%;
+}
+
+/* ================= PAYMENT / AUTH ================= */
+
+#appScreen{
+    min-height:100vh;
+}
+
+.screen{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px 15px;
+    background:var(--bg);
+}
+
+.auth-card{
+    width:460px;
+    max-width:100%;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 30px 100px rgba(0,0,0,.35);
+}
+
+.auth-logo{
+    text-align:center;
+    font-size:24px;
+    font-weight:900;
+    margin-bottom:25px;
+}
+
+.auth-logo span{
+    color:var(--primary);
+}
+
+.auth-card h2{
+    font-size:22px;
+    margin-bottom:6px;
+}
+
+.auth-card > p{
     color:var(--muted);
     font-size:12px;
-    margin-bottom:20px;
+    margin-bottom:22px;
+}
+
+.form-group{
+    margin-bottom:13px;
+}
+
+.form-group label{
+    display:block;
+    color:#aab2c1;
+    font-size:10px;
+    margin-bottom:6px;
 }
 
 .input{
     width:100%;
     padding:13px;
-    margin-bottom:12px;
-    background:var(--card2);
     border:1px solid var(--border);
-    border-radius:9px;
+    background:var(--card2);
     color:var(--text);
+    border-radius:9px;
     outline:none;
 }
 
-.modal-primary{
+.input:focus{
+    border-color:var(--primary);
+}
+
+.full{
     width:100%;
-    padding:13px;
-    background:var(--primary);
-    color:#fff;
-    border:0;
-    border-radius:9px;
-    font-weight:700;
 }
 
-.close{
-    width:100%;
-    padding:11px;
-    background:transparent;
-    color:var(--muted);
-    border:0;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1050px){
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:700px){
-
-    .sidebar{
-        width:68px;
-        padding:20px 7px;
-    }
-
-    .main{
-        margin-left:68px;
-    }
-
-    .logo{
-        font-size:0;
-        text-align:center;
-    }
-
-    .logo span{
-        font-size:23px;
-    }
-
-    .workspace,
-    .nav-label,
-    .nav-btn span:last-child{
-        display:none;
-    }
-
-    .nav-btn{
-        justify-content:center;
-    }
-
-    .content{
-        padding:20px 13px;
-    }
-
-    .topbar{
-        padding:0 13px;
-    }
-
-    .stats{
-        grid-template-columns:1fr;
-    }
-
-    .page-header{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .search-box{
-        flex-direction:column;
-    }
-
-}
-
-/* ================= ACCESS APPROVAL ================= */
-
-#approvalGate{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:#070911;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.approval-box{
-    width:460px;
-    max-width:100%;
-    background:#10141f;
-    border:1px solid #202738;
-    border-radius:20px;
-    padding:38px;
+.auth-footer{
     text-align:center;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
+    color:var(--muted);
+    font-size:11px;
+    margin-top:18px;
 }
 
-.approval-icon{
-    width:70px;
-    height:70px;
-    margin:0 auto 20px;
-    border-radius:18px;
+.link{
+    color:var(--primary2);
+    cursor:pointer;
+}
+
+.back-home{
+    display:block;
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+/* ================= PLAN PAYMENT ================= */
+
+.selected-plan{
+    padding:15px;
+    border:1px solid rgba(116,103,255,.35);
+    background:rgba(116,103,255,.08);
+    border-radius:12px;
+    margin-bottom:18px;
+}
+
+.selected-plan-top{
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    justify-content:center;
-    background:rgba(116,103,255,.12);
-    font-size:30px;
 }
 
-.approval-box h1{
-    font-size:24px;
-    margin-bottom:10px;
+.selected-plan strong{
+    font-size:16px;
 }
 
-.approval-box p{
-    color:#7f899d;
-    font-size:13px;
-    line-height:1.7;
+.selected-plan-price{
+    color:#b6afff;
+    font-weight:800;
 }
 
-.approval-status{
-    margin:22px 0;
-    padding:13px 15px;
-    border:1px solid #202738;
-    background:#141925;
-    border-radius:10px;
+.payment-method{
+    padding:15px;
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:11px;
+    margin-bottom:12px;
+}
+
+.payment-method strong{
     font-size:12px;
 }
 
-.approval-status.pending{color:#f2c85b}
-.approval-status.rejected{color:#ff6262}
-.approval-status.approved{color:#35d69a}
-
-.admin-panel{
-    display:none;
-}
-
-.admin-user{
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    align-items:center;
-    padding:17px;
-    margin-bottom:10px;
-    background:#10141f;
-    border:1px solid #202738;
-    border-radius:12px;
-}
-
-.admin-user-info strong{
-    font-size:13px;
-}
-
-.admin-user-info small{
-    display:block;
-    color:#7f899d;
-    margin-top:5px;
-}
-
-.admin-actions{
-    display:flex;
-    gap:7px;
-}
-
-.admin-approve,
-.admin-reject{
-    border:0;
-    border-radius:8px;
-    padding:9px 12px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.admin-approve{
-    background:#35d69a;
-    color:#06120e;
-}
-
-.admin-reject{
-    background:#ff6262;
-    color:#fff;
-}
-
-.account-card{
-    background:var(--card2);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:15px;
-    margin-bottom:15px;
-}
-
-.account-card small{
+.payment-method small{
     display:block;
     color:var(--muted);
-    margin-bottom:5px;
+    margin-top:4px;
+    font-size:9px;
+}
+
+/* ================= STATUS ================= */
+
+.status-box{
+    padding:15px;
+    border-radius:11px;
+    margin-bottom:18px;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.status-box.pending{
+    color:var(--yellow);
+    background:rgba(242,200,91,.08);
+    border:1px solid rgba(242,200,91,.2);
+}
+
+.status-box.success{
+    color:var(--green);
+    background:rgba(53,214,154,.08);
+    border:1px solid rgba(53,214,154,.2);
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    border-top:1px solid var(--border);
+    padding:30px 0;
+    color:var(--muted);
     font-size:10px;
 }
 
-.account-card strong{
-    font-size:13px;
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
 }
 
+/* ================= LIGHT MODE ================= */
+
+body.light{
+    --bg:#f5f6fb;
+    --bg2:#ffffff;
+    --card:#ffffff;
+    --card2:#f0f2f7;
+    --border:#dfe3eb;
+    --text:#151927;
+    --muted:#687185;
+}
+
+body.light .navbar{
+    background:rgba(245,246,251,.9);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:800px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding:75px 0;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .features,
+    .pricing{
+        grid-template-columns:1fr;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        gap:8px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .container{
+        width:min(100% - 26px,1180px);
+    }
+
+    .nav-inner{
+        width:min(100% - 26px,1180px);
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .auth-card{
+        padding:22px;
+    }
+
+}
 
 </style>
 </head>
 
 <body>
 
-<!-- ================= ACCESS APPROVAL GATE ================= -->
+<!-- =========================================================
+     LANDING PAGE
+========================================================= -->
 
-<div id="approvalGate">
+<div id="landingPage">
 
-    <div class="approval-box">
+<header class="navbar">
 
-        <div class="approval-icon" id="approvalIcon">⏳</div>
-
-        <h1 id="approvalTitle">
-            Account Pending Approval
-        </h1>
-
-        <p id="approvalMessage">
-            Your payment has been received. Your account is waiting for admin approval.
-        </p>
-
-        <div class="approval-status pending" id="approvalStatus">
-            ● Pending admin approval
-        </div>
-
-        <button class="primary" style="width:100%" onclick="approvalLogout()">
-            Logout
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ================= ADMIN APPROVAL PAGE ================= -->
-
-<section class="content admin-panel" id="adminPage" style="margin-left:245px;">
-
-    <div class="page-header">
-
-        <div>
-            <h1>Access Approval</h1>
-            <p>Review paid accounts and approve dashboard access.</p>
-        </div>
-
-        <button class="primary" onclick="loadApprovalUsers()">
-            Refresh
-        </button>
-
-    </div>
-
-    <div class="card">
-
-        <div class="card-header">
-            <h3>Pending Accounts</h3>
-            <span id="pendingCount">0</span>
-        </div>
-
-        <div class="card-body" id="approvalUsers">
-            <div style="text-align:center;padding:30px;color:var(--muted)">
-                Loading accounts...
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- ================= SIDEBAR ================= -->
-
-<aside class="sidebar">
+<div class="nav-inner">
 
 <div class="logo">
 S<span>Leads</span>
 </div>
 
-<div class="workspace">
+<nav class="nav-links">
 
-<small>WORKSPACE</small>
+<a href="#features">Features</a>
+<a href="#pricing">Pricing</a>
 
-<strong id="workspaceName">
-My Workspace
-</strong>
+</nav>
 
-</div>
-
-
-<div class="nav-label">
-Main
-</div>
+<div class="nav-actions">
 
 <button
-class="nav-btn active"
-onclick="showPage('overview',this)">
-<span>▦</span>
-<span>Overview</span>
+class="btn btn-secondary"
+onclick="showLogin()">
+Login
 </button>
 
 <button
-class="nav-btn"
-onclick="showPage('leads',this)">
-<span>◎</span>
-<span>Leads</span>
+class="btn btn-primary"
+onclick="scrollToPricing()">
+Get Started
 </button>
 
-<button
-class="nav-btn"
-onclick="showPage('search',this)">
-<span>⌕</span>
-<span>Find Leads</span>
-</button>
-
-
-<div class="nav-label">
-Manage
-</div>
-
-<button
-class="nav-btn"
-onclick="showPage('platforms',this)">
-<span>◉</span>
-<span>Platforms</span>
-</button>
-
-<button
-class="nav-btn"
-onclick="showPage('keywords',this)">
-<span>⌁</span>
-<span>Keywords</span>
-</button>
-
-<button
-class="nav-btn"
-onclick="showPage('analytics',this)">
-<span>▥</span>
-<span>Analytics</span>
-</button>
-
-
-<div class="nav-label">
-Account
-</div>
-
-<button
-class="nav-btn"
-onclick="openSettings()">
-<span>⚙</span>
-<span>Settings</span>
-</button>
-
-
-
-<button
-class="nav-btn"
-id="adminNavButton"
-onclick="openAdminPanel()"
-style="display:none;">
-<span>✓</span>
-<span>Access Approval</span>
-</button>
-
-
-<div class="sidebar-bottom">
-
-<button
-class="nav-btn"
-onclick="toggleTheme()">
-<span>☼</span>
-<span>Theme</span>
-</button>
-
-<button
-class="nav-btn"
-onclick="logout()">
-<span>↪</span>
-<span>Logout</span>
-</button>
-
-</div>
-
-</aside>
-
-
-<!-- ================= MAIN ================= -->
-
-<main class="main">
-
-
-<header class="topbar">
-
-<div
-class="page-name"
-id="pageName">
-Overview
-</div>
-
-<div class="top-right">
-
-<button
-class="icon-btn"
-onclick="toggleTheme()">
-☼
-</button>
-
-<button class="icon-btn">
-🔔
-</button>
-
-<div
-class="avatar"
-id="avatar">
-S
 </div>
 
 </div>
@@ -1041,486 +662,115 @@ S
 </header>
 
 
-<!-- ================= OVERVIEW ================= -->
+<section class="hero">
 
-<section
-class="content page"
-id="overviewPage">
+<div class="container">
 
-<div class="page-header">
-
-<div>
+<div class="badge">
+<span class="badge-dot"></span>
+AI-powered lead discovery
+</div>
 
 <h1>
-Overview
+Find people who are already looking for
+<span>your service.</span>
 </h1>
 
 <p>
-Monitor your lead generation activity from one place.
+SLeads discovers buying-intent conversations across
+Reddit, LinkedIn, X, Facebook and Instagram so you
+can find prospects instead of manually searching for them.
 </p>
 
-</div>
+<div class="hero-buttons">
 
 <button
-class="primary"
-onclick="showPage('search')">
-+ Find Leads
+class="btn btn-primary btn-large"
+onclick="scrollToPricing()">
+Start Finding Leads
+</button>
+
+<button
+class="btn btn-secondary btn-large"
+onclick="document.getElementById('features').scrollIntoView()">
+Explore Features
 </button>
 
 </div>
 
 
-<div class="stats">
+<div class="platform-strip">
 
-<div class="stat">
-
-<div class="stat-label">
-Total Leads
-</div>
-
-<div class="stat-value">
-0
-</div>
-
-<div class="stat-bottom">
-No leads generated yet
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-label">
-Qualified Leads
-</div>
-
-<div class="stat-value">
-0
-</div>
-
-<div class="stat-bottom">
-AI qualified
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-label">
-Searches Used
-</div>
-
-<div
-class="stat-value"
-id="searchUsage">
-0
-</div>
-
-<div class="stat-bottom">
-This billing period
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-label">
-Current Plan
-</div>
-
-<div
-class="stat-value"
-id="planValue">
-Free
-</div>
-
-<div class="stat-bottom">
-Active subscription
-</div>
+<div class="platform-chip">Reddit</div>
+<div class="platform-chip">LinkedIn</div>
+<div class="platform-chip">X</div>
+<div class="platform-chip">Facebook</div>
+<div class="platform-chip">Instagram</div>
 
 </div>
 
 </div>
 
+</section>
 
-<div class="grid">
 
+<section
+class="section"
+id="features">
 
-<div class="card">
+<div class="container">
 
-<div class="card-header">
+<div class="section-head">
 
-<h3>
-Latest Leads
-</h3>
-
-<span>
-Live
-</span>
-
-</div>
-
-<div class="card-body">
-
-<div class="lead">
-
-<div class="source">
-R
-</div>
-
-<div class="lead-main">
-
-<div class="lead-title">
-
-<strong>
-Reddit conversations
-</strong>
-
-<span class="score">
-AI 92%
-</span>
-
-</div>
-
-<div class="lead-text">
-Potential customers will appear here after you run
-your first lead search.
-</div>
-
-<div class="lead-meta">
-Reddit · Waiting for search
-</div>
-
-</div>
-
-</div>
-
-
-<div class="lead">
-
-<div class="source">
-in
-</div>
-
-<div class="lead-main">
-
-<div class="lead-title">
-
-<strong>
-LinkedIn opportunities
-</strong>
-
-<span class="score">
-AI 88%
-</span>
-
-</div>
-
-<div class="lead-text">
-SLeads will analyze relevant conversations and identify
-potential buyers.
-</div>
-
-<div class="lead-meta">
-LinkedIn · Waiting for search
-</div>
-
-</div>
-
-</div>
-
-
-<div style="text-align:center;padding:20px">
-
-<button
-class="secondary"
-onclick="showPage('leads')">
-View All Leads
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div>
-
-<div class="plan">
-
-<div class="plan-top">
-
-<div class="plan-name"
-id="planName">
-Free
-</div>
-
-<div class="plan-badge">
-ACTIVE
-</div>
-
-</div>
-
-<div style="color:var(--muted);font-size:11px;margin-top:7px;">
-Your current SLeads subscription
-</div>
-
-<div class="usage">
-
-<div class="usage-row">
-
-<span>
-Lead searches
-</span>
-
-<span>
-0 / 10
-</span>
-
-</div>
-
-<div class="progress">
-<div></div>
-</div>
-
-</div>
-
-<div class="usage">
-
-<div class="usage-row">
-
-<span>
-Lead exports
-</span>
-
-<span>
-0 / 5
-</span>
-
-</div>
-
-<div class="progress">
-<div style="width:10%"></div>
-</div>
-
-</div>
-
-<br>
-
-<button
-class="primary"
-style="width:100%"
-onclick="openUpgrade()">
-Upgrade Plan
-</button>
-
-</div>
-
-
-<div class="card" style="margin-top:18px;">
-
-<div class="card-header">
-
-<h3>
-Recent Activity
-</h3>
-
-<span>
-Today
-</span>
-
-</div>
-
-<div class="card-body">
-
-<div class="activity">
-
-<div class="activity-dot"></div>
-
-<div>
+<h2>Everything you need to find leads</h2>
 
 <p>
-Dashboard initialized
+One workspace for discovering and managing buying-intent prospects.
 </p>
 
-<small>
-Just now
-</small>
-
 </div>
 
-</div>
 
-<div class="activity">
+<div class="features">
 
-<div class="activity-dot"></div>
+<div class="feature">
 
-<div>
+<div class="feature-icon">◎</div>
+
+<h3>AI Lead Discovery</h3>
 
 <p>
-Lead engine ready
+Search for people actively discussing problems,
+services and products related to your business.
 </p>
 
-<small>
-Waiting for first search
-</small>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 
-<div class="card">
+<div class="feature">
 
-<div class="card-header">
+<div class="feature-icon">✦</div>
 
-<h3>
-Connected Platforms
-</h3>
+<h3>Intent Detection</h3>
 
-<span>
-5 available
-</span>
-
-</div>
-
-<div class="card-body">
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-R
-</div>
-
-<div>
-
-<div class="platform-name">
-Reddit
-</div>
-
-<div class="status">
-<span class="dot"></span>Ready
-</div>
-
-</div>
-
-</div>
+<p>
+SLeads identifies high-intent conversations and
+prioritizes prospects that are more likely to convert.
+</p>
 
 </div>
 
 
-<div class="platform">
+<div class="feature">
 
-<div class="platform-left">
+<div class="feature-icon">▥</div>
 
-<div class="platform-icon">
-in
-</div>
+<h3>Lead Workspace</h3>
 
-<div>
-
-<div class="platform-name">
-LinkedIn
-</div>
-
-<div class="status">
-<span class="dot"></span>Ready
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-𝕏
-</div>
-
-<div>
-
-<div class="platform-name">
-X
-</div>
-
-<div class="status">
-<span class="dot"></span>Ready
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-f
-</div>
-
-<div>
-
-<div class="platform-name">
-Facebook
-</div>
-
-<div class="status">
-<span class="dot"></span>Ready
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-◎
-</div>
-
-<div>
-
-<div class="platform-name">
-Instagram
-</div>
-
-<div class="status">
-<span class="dot"></span>Ready
-</div>
-
-</div>
-
-</div>
-
-</div>
+<p>
+Keep discovered prospects, searches, platforms and
+lead activity organized inside one dashboard.
+</p>
 
 </div>
 
@@ -1531,106 +781,121 @@ Instagram
 </section>
 
 
-<!-- ================= LEADS ================= -->
-
 <section
-class="content page hidden"
-id="leadsPage">
+class="section"
+id="pricing">
 
-<div class="page-header">
+<div class="container">
 
-<div>
+<div class="section-head">
 
-<h1>
-Leads
-</h1>
+<h2>Simple pricing</h2>
 
 <p>
-All prospects discovered by SLeads.
+Choose the plan that fits your lead generation volume.
 </p>
 
 </div>
 
+
+<div class="pricing">
+
+
+<div class="price-card">
+
+<h3>Basic</h3>
+
+<div class="price">
+$19
+<small>/month</small>
+</div>
+
+<div class="price-desc">
+For getting started with lead generation.
+</div>
+
+<ul class="price-list">
+
+<li>Lead discovery</li>
+<li>5 platforms</li>
+<li>Basic AI qualification</li>
+<li>Lead workspace</li>
+
+</ul>
+
 <button
-class="primary"
-onclick="showPage('search')">
-+ Find New Leads
+class="btn btn-primary"
+onclick="selectPlan('Basic',19)">
+Choose Basic
 </button>
 
 </div>
 
 
-<div class="card">
+<div class="price-card featured">
 
-<div class="card-header">
-
-<h3>
-Lead Database
-</h3>
-
-<span>
-0 leads
-</span>
-
+<div class="popular">
+MOST POPULAR
 </div>
 
-<div class="card-body">
+<h3>Growth</h3>
 
-<div class="search-box">
+<div class="price">
+$39
+<small>/month</small>
+</div>
 
-<input
-placeholder="Search your leads...">
+<div class="price-desc">
+For businesses generating leads consistently.
+</div>
+
+<ul class="price-list">
+
+<li>Everything in Basic</li>
+<li>Higher search limits</li>
+<li>Advanced AI qualification</li>
+<li>Lead analytics</li>
+
+</ul>
 
 <button
-class="primary">
-Search
+class="btn btn-primary"
+onclick="selectPlan('Growth',39)">
+Choose Growth
 </button>
 
 </div>
 
 
-<table class="table" style="margin-top:20px;">
+<div class="price-card">
 
-<thead>
+<h3>Pro</h3>
 
-<tr>
+<div class="price">
+$89
+<small>/month</small>
+</div>
 
-<th>LEAD</th>
-<th>SOURCE</th>
-<th>INTENT</th>
-<th>STATUS</th>
+<div class="price-desc">
+For high-volume prospecting operations.
+</div>
 
-</tr>
+<ul class="price-list">
 
-</thead>
+<li>Everything in Growth</li>
+<li>Highest search limits</li>
+<li>Advanced analytics</li>
+<li>Priority access</li>
 
-<tbody>
+</ul>
 
-<tr>
+<button
+class="btn btn-primary"
+onclick="selectPlan('Pro',89)">
+Choose Pro
+</button>
 
-<td>
-No leads yet
-</td>
-
-<td>
-—
-</td>
-
-<td>
-—
-</td>
-
-<td>
-<span style="color:var(--muted)">
-Waiting
-</span>
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
+</div>
 
 </div>
 
@@ -1639,568 +904,730 @@ Waiting
 </section>
 
 
-<!-- ================= SEARCH ================= -->
+<footer class="footer">
+
+<div class="container footer-inner">
+
+<span>© 2026 SLeads. All rights reserved.</span>
+
+<span>AI Lead Generation Platform</span>
+
+</div>
+
+</footer>
+
+</div>
+
+
+<!-- =========================================================
+     APPLICATION SCREENS
+========================================================= -->
+
+<div
+id="appScreen"
+class="hidden">
+
+
+<!-- ================= PAYMENT ================= -->
 
 <section
-class="content page hidden"
-id="searchPage">
+id="paymentScreen"
+class="screen">
 
-<div class="page-header">
+<div class="auth-card">
 
-<div>
+<div class="auth-logo">
+S<span>Leads</span>
+</div>
 
-<h1>
-Find Leads
-</h1>
+<h2>Complete your payment</h2>
 
 <p>
-Search social conversations for people who need your service.
+Select your payment method to continue.
 </p>
 
-</div>
 
-</div>
+<div class="selected-plan">
 
+<div class="selected-plan-top">
 
-<div class="card">
+<strong id="paymentPlanName">
+Basic
+</strong>
 
-<div class="card-header">
-
-<h3>
-Create Lead Search
-</h3>
-
-<span>
-AI powered
+<span
+class="selected-plan-price"
+id="paymentPlanPrice">
+$19/month
 </span>
 
 </div>
 
-<div class="card-body">
+</div>
+
+
+<div
+class="payment-method"
+onclick="selectPayment('Card')">
+
+<strong>💳 Card Payment</strong>
+
+<small>
+Credit / debit card
+</small>
+
+</div>
+
+
+<div
+class="payment-method"
+onclick="selectPayment('PayPal')">
+
+<strong>◉ PayPal</strong>
+
+<small>
+Pay securely using PayPal
+</small>
+
+</div>
+
+
+<div
+class="payment-method"
+onclick="selectPayment('Manual')">
+
+<strong>▣ Manual Payment</strong>
+
+<small>
+Payment details can be verified by admin
+</small>
+
+</div>
+
+
+<div
+id="paymentStatus"
+class="status-box pending hidden">
+</div>
+
+
+<button
+class="btn btn-primary full"
+onclick="completePayment()">
+Continue to Payment
+</button>
+
+
+<div
+class="auth-footer">
+
+Already have an account?
+<span
+class="link"
+onclick="showLogin()">
+Login
+</span>
+
+</div>
+
+
+<span
+class="back-home"
+onclick="showLanding()">
+← Back to website
+</span>
+
+</div>
+
+</section>
+
+
+<!-- ================= SIGNUP ================= -->
+
+<section
+id="signupScreen"
+class="screen hidden">
+
+<div class="auth-card">
+
+<div class="auth-logo">
+S<span>Leads</span>
+</div>
+
+<h2>Create your account</h2>
+
+<p>
+Your account will be reviewed after payment.
+</p>
+
+
+<div class="form-group">
+
+<label>FULL NAME</label>
 
 <input
 class="input"
-id="searchKeyword"
-placeholder="What are people looking for? e.g. need a marketing agency">
+id="signupName"
+placeholder="Your name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>EMAIL</label>
+
+<input
+class="input"
+id="signupEmail"
+type="email"
+placeholder="you@example.com">
+
+</div>
+
+
+<div class="form-group">
+
+<label>PASSWORD</label>
+
+<input
+class="input"
+id="signupPassword"
+type="password"
+placeholder="Create a password">
+
+</div>
+
+
+<div class="form-group">
+
+<label>BUSINESS / WORKSPACE</label>
+
+<input
+class="input"
+id="signupBusiness"
+placeholder="Your business">
+
+</div>
+
+
+<button
+class="btn btn-primary full"
+onclick="signup()">
+Create Account
+</button>
+
+
+<div
+class="auth-footer">
+
+Already have an account?
+<span
+class="link"
+onclick="showLogin()">
+Login
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= LOGIN ================= -->
+
+<section
+id="loginScreen"
+class="screen hidden">
+
+<div class="auth-card">
+
+<div class="auth-logo">
+S<span>Leads</span>
+</div>
+
+<h2>Welcome back</h2>
+
+<p>
+Login to access your SLeads account.
+</p>
+
+
+<div class="form-group">
+
+<label>EMAIL</label>
+
+<input
+class="input"
+id="loginEmail"
+type="email"
+placeholder="you@example.com">
+
+</div>
+
+
+<div class="form-group">
+
+<label>PASSWORD</label>
+
+<input
+class="input"
+id="loginPassword"
+type="password"
+placeholder="Your password">
+
+</div>
+
+
+<button
+class="btn btn-primary full"
+onclick="login()">
+Login
+</button>
+
+
+<div
+class="auth-footer">
+
+Don't have an account?
+<span
+class="link"
+onclick="showSignup()">
+Sign up
+</span>
+
+<br><br>
+
+<span
+class="link"
+onclick="forgotPassword()">
+Forgot password?
+</span>
+
+</div>
+
+
+<span
+class="back-home"
+onclick="showLanding()">
+← Back to website
+</span>
+
+</div>
+
+</section>
+
+
+<!-- ================= PENDING ================= -->
+
+<section
+id="pendingScreen"
+class="screen hidden">
+
+<div class="auth-card"
+style="text-align:center">
+
+<div style="
+font-size:45px;
+margin-bottom:15px;
+">
+⏳
+</div>
+
+<h2>Approval pending</h2>
+
+<p>
+Your payment has been recorded and your account
+is waiting for admin approval.
+</p>
+
+<div class="status-box pending">
+Payment received.<br>
+Dashboard access will become available after approval.
+</div>
+
+<button
+class="btn btn-primary full"
+onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section
+id="dashboardScreen"
+class="screen hidden"
+style="padding:0;display:block">
+
+<div
+style="
+min-height:100vh;
+background:var(--bg);
+">
+
+<div style="
+max-width:1100px;
+margin:auto;
+padding:25px 18px;
+">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+padding-bottom:20px;
+border-bottom:1px solid var(--border);
+">
+
+<div>
+
+<div class="logo">
+S<span>Leads</span>
+</div>
+
+<div style="
+color:var(--muted);
+font-size:11px;
+margin-top:4px;
+">
+Dashboard
+</div>
+
+</div>
+
+
+<div style="
+display:flex;
+gap:8px;
+align-items:center;
+">
+
+<button
+class="btn btn-secondary"
+onclick="toggleTheme()">
+☼
+</button>
+
+<button
+class="btn btn-secondary"
+onclick="openAccount()">
+Account
+</button>
+
+<button
+class="btn btn-secondary"
+onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</div>
+
+
+<div style="
+padding:35px 0 25px;
+">
+
+<h1
+id="dashWelcome"
+style="font-size:30px">
+Welcome
+</h1>
+
+<p style="
+color:var(--muted);
+font-size:13px;
+margin-top:6px;
+">
+Find and manage your potential customers.
+</p>
+
+</div>
+
+
+<div style="
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-bottom:20px;
+">
+
+<div class="feature">
+
+<div style="
+color:var(--muted);
+font-size:10px;
+">
+Total Leads
+</div>
+
+<div
+id="dashLeads"
+style="
+font-size:28px;
+font-weight:900;
+margin-top:8px;
+">
+0
+</div>
+
+</div>
+
+
+<div class="feature">
+
+<div style="
+color:var(--muted);
+font-size:10px;
+">
+Searches
+</div>
+
+<div
+id="dashSearches"
+style="
+font-size:28px;
+font-weight:900;
+margin-top:8px;
+">
+0
+</div>
+
+</div>
+
+
+<div class="feature">
+
+<div style="
+color:var(--muted);
+font-size:10px;
+">
+Plan
+</div>
+
+<div
+id="dashPlan"
+style="
+font-size:20px;
+font-weight:900;
+margin-top:13px;
+">
+—
+</div>
+
+</div>
+
+
+<div class="feature">
+
+<div style="
+color:var(--muted);
+font-size:10px;
+">
+Access
+</div>
+
+<div style="
+font-size:15px;
+font-weight:900;
+margin-top:15px;
+color:var(--green);
+">
+APPROVED
+</div>
+
+</div>
+
+</div>
+
+
+<div style="
+display:grid;
+grid-template-columns:1.3fr .7fr;
+gap:15px;
+">
+
+<div class="feature">
+
+<h3>Find Leads</h3>
+
+<p style="
+margin:7px 0 18px;
+">
+Search for people who need your service.
+</p>
+
+
+<input
+class="input"
+id="dashKeyword"
+placeholder="e.g. need a marketing agency"
+style="margin-bottom:10px">
 
 
 <select
 class="input"
-id="searchPlatform">
+id="dashPlatform"
+style="margin-bottom:10px">
 
-<option>
-All Platforms
-</option>
-
-<option>
-Reddit
-</option>
-
-<option>
-LinkedIn
-</option>
-
-<option>
-X
-</option>
-
-<option>
-Facebook
-</option>
-
-<option>
-Instagram
-</option>
+<option>All Platforms</option>
+<option>Reddit</option>
+<option>LinkedIn</option>
+<option>X</option>
+<option>Facebook</option>
+<option>Instagram</option>
 
 </select>
 
 
 <button
-class="primary"
-onclick="runSearch()">
-Start AI Lead Search
+class="btn btn-primary"
+onclick="dashboardSearch()">
+Start Lead Search
 </button>
-
-</div>
-
-</div>
 
 
 <div
-class="card"
-style="margin-top:18px;">
-
-<div class="card-header">
-
-<h3>
-Search Results
-</h3>
-
-<span id="resultStatus">
-No search running
-</span>
-
-</div>
-
-<div
-class="card-body"
-id="searchResults">
-
-<div style="text-align:center;padding:35px;color:var(--muted);">
-
-Enter a keyword above to start discovering opportunities.
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= PLATFORMS ================= -->
-
-<section
-class="content page hidden"
-id="platformsPage">
-
-<div class="page-header">
-
-<div>
-
-<h1>
-Platforms
-</h1>
-
-<p>
-Manage the social platforms used for lead discovery.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="grid">
-
-<div class="card">
-
-<div class="card-header">
-
-<h3>
-Lead Sources
-</h3>
-
-<span>
-5 platforms
-</span>
-
-</div>
-
-<div class="card-body">
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-R
-</div>
-
-<div>
-
-<div class="platform-name">
-Reddit
-</div>
-
-<div class="status">
-<span class="dot"></span>Available
-</div>
-
-</div>
-
-</div>
-
-<button class="secondary">
-Configure
-</button>
-
-</div>
-
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-in
-</div>
-
-<div>
-
-<div class="platform-name">
-LinkedIn
-</div>
-
-<div class="status">
-<span class="dot"></span>Available
-</div>
-
-</div>
-
-</div>
-
-<button class="secondary">
-Configure
-</button>
-
-</div>
-
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-𝕏
-</div>
-
-<div>
-
-<div class="platform-name">
-X
-</div>
-
-<div class="status">
-<span class="dot"></span>Available
-</div>
-
-</div>
-
-</div>
-
-<button class="secondary">
-Configure
-</button>
-
-</div>
-
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-f
-</div>
-
-<div>
-
-<div class="platform-name">
-Facebook
-</div>
-
-<div class="status">
-<span class="dot"></span>Available
-</div>
-
-</div>
-
-</div>
-
-<button class="secondary">
-Configure
-</button>
-
-</div>
-
-
-<div class="platform">
-
-<div class="platform-left">
-
-<div class="platform-icon">
-◎
-</div>
-
-<div>
-
-<div class="platform-name">
-Instagram
-</div>
-
-<div class="status">
-<span class="dot"></span>Available
-</div>
-
-</div>
-
-</div>
-
-<button class="secondary">
-Configure
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= KEYWORDS ================= -->
-
-<section
-class="content page hidden"
-id="keywordsPage">
-
-<div class="page-header">
-
-<div>
-
-<h1>
-Keywords
-</h1>
-
-<p>
-Tell SLeads what buying intent to look for.
-</p>
-
-</div>
-
-<button
-class="primary"
-onclick="addKeyword()">
-+ Add Keyword
-</button>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-header">
-
-<h3>
-Your Buyer Keywords
-</h3>
-
-<span id="keywordCount">
-0 / 20
-</span>
-
-</div>
-
-<div class="card-body">
-
-<div
-id="keywordList"
-style="display:flex;gap:9px;flex-wrap:wrap;">
-
-<span
-class="filter">
-No keywords added
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= ANALYTICS ================= -->
-
-<section
-class="content page hidden"
-id="analyticsPage">
-
-<div class="page-header">
-
-<div>
-
-<h1>
-Analytics
-</h1>
-
-<p>
-Track your lead generation performance.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="stats">
-
-<div class="stat">
-
-<div class="stat-label">
-Total Searches
-</div>
-
-<div class="stat-value">
-0
-</div>
-
-</div>
-
-<div class="stat">
-
-<div class="stat-label">
-Leads Found
-</div>
-
-<div class="stat-value">
-0
-</div>
-
-</div>
-
-<div class="stat">
-
-<div class="stat-label">
-Qualified
-</div>
-
-<div class="stat-value">
-0
-</div>
-
-</div>
-
-<div class="stat">
-
-<div class="stat-label">
-Conversion
-</div>
-
-<div class="stat-value">
-0%
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-header">
-
-<h3>
-Lead Generation Activity
-</h3>
-
-<span>
-Last 30 days
-</span>
-
-</div>
-
-<div class="card-body">
-
-<div style="
-height:250px;
-display:flex;
-align-items:center;
-justify-content:center;
+id="dashResults"
+style="
+margin-top:20px;
 color:var(--muted);
-font-size:12px;
+font-size:11px;
+">
+No search performed yet.
+</div>
+
+</div>
+
+
+<div class="feature">
+
+<h3>Lead Sources</h3>
+
+<div style="margin-top:15px">
+
+<div class="platform-chip"
+style="margin-bottom:7px">
+● Reddit
+</div>
+
+<div class="platform-chip"
+style="margin-bottom:7px">
+● LinkedIn
+</div>
+
+<div class="platform-chip"
+style="margin-bottom:7px">
+● X
+</div>
+
+<div class="platform-chip"
+style="margin-bottom:7px">
+● Facebook
+</div>
+
+<div class="platform-chip">
+● Instagram
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- ================= ACCOUNT MODAL ================= -->
+
+<div
+id="accountModal"
+class="screen hidden"
+style="
+position:fixed;
+inset:0;
+z-index:100;
+background:rgba(0,0,0,.8);
 ">
 
-Analytics will appear after your first lead search.
+<div class="auth-card">
 
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-</main>
-
-
-<!-- ================= SETTINGS MODAL ================= -->
-
-<div
-class="modal-bg hidden"
-id="settingsModal">
-
-<div class="modal">
-
-<h2>
-Settings
-</h2>
+<h2>Account</h2>
 
 <p>
 Manage your SLeads account.
 </p>
 
-<div class="account-card">
-    <small>ACCOUNT NAME</small>
-    <strong id="settingsAccountName">—</strong>
+
+<div class="selected-plan">
+
+<strong id="accountName">
+—
+</strong>
+
+<br>
+
+<span
+id="accountEmail"
+style="
+color:var(--muted);
+font-size:10px;
+">
+—
+</span>
+
+<br><br>
+
+<span
+id="accountPlan"
+style="
+color:var(--primary2);
+font-size:11px;
+">
+—
+</span>
+
 </div>
-
-<div class="account-card">
-    <small>EMAIL</small>
-    <strong id="settingsEmail">—</strong>
-</div>
-
-<div class="account-card">
-    <small>PLAN</small>
-    <strong id="settingsPlan">Free</strong>
-</div>
-
-
 
 
 <button
-class="nav-btn"
+class="btn btn-secondary full"
 onclick="toggleTheme()"
-style="background:var(--card2);margin-bottom:7px;">
-
-<span>☼</span>
-<span>Dark / Light Mode</span>
-
+style="margin-bottom:8px">
+☼ Dark / Light Mode
 </button>
 
 
 <button
-class="nav-btn"
-onclick="logout()"
-style="background:var(--card2);margin-bottom:7px;">
-
-<span>↪</span>
-<span>Logout</span>
-
+class="btn full"
+style="
+background:rgba(255,98,98,.1);
+color:var(--red);
+border:1px solid rgba(255,98,98,.2);
+"
+onclick="deleteAccount()">
+Delete Account
 </button>
 
 
 <button
-class="nav-btn"
-onclick="deleteAccount()"
-style="background:rgba(255,70,70,.08);color:var(--red);">
-
-<span>🗑</span>
-<span>Delete Account</span>
-
-</button>
-
-
-<button
-class="close"
-onclick="closeSettings()">
+class="back-home"
+onclick="closeAccount()">
 Close
 </button>
 
@@ -2209,83 +1636,56 @@ Close
 </div>
 
 
-<!-- ================= UPGRADE MODAL ================= -->
-
-<div
-class="modal-bg hidden"
-id="upgradeModal">
-
-<div class="modal">
-
-<h2>
-Upgrade SLeads
-</h2>
-
-<p>
-Choose a plan to increase your lead generation limits.
-</p>
-
-
-<button
-class="nav-btn"
-style="background:var(--card2);margin-bottom:8px;"
-onclick="upgrade('Basic')">
-
-<span>◆</span>
-<span>Basic — $19/month</span>
-
-</button>
-
-
-<button
-class="nav-btn"
-style="background:var(--card2);margin-bottom:8px;"
-onclick="upgrade('Growth')">
-
-<span>◆</span>
-<span>Growth — $39/month</span>
-
-</button>
-
-
-<button
-class="nav-btn"
-style="background:var(--card2);"
-onclick="upgrade('Pro')">
-
-<span>◆</span>
-<span>Pro — $89/month</span>
-
-</button>
-
-
-<button
-class="close"
-onclick="closeUpgrade()">
-Cancel
-</button>
-
-</div>
-
-</div>
-
-
-
 <script>
 
 /* =========================================================
-   SLEADS DASHBOARD + ACCESS APPROVAL
-   ========================================================= */
+   SLEADS COMPLETE FRONTEND FLOW
+   OVERVIEW → PAYMENT → SIGNUP/LOGIN → APPROVAL → DASHBOARD
+========================================================= */
 
 
-/* ================= USER ================= */
+/* ================= STATE ================= */
 
-function getUser(){
+let selectedPlan = null;
+let selectedPrice = 0;
+let selectedPaymentMethod = null;
+
+
+/* ================= STORAGE HELPERS ================= */
+
+function getUsers(){
 
     try{
 
         return JSON.parse(
-            localStorage.getItem("sLeadsUser")
+            localStorage.getItem("sLeadsAllUsers") || "[]"
+        );
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function saveUsers(users){
+
+    localStorage.setItem(
+        "sLeadsAllUsers",
+        JSON.stringify(users)
+    );
+
+}
+
+
+function getCurrentUser(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem("sLeadsUser") || "null"
         );
 
     }catch(e){
@@ -2297,421 +1697,614 @@ function getUser(){
 }
 
 
-/* ================= APPROVAL DATA ================= */
-
-function getApprovalStatus(){
-
-    return localStorage.getItem(
-        "sLeadsAccessStatus"
-    ) || "pending";
-
-}
-
-
-function setApprovalStatus(status){
+function saveCurrentUser(user){
 
     localStorage.setItem(
-        "sLeadsAccessStatus",
-        status
+        "sLeadsUser",
+        JSON.stringify(user)
+    );
+
+    localStorage.setItem(
+        "loggedIn",
+        "true"
     );
 
 }
 
 
-/* ================= ADMIN MODE ================= */
+/* ================= PAGE CONTROL ================= */
 
-function isAdmin(){
+function hideAllScreens(){
 
-    const user = getUser();
+    document
+    .querySelectorAll("#appScreen > .screen")
+    .forEach(function(screen){
 
-    if(!user) return false;
+        screen.classList.add("hidden");
 
-    return (
-        user.isAdmin === true ||
-        user.role === "admin" ||
-        user.email === "naqvishahvlog@gmail.com"
-    );
+    });
 
 }
 
 
-/* ================= ACCESS GATE ================= */
+function showLanding(){
 
-function checkAccess(){
+    document
+    .getElementById("appScreen")
+    .classList.add("hidden");
 
-    const user = getUser();
-
-    if(!user){
-
-        window.location.href = "index.html";
-
-        return false;
-
-    }
-
-    /* Admin always gets access */
-
-    if(isAdmin()){
-
-        document
-        .getElementById("adminNavButton")
-        .style.display = "flex";
-
-        return true;
-
-    }
-
-
-    const status = getApprovalStatus();
-
-
-    if(status === "approved"){
-
-        return true;
-
-    }
-
-
-    showApprovalGate(status);
-
-    return false;
+    document
+    .getElementById("landingPage")
+    .classList.remove("hidden");
 
 }
 
 
-function showApprovalGate(status){
+function openApp(){
 
-    const gate =
-    document.getElementById(
-        "approvalGate"
+    document
+    .getElementById("landingPage")
+    .classList.add("hidden");
+
+    document
+    .getElementById("appScreen")
+    .classList.remove("hidden");
+
+}
+
+
+function showLogin(){
+
+    openApp();
+
+    hideAllScreens();
+
+    document
+    .getElementById("loginScreen")
+    .classList.remove("hidden");
+
+}
+
+
+function showSignup(){
+
+    openApp();
+
+    hideAllScreens();
+
+    document
+    .getElementById("signupScreen")
+    .classList.remove("hidden");
+
+}
+
+
+function showPayment(){
+
+    openApp();
+
+    hideAllScreens();
+
+    document
+    .getElementById("paymentScreen")
+    .classList.remove("hidden");
+
+}
+
+
+function scrollToPricing(){
+
+    document
+    .getElementById("pricing")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ================= PLAN ================= */
+
+function selectPlan(plan,price){
+
+    selectedPlan = plan;
+    selectedPrice = price;
+
+    localStorage.setItem(
+        "sLeadsSelectedPlan",
+        JSON.stringify({
+            plan:plan,
+            price:price
+        })
     );
 
-    const icon =
-    document.getElementById(
-        "approvalIcon"
-    );
+    document
+    .getElementById("paymentPlanName")
+    .innerText = plan;
 
-    const title =
-    document.getElementById(
-        "approvalTitle"
-    );
+    document
+    .getElementById("paymentPlanPrice")
+    .innerText =
+    "$" + price + "/month";
 
-    const message =
-    document.getElementById(
-        "approvalMessage"
-    );
+    showPayment();
 
-    const statusBox =
-    document.getElementById(
-        "approvalStatus"
-    );
+}
 
 
-    gate.style.display = "flex";
+/* ================= PAYMENT ================= */
+
+function selectPayment(method){
+
+    selectedPaymentMethod = method;
+
+    document
+    .getElementById("paymentStatus")
+    .classList.remove("hidden");
+
+    document
+    .getElementById("paymentStatus")
+    .innerText =
+    method + " selected. Continue to proceed.";
+
+}
 
 
-    if(status === "rejected"){
+function completePayment(){
 
-        icon.innerText = "✕";
+    if(!selectedPlan){
 
-        title.innerText =
-        "Access Not Approved";
+        const saved =
+        JSON.parse(
+            localStorage.getItem(
+                "sLeadsSelectedPlan"
+            ) || "null"
+        );
 
-        message.innerText =
-        "Your account access was not approved. Please contact support if you believe this is a mistake.";
+        if(saved){
 
-        statusBox.className =
-        "approval-status rejected";
+            selectedPlan = saved.plan;
+            selectedPrice = saved.price;
 
-        statusBox.innerText =
-        "● Access rejected";
+        }
+
+    }
+
+
+    if(!selectedPlan){
+
+        alert(
+            "Please select a plan first."
+        );
+
+        showLanding();
 
         return;
 
     }
 
 
-    icon.innerText = "⏳";
+    if(!selectedPaymentMethod){
 
-    title.innerText =
-    "Account Pending Approval";
-
-    message.innerText =
-    "Your payment has been received. Your account is waiting for admin approval.";
-
-    statusBox.className =
-    "approval-status pending";
-
-    statusBox.innerText =
-    "● Pending admin approval";
-
-}
-
-
-function approvalLogout(){
-
-    localStorage.removeItem(
-        "loggedIn"
-    );
-
-    localStorage.removeItem(
-        "sLeadsUser"
-    );
-
-    window.location.href =
-    "index.html";
-
-}
-
-
-/* ================= LOAD ================= */
-
-window.addEventListener(
-"DOMContentLoaded",
-function(){
-
-    loadTheme();
-
-    const user = getUser();
-
-
-    if(!user){
-
-        window.location.href =
-        "index.html";
+        alert(
+            "Please select a payment method first."
+        );
 
         return;
 
     }
 
+
+    /*
+       DEMO PAYMENT STATE
+
+       Real production payment verification
+       must happen on the server/backend.
+    */
+
+    localStorage.setItem(
+        "sLeadsPayment",
+        JSON.stringify({
+
+            status:"paid",
+            plan:selectedPlan,
+            price:selectedPrice,
+            method:selectedPaymentMethod,
+            timestamp:Date.now()
+
+        })
+    );
+
+
+    showSignup();
+
+}
+
+
+/* ================= SIGNUP ================= */
+
+function signup(){
 
     const name =
-    user.name ||
-    user.fullName ||
-    "User";
-
-
     document
-    .getElementById("workspaceName")
-    .innerText =
-    user.business ||
-    name + "'s Workspace";
-
-
-    document
-    .getElementById("avatar")
-    .innerText =
-    name.charAt(0).toUpperCase();
-
-
-    document
-    .getElementById("planValue")
-    .innerText =
-    user.plan ||
-    "Free";
-
-
-    document
-    .getElementById("planName")
-    .innerText =
-    user.plan ||
-    "Free";
-
-
-    const accountName =
-    document.getElementById(
-        "settingsAccountName"
-    );
+    .getElementById("signupName")
+    .value
+    .trim();
 
     const email =
-    document.getElementById(
-        "settingsEmail"
-    );
-
-    const plan =
-    document.getElementById(
-        "settingsPlan"
-    );
-
-
-    if(accountName)
-        accountName.innerText =
-        name;
-
-
-    if(email)
-        email.innerText =
-        user.email ||
-        "—";
-
-
-    if(plan)
-        plan.innerText =
-        user.plan ||
-        "Free";
-
-
-    loadKeywords();
-
-
-    const allowed =
-    checkAccess();
-
-
-    if(!allowed && !isAdmin()){
-
-        return;
-
-    }
-
-});
-
-
-/* ================= PAGE NAVIGATION ================= */
-
-function showPage(page,button){
-
     document
-    .querySelectorAll(".page")
-    .forEach(function(el){
+    .getElementById("signupEmail")
+    .value
+    .trim()
+    .toLowerCase();
 
-        el.classList.add("hidden");
-
-    });
-
-
-    const target =
-    document.getElementById(
-        page + "Page"
-    );
-
-
-    if(target){
-
-        target.classList.remove(
-            "hidden"
-        );
-
-    }
-
-
+    const password =
     document
-    .querySelectorAll(".nav-btn")
-    .forEach(function(btn){
+    .getElementById("signupPassword")
+    .value;
 
-        btn.classList.remove(
-            "active"
-        );
-
-    });
-
-
-    if(button){
-
-        button.classList.add(
-            "active"
-        );
-
-    }
-
-
-    const names = {
-
-        overview:"Overview",
-        leads:"Leads",
-        search:"Find Leads",
-        platforms:"Platforms",
-        keywords:"Keywords",
-        analytics:"Analytics"
-
-    };
-
-
-    const pageName =
-    document.getElementById(
-        "pageName"
-    );
-
-
-    if(pageName){
-
-        pageName.innerText =
-        names[page] ||
-        "Dashboard";
-
-    }
-
-}
-
-
-/* ================= THEME ================= */
-
-function loadTheme(){
-
-    if(
-        localStorage.getItem(
-            "sLeadsTheme"
-        ) === "light"
-    ){
-
-        document.body.classList.add(
-            "light"
-        );
-
-    }
-
-}
-
-
-function toggleTheme(){
-
-    document.body.classList.toggle(
-        "light"
-    );
-
-
-    localStorage.setItem(
-        "sLeadsTheme",
-
-        document.body.classList.contains(
-            "light"
-        )
-        ? "light"
-        : "dark"
-    );
-
-}
-
-
-/* ================= SEARCH ================= */
-
-function runSearch(){
-
-    if(!checkAccess())
-        return;
-
-
-    const keyword =
+    const business =
     document
-    .getElementById(
-        "searchKeyword"
-    )
+    .getElementById("signupBusiness")
     .value
     .trim();
 
 
+    if(!name || !email || !password){
+
+        alert(
+            "Please complete your name, email and password."
+        );
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        alert(
+            "Password must be at least 6 characters."
+        );
+
+        return;
+
+    }
+
+
+    const payment =
+    JSON.parse(
+        localStorage.getItem(
+            "sLeadsPayment"
+        ) || "null"
+    );
+
+
+    if(
+        !payment ||
+        payment.status !== "paid"
+    ){
+
+        alert(
+            "Payment is required before creating an account."
+        );
+
+        showPayment();
+
+        return;
+
+    }
+
+
+    let users = getUsers();
+
+
+    if(
+        users.some(
+            user =>
+            user.email === email
+        )
+    ){
+
+        alert(
+            "An account with this email already exists. Please login."
+        );
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    const user = {
+
+        id:
+        "user_" +
+        Date.now(),
+
+        name:name,
+
+        email:email,
+
+        password:password,
+
+        business:
+        business || name + "'s Workspace",
+
+        plan:
+        payment.plan,
+
+        payment_status:
+        "paid",
+
+        access_status:
+        "pending",
+
+        created_at:
+        Date.now(),
+
+        isAdmin:false,
+
+        role:"user"
+
+    };
+
+
+    users.push(user);
+
+    saveUsers(users);
+
+    saveCurrentUser(user);
+
+
+    localStorage.setItem(
+        "sLeadsAccessStatus",
+        "pending"
+    );
+
+
+    showPending();
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function login(){
+
+    const email =
+    document
+    .getElementById("loginEmail")
+    .value
+    .trim()
+    .toLowerCase();
+
+    const password =
+    document
+    .getElementById("loginPassword")
+    .value;
+
+
+    if(!email || !password){
+
+        alert(
+            "Enter your email and password."
+        );
+
+        return;
+
+    }
+
+
+    const users = getUsers();
+
+
+    const user =
+    users.find(
+        item =>
+        item.email === email &&
+        item.password === password
+    );
+
+
+    if(!user){
+
+        alert(
+            "Invalid email or password."
+        );
+
+        return;
+
+    }
+
+
+    saveCurrentUser(user);
+
+
+    if(
+        user.isAdmin === true ||
+        user.role === "admin"
+    ){
+
+        showDashboard();
+
+        return;
+
+    }
+
+
+    if(
+        user.payment_status !== "paid"
+    ){
+
+        alert(
+            "Payment is required before dashboard access."
+        );
+
+        showLanding();
+
+        return;
+
+    }
+
+
+    if(
+        user.access_status !== "approved"
+    ){
+
+        showPending();
+
+        return;
+
+    }
+
+
+    showDashboard();
+
+}
+
+
+/* ================= PENDING ================= */
+
+function showPending(){
+
+    openApp();
+
+    hideAllScreens();
+
+    document
+    .getElementById("pendingScreen")
+    .classList.remove("hidden");
+
+}
+
+
+/* ================= DASHBOARD ================= */
+
+function showDashboard(){
+
+    const user = getCurrentUser();
+
+
+    if(!user){
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    /*
+       ACCESS CHECK
+    */
+
+    const isAdmin =
+    user.isAdmin === true ||
+    user.role === "admin";
+
+
+    if(
+        !isAdmin &&
+        (
+            user.payment_status !== "paid" ||
+            user.access_status !== "approved"
+        )
+    ){
+
+        if(
+            user.payment_status !== "paid"
+        ){
+
+            showLanding();
+
+        }else{
+
+            showPending();
+
+        }
+
+        return;
+
+    }
+
+
+    openApp();
+
+    hideAllScreens();
+
+    document
+    .getElementById("dashboardScreen")
+    .classList.remove("hidden");
+
+
+    document
+    .getElementById("dashWelcome")
+    .innerText =
+    "Welcome, " +
+    (
+        user.name ||
+        "User"
+    );
+
+
+    document
+    .getElementById("dashPlan")
+    .innerText =
+    user.plan ||
+    "—";
+
+
+    updateDashboardStats();
+
+}
+
+
+/* ================= DASHBOARD SEARCH ================= */
+
+function dashboardSearch(){
+
+    const user = getCurrentUser();
+
+
+    if(!user){
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    if(
+        user.payment_status !== "paid" ||
+        user.access_status !== "approved"
+    ){
+
+        showPending();
+
+        return;
+
+    }
+
+
+    const keyword =
+    document
+    .getElementById("dashKeyword")
+    .value
+    .trim();
+
     const platform =
     document
-    .getElementById(
-        "searchPlatform"
-    )
+    .getElementById("dashPlatform")
     .value;
 
 
     if(!keyword){
 
         alert(
-            "Enter a keyword or buyer intent first."
+            "Enter a lead keyword first."
         );
 
         return;
@@ -2719,565 +2312,144 @@ function runSearch(){
     }
 
 
-    document
-    .getElementById(
-        "resultStatus"
-    )
-    .innerText =
-    "Searching...";
+    let searches =
+    parseInt(
+        localStorage.getItem(
+            "sLeadsSearches_" + user.email
+        ) || "0"
+    );
 
 
-    document
-    .getElementById(
-        "searchResults"
-    )
-    .innerHTML = `
+    searches++;
 
-        <div style="
-        text-align:center;
-        padding:35px;
-        color:var(--muted);
-        ">
 
-            <div style="
-            font-size:28px;
-            margin-bottom:10px;
-            ">
-            ✦
-            </div>
+    localStorage.setItem(
+        "sLeadsSearches_" + user.email,
+        searches
+    );
 
-            SLeads is preparing your search for
 
-            <strong style="color:var(--text)">
-            ${escapeHtml(keyword)}
-            </strong>
+    const results =
+    document.getElementById(
+        "dashResults"
+    );
 
-            on
-            ${escapeHtml(platform)}.
 
-            <br><br>
+    results.innerHTML = `
 
-            <span style="font-size:10px;">
-            Connect the live lead-generation backend
-            to return real results.
-            </span>
+        <div class="status-box success">
+
+        Search #${searches} started.
+
+        <br><br>
+
+        Keyword:
+        <strong>
+        ${escapeHtml(keyword)}
+        </strong>
+
+        <br>
+
+        Platform:
+        <strong>
+        ${escapeHtml(platform)}
+        </strong>
+
+        <br><br>
+
+        Connect your live Reddit, LinkedIn, X,
+        Facebook and Instagram APIs/backend to return
+        real leads here.
 
         </div>
 
     `;
 
 
-    let usage =
-    parseInt(
-        localStorage.getItem(
-            "sLeadsSearches"
-        ) || "0"
-    );
-
-
-    usage++;
-
-
-    localStorage.setItem(
-        "sLeadsSearches",
-        usage
-    );
-
-
-    const usageBox =
-    document.getElementById(
-        "searchUsage"
-    );
-
-
-    if(usageBox)
-        usageBox.innerText =
-        usage;
+    updateDashboardStats();
 
 }
 
 
-/* ================= KEYWORDS ================= */
+/* ================= STATS ================= */
 
-function loadKeywords(){
+function updateDashboardStats(){
 
-    const box =
-    document.getElementById(
-        "keywordList"
-    );
+    const user = getCurrentUser();
 
-
-    const count =
-    document.getElementById(
-        "keywordCount"
-    );
-
-
-    if(!box || !count)
+    if(!user)
         return;
 
 
-    let keywords =
-    JSON.parse(
-        localStorage.getItem(
-            "sLeadsKeywords"
-        ) || "[]"
-    );
-
-
-    renderKeywords(
-        keywords
-    );
-
-}
-
-
-function renderKeywords(
-    keywords
-){
-
-    const box =
-    document.getElementById(
-        "keywordList"
-    );
-
-
-    const count =
-    document.getElementById(
-        "keywordCount"
-    );
-
-
-    if(!box || !count)
-        return;
-
-
-    count.innerText =
-    keywords.length +
-    " / 20";
-
-
-    if(!keywords.length){
-
-        box.innerHTML = `
-
-            <span class="filter">
-            No keywords added
-            </span>
-
-        `;
-
-        return;
-
-    }
-
-
-    box.innerHTML =
-    keywords.map(
-        function(keyword){
-
-            return `
-
-                <span class="filter">
-                ${escapeHtml(keyword)}
-                </span>
-
-            `;
-
-        }
-    ).join("");
-
-}
-
-
-function addKeyword(){
-
-    if(!checkAccess())
-        return;
-
-
-    const keyword =
-    prompt(
-        "Enter a buyer-intent keyword:"
-    );
-
-
-    if(!keyword)
-        return;
-
-
-    let keywords =
-    JSON.parse(
-        localStorage.getItem(
-            "sLeadsKeywords"
-        ) || "[]"
-    );
-
-
-    if(keywords.length >= 20){
-
-        alert(
-            "You have reached your keyword limit."
-        );
-
-        return;
-
-    }
-
-
-    keywords.push(
-        keyword.trim()
-    );
-
-
-    localStorage.setItem(
-        "sLeadsKeywords",
-        JSON.stringify(
-            keywords
-        )
-    );
-
-
-    renderKeywords(
-        keywords
-    );
-
-}
-
-
-/* ================= SETTINGS ================= */
-
-function openSettings(){
-
-    document
-    .getElementById(
-        "settingsModal"
-    )
-    .classList.remove(
-        "hidden"
-    );
-
-}
-
-
-function closeSettings(){
-
-    document
-    .getElementById(
-        "settingsModal"
-    )
-    .classList.add(
-        "hidden"
-    );
-
-}
-
-
-/* ================= UPGRADE ================= */
-
-function openUpgrade(){
-
-    document
-    .getElementById(
-        "upgradeModal"
-    )
-    .classList.remove(
-        "hidden"
-    );
-
-}
-
-
-function closeUpgrade(){
-
-    document
-    .getElementById(
-        "upgradeModal"
-    )
-    .classList.add(
-        "hidden"
-    );
-
-}
-
-
-function upgrade(plan){
-
-    closeUpgrade();
-
-    alert(
-        "Payment setup for " +
-        plan +
-        " will be connected next."
-    );
-
-}
-
-
-/* ================= ADMIN PANEL ================= */
-
-function openAdminPanel(){
-
-    if(!isAdmin()){
-
-        alert(
-            "Admin access required."
-        );
-
-        return;
-
-    }
+    const searches =
+    localStorage.getItem(
+        "sLeadsSearches_" + user.email
+    ) || "0";
 
 
     document
-    .querySelectorAll(".page")
-    .forEach(function(el){
-
-        el.classList.add(
-            "hidden"
-        );
-
-    });
-
-
-    document
-    .getElementById(
-        "adminPage"
-    )
-    .style.display =
-    "block";
-
-
-    document
-    .getElementById(
-        "pageName"
-    )
+    .getElementById("dashSearches")
     .innerText =
-    "Access Approval";
+    searches;
 
 
-    loadApprovalUsers();
-
-}
-
-
-function loadApprovalUsers(){
-
-    if(!isAdmin())
-        return;
-
-
-    const user =
-    getUser();
-
-
-    const users =
-    JSON.parse(
-        localStorage.getItem(
-            "sLeadsAllUsers"
-        ) || "[]"
-    );
-
-
-    const box =
-    document.getElementById(
-        "approvalUsers"
-    );
-
-
-    const count =
-    document.getElementById(
-        "pendingCount"
-    );
-
-
-    if(!box)
-        return;
-
-
-    const pending =
-    users.filter(
-        u =>
-        (
-            u.access_status ||
-            "pending"
-        ) === "pending"
-    );
-
-
-    if(count)
-        count.innerText =
-        pending.length;
-
-
-    if(!users.length){
-
-        box.innerHTML = `
-
-            <div style="
-            text-align:center;
-            padding:30px;
-            color:var(--muted);
-            ">
-
-            No registered users found.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    box.innerHTML =
-    users.map(
-        function(item){
-
-            const status =
-            item.access_status ||
-            "pending";
-
-
-            return `
-
-            <div class="admin-user">
-
-                <div class="admin-user-info">
-
-                    <strong>
-                    ${escapeHtml(
-                        item.name ||
-                        item.fullName ||
-                        "User"
-                    )}
-                    </strong>
-
-                    <small>
-                    ${escapeHtml(
-                        item.email ||
-                        "No email"
-                    )}
-                    </small>
-
-                    <small>
-                    Plan:
-                    ${escapeHtml(
-                        item.plan ||
-                        "Free"
-                    )}
-                    · Status:
-                    ${escapeHtml(status)}
-                    </small>
-
-                </div>
-
-
-                <div class="admin-actions">
-
-                    ${
-                    status === "approved"
-                    ?
-
-                    `<button
-                    class="admin-reject"
-                    onclick="
-                    updateApproval(
-                        '${escapeJs(item.email)}',
-                        'rejected'
-                    )">
-                    Revoke
-                    </button>`
-
-                    :
-
-                    `
-                    <button
-                    class="admin-approve"
-                    onclick="
-                    updateApproval(
-                        '${escapeJs(item.email)}',
-                        'approved'
-                    )">
-                    Approve
-                    </button>
-
-                    <button
-                    class="admin-reject"
-                    onclick="
-                    updateApproval(
-                        '${escapeJs(item.email)}',
-                        'rejected'
-                    )">
-                    Reject
-                    </button>
-                    `
-                    }
-
-                </div>
-
-            </div>
-
-            `;
-
-        }
-    ).join("");
+    document
+    .getElementById("dashLeads")
+    .innerText =
+    "0";
 
 }
 
 
-function updateApproval(
-    email,
-    status
-){
+/* ================= ACCOUNT ================= */
 
-    if(!isAdmin())
+function openAccount(){
+
+    const user = getCurrentUser();
+
+
+    if(!user)
         return;
 
 
-    let users =
-    JSON.parse(
-        localStorage.getItem(
-            "sLeadsAllUsers"
-        ) || "[]"
+    document
+    .getElementById("accountName")
+    .innerText =
+    user.name || "User";
+
+
+    document
+    .getElementById("accountEmail")
+    .innerText =
+    user.email || "—";
+
+
+    document
+    .getElementById("accountPlan")
+    .innerText =
+    (
+        user.plan ||
+        "Free"
+    ) +
+    " · " +
+    (
+        user.access_status ||
+        "pending"
     );
 
 
-    users =
-    users.map(
-        function(user){
+    document
+    .getElementById("accountModal")
+    .classList.remove("hidden");
 
-            if(
-                user.email === email
-            ){
-
-                user.access_status =
-                status;
-
-            }
-
-            return user;
-
-        }
-    );
+}
 
 
-    localStorage.setItem(
-        "sLeadsAllUsers",
-        JSON.stringify(
-            users
-        )
-    );
+function closeAccount(){
 
-
-    alert(
-        "Account status changed to " +
-        status
-    );
-
-
-    loadApprovalUsers();
+    document
+    .getElementById("accountModal")
+    .classList.add("hidden");
 
 }
 
@@ -3287,11 +2459,16 @@ function updateApproval(
 function logout(){
 
     localStorage.removeItem(
+        "sLeadsUser"
+    );
+
+    localStorage.removeItem(
         "loggedIn"
     );
 
-    window.location.href =
-    "index.html";
+    closeAccount();
+
+    showLanding();
 
 }
 
@@ -3299,6 +2476,16 @@ function logout(){
 /* ================= DELETE ACCOUNT ================= */
 
 function deleteAccount(){
+
+    const user = getCurrentUser();
+
+
+    if(!user){
+
+        return;
+
+    }
+
 
     if(
         !confirm(
@@ -3322,39 +2509,17 @@ function deleteAccount(){
     }
 
 
-    const user =
-    getUser();
+    let users = getUsers();
 
 
-    if(user){
-
-        let users =
-        JSON.parse(
-            localStorage.getItem(
-                "sLeadsAllUsers"
-            ) || "[]"
-        );
+    users =
+    users.filter(
+        item =>
+        item.email !== user.email
+    );
 
 
-        users =
-        users.filter(
-            function(item){
-
-                return item.email !==
-                user.email;
-
-            }
-        );
-
-
-        localStorage.setItem(
-            "sLeadsAllUsers",
-            JSON.stringify(
-                users
-            )
-        );
-
-    }
+    saveUsers(users);
 
 
     localStorage.removeItem(
@@ -3366,23 +2531,19 @@ function deleteAccount(){
     );
 
     localStorage.removeItem(
-        "sLeadsBusiness"
+        "sLeadsPayment"
     );
 
     localStorage.removeItem(
-        "sLeadsKeywords"
-    );
-
-    localStorage.removeItem(
-        "sLeadsSearches"
-    );
-
-    localStorage.removeItem(
-        "pendingPayment"
+        "sLeadsSelectedPlan"
     );
 
     localStorage.removeItem(
         "sLeadsAccessStatus"
+    );
+
+    localStorage.removeItem(
+        "sLeadsSearches_" + user.email
     );
 
 
@@ -3391,10 +2552,180 @@ function deleteAccount(){
     );
 
 
-    window.location.href =
-    "index.html";
+    showLanding();
 
 }
+
+
+/* ================= PASSWORD RESET ================= */
+
+function forgotPassword(){
+
+    const email =
+    prompt(
+        "Enter your SLeads account email:"
+    );
+
+
+    if(!email)
+        return;
+
+
+    const users = getUsers();
+
+
+    const user =
+    users.find(
+        item =>
+        item.email ===
+        email.trim().toLowerCase()
+    );
+
+
+    if(!user){
+
+        alert(
+            "No account was found with that email."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "Password reset email will be connected to Supabase Auth."
+    );
+
+}
+
+
+/* ================= THEME ================= */
+
+function toggleTheme(){
+
+    document
+    .body
+    .classList
+    .toggle("light");
+
+
+    localStorage.setItem(
+        "sLeadsTheme",
+        document.body.classList.contains("light")
+        ? "light"
+        : "dark"
+    );
+
+}
+
+
+function loadTheme(){
+
+    if(
+        localStorage.getItem(
+            "sLeadsTheme"
+        ) === "light"
+    ){
+
+        document
+        .body
+        .classList
+        .add("light");
+
+    }
+
+}
+
+
+/* ================= INIT ================= */
+
+window.addEventListener(
+"DOMContentLoaded",
+function(){
+
+    loadTheme();
+
+
+    const user =
+    getCurrentUser();
+
+
+    if(!user)
+        return;
+
+
+    const payment =
+    JSON.parse(
+        localStorage.getItem(
+            "sLeadsPayment"
+        ) || "null"
+    );
+
+
+    /*
+       Keep user data synchronized
+    */
+
+    if(payment){
+
+        user.payment_status =
+        payment.status;
+
+        user.plan =
+        payment.plan;
+
+    }
+
+
+    /*
+       If admin approved this account,
+       update from stored user list.
+    */
+
+    const users = getUsers();
+
+
+    const storedUser =
+    users.find(
+        item =>
+        item.email === user.email
+    );
+
+
+    if(storedUser){
+
+        user.access_status =
+        storedUser.access_status;
+
+        user.payment_status =
+        storedUser.payment_status;
+
+        user.plan =
+        storedUser.plan;
+
+    }
+
+
+    saveCurrentUser(user);
+
+
+    if(
+        user.payment_status === "paid" &&
+        user.access_status === "approved"
+    ){
+
+        showDashboard();
+
+    }else if(
+        user.payment_status === "paid"
+    ){
+
+        showPending();
+
+    }
+
+});
 
 
 /* ================= SECURITY ================= */
@@ -3410,17 +2741,7 @@ function escapeHtml(value){
 
 }
 
-
-function escapeJs(value){
-
-    return String(value || "")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
-
-}
-
 </script>
-
 
 </body>
 </html>
