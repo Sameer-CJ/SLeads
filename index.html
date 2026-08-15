@@ -1,1292 +1,1248 @@
-# SLeads White Theme — Complete `index.html`
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SLeads — Social Lead Generation</title>
-  <meta name="description" content="SLeads helps you discover and organize leads from Reddit, Instagram, Facebook, X and LinkedIn.">
-
-  <style>
-    :root {
-      --bg: #ffffff;
-      --bg-soft: #f7f8fc;
-      --card: #ffffff;
-      --card-soft: #f9fafc;
-      --border: #e7e9ef;
-      --border-dark: #d9dce5;
-      --text: #11131a;
-      --muted: #6d7280;
-      --primary: #685cff;
-      --primary2: #7b70ff;
-      --green: #16a66a;
-      --shadow: 0 20px 60px rgba(25, 30, 50, .08);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .container {
-      width: min(1160px, 92%);
-      margin: auto;
-    }
-
-    /* ================= NAVBAR ================= */
-
-    nav {
-      height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .logo {
-      font-size: 25px;
-      font-weight: 850;
-      letter-spacing: -1.2px;
-      color: #11131a;
-    }
-
-    .logo span {
-      color: var(--primary);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      color: #646977;
-      font-size: 14px;
-    }
-
-    .nav-links a {
-      transition: .2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .login {
-      color: #626775;
-      font-size: 14px;
-      padding: 9px 13px;
-    }
-
-    .login:hover {
-      color: #11131a;
-    }
-
-    .nav-btn {
-      background: #11131a;
-      color: white;
-      padding: 10px 17px;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 750;
-      transition: .2s;
-    }
-
-    .nav-btn:hover {
-      background: #292c35;
-      transform: translateY(-1px);
-    }
-
-    /* ================= HERO ================= */
-
-    .hero {
-      position: relative;
-      text-align: center;
-      padding: 105px 20px 75px;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 400px;
-      left: 50%;
-      top: 20px;
-      transform: translateX(-50%);
-      background: rgba(104, 92, 255, .10);
-      filter: blur(100px);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 13px;
-      border: 1px solid #e1e3ea;
-      background: #fafbfe;
-      border-radius: 50px;
-      color: #656a78;
-      font-size: 13px;
-      margin-bottom: 25px;
-      box-shadow: 0 5px 20px rgba(20, 25, 40, .03);
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 12px rgba(22, 166, 106, .35);
-    }
-
-    .hero h1 {
-      max-width: 900px;
-      margin: auto;
-      font-size: clamp(45px, 7vw, 78px);
-      line-height: 1.01;
-      letter-spacing: -4px;
-      color: #11131a;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #6256f4, #887fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      max-width: 680px;
-      margin: 28px auto;
-      color: #6d7280;
-      font-size: 18px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 13px;
-      margin-top: 32px;
-    }
-
-    .primary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--primary);
-      color: white;
-      padding: 14px 22px;
-      border-radius: 10px;
-      font-weight: 750;
-      border: 0;
-      cursor: pointer;
-      transition: .2s;
-      box-shadow: 0 10px 25px rgba(104, 92, 255, .20);
-    }
-
-    .primary-btn:hover {
-      background: var(--primary2);
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(104, 92, 255, .25);
-    }
-
-    .secondary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #dfe2e9;
-      background: white;
-      color: #30343e;
-      padding: 14px 22px;
-      border-radius: 10px;
-      font-weight: 650;
-      transition: .2s;
-    }
-
-    .secondary-btn:hover {
-      background: #f7f8fb;
-      border-color: #cfd3dc;
-      transform: translateY(-1px);
-    }
-
-    /* ================= PLATFORMS ================= */
-
-    .platform-strip {
-      padding: 30px 0 80px;
-    }
-
-    .platform-title {
-      text-align: center;
-      color: #9296a2;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 25px;
-    }
-
-    .platforms {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-    }
-
-    .platform {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 16px 10px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      color: #4d5260;
-      font-size: 14px;
-      font-weight: 650;
-      transition: .2s;
-      box-shadow: 0 5px 18px rgba(20, 25, 40, .025);
-    }
-
-    .platform:hover {
-      border-color: #cfd2dc;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(20, 25, 40, .07);
-    }
-
-    .platform-icon {
-      width: 25px;
-      height: 25px;
-      display: grid;
-      place-items: center;
-      border-radius: 7px;
-      background: #f0efff;
-      color: #665bf2;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    /* ================= DASHBOARD ================= */
-
-    .dashboard {
-      margin: 0 auto 100px;
-      max-width: 1040px;
-      padding: 20px;
-      border-radius: 18px;
-      background: #f8f9fc;
-      border: 1px solid #e2e4eb;
-      box-shadow: 0 30px 80px rgba(25, 30, 50, .10);
-    }
-
-    .dashboard-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .dash-brand {
-      font-weight: 750;
-      color: #191c24;
-    }
-
-    .live {
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 650;
-    }
-
-    .dash-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 13px;
-    }
-
-    .dash-card {
-      background: white;
-      border: 1px solid #e5e7ed;
-      padding: 21px;
-      border-radius: 12px;
-      box-shadow: 0 5px 18px rgba(20, 25, 40, .035);
-    }
-
-    .dash-card small {
-      color: #858a96;
-      font-size: 12px;
-    }
-
-    .dash-card strong {
-      display: block;
-      font-size: 28px;
-      margin-top: 4px;
-      color: #151820;
-    }
-
-    .dash-bottom {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 13px;
-      margin-top: 13px;
-    }
-
-    .activity,
-    .sources {
-      background: white;
-      border: 1px solid #e5e7ed;
-      border-radius: 12px;
-      padding: 21px;
-      box-shadow: 0 5px 18px rgba(20, 25, 40, .025);
-    }
-
-    .box-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 17px;
-      color: #20232c;
-    }
-
-    .activity-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 11px 0;
-      border-bottom: 1px solid #eef0f4;
-      font-size: 13px;
-      color: #505561;
-    }
-
-    .activity-row:last-child {
-      border-bottom: 0;
-    }
-
-    .source-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 9px 0;
-      color: #6c717e;
-      font-size: 13px;
-    }
-
-    .source-row span:last-child {
-      color: #171a22;
-      font-weight: 700;
-    }
-
-    /* ================= SECTION ================= */
-
-    .section {
-      padding: 90px 0;
-    }
-
-    .section-heading {
-      max-width: 700px;
-      margin: 0 auto 48px;
-      text-align: center;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(32px, 5vw, 48px);
-      letter-spacing: -2px;
-      line-height: 1.1;
-      color: #12151c;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      margin-top: 14px;
-    }
-
-    /* ================= FEATURES ================= */
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .feature {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 28px;
-      transition: .2s;
-      box-shadow: 0 8px 25px rgba(20, 25, 40, .035);
-    }
-
-    .feature:hover {
-      border-color: #d0d3dc;
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(20, 25, 40, .07);
-    }
-
-    .feature-icon {
-      width: 43px;
-      height: 43px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: #f0efff;
-      color: #665bf2;
-      font-size: 18px;
-      margin-bottom: 20px;
-      font-weight: 750;
-    }
-
-    .feature h3 {
-      margin-bottom: 9px;
-      font-size: 17px;
-      color: #171a22;
-    }
-
-    .feature p {
-      color: #747986;
-      font-size: 14px;
-    }
-
-    /* ================= PRICING ================= */
-
-    .pricing {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-      align-items: stretch;
-    }
-
-    .price-card {
-      position: relative;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 8px 25px rgba(20, 25, 40, .035);
-      transition: .2s;
-    }
-
-    .price-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(20, 25, 40, .07);
-    }
-
-    .price-card.popular {
-      border-color: #aaa4ff;
-      box-shadow: 0 15px 45px rgba(104, 92, 255, .12);
-    }
-
-    .popular-label {
-      position: absolute;
-      top: 17px;
-      right: 17px;
-      background: #f0efff;
-      color: #6258ed;
-      border: 1px solid #d8d4ff;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .price-card h3 {
-      font-size: 20px;
-      color: #171a22;
-    }
-
-    .price-card > p {
-      color: #858995;
-      font-size: 13px;
-      margin: 7px 0 22px;
-      min-height: 40px;
-    }
-
-    .price {
-      font-size: 44px;
-      font-weight: 800;
-      letter-spacing: -2px;
-      color: #11131a;
-    }
-
-    .price span {
-      color: #7f838e;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0;
-    }
-
-    .price-btn {
-      display: block;
-      text-align: center;
-      margin: 22px 0;
-      padding: 12px;
-      border-radius: 9px;
-      border: 1px solid #dfe2e8;
-      background: white;
-      color: #292d36;
-      font-weight: 700;
-      font-size: 14px;
-      transition: .2s;
-    }
-
-    .price-card.popular .price-btn {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      box-shadow: 0 8px 20px rgba(104, 92, 255, .18);
-    }
-
-    .price-btn:hover {
-      background: #f4f5f8;
-    }
-
-    .price-card.popular .price-btn:hover {
-      background: var(--primary2);
-    }
-
-    .features-list {
-      list-style: none;
-    }
-
-    .features-list li {
-      color: #666b77;
-      font-size: 13px;
-      margin: 12px 0;
-    }
-
-    .features-list li::before {
-      content: "✓";
-      color: var(--green);
-      margin-right: 9px;
-      font-weight: 800;
-    }
-
-    /* ================= CTA ================= */
-
-    .cta {
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      padding: 90px 25px;
-      margin: 70px 0 90px;
-      border: 1px solid #e0e2e9;
-      border-radius: 20px;
-      background: linear-gradient(145deg, #fafaff, #f5f6fb);
-      box-shadow: 0 20px 60px rgba(20, 25, 40, .06);
-    }
-
-    .cta::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 200px;
-      background: rgba(104, 92, 255, .10);
-      filter: blur(80px);
-      left: 50%;
-      top: 30%;
-      transform: translateX(-50%);
-    }
-
-    .cta-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta h2 {
-      font-size: clamp(32px, 5vw, 48px);
-      letter-spacing: -2px;
-      color: #11131a;
-    }
-
-    .cta p {
-      color: var(--muted);
-      margin: 14px auto 28px;
-    }
-
-    /* ================= FOOTER ================= */
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 35px 0;
-      color: #858995;
-      font-size: 13px;
-      background: #fbfcfe;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-logo {
-      color: #353944;
-      font-weight: 750;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 22px;
-    }
-
-    .footer-links a:hover {
-      color: #11131a;
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 800px) {
-
-      .nav-links {
-        display: none;
-      }
-
-      .nav-actions .login {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 75px;
-      }
-
-      .hero h1 {
-        letter-spacing: -2.5px;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .platforms {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .platform:last-child {
-        grid-column: span 2;
-      }
-
-      .dash-grid,
-      .dash-bottom,
-      .features,
-      .pricing {
-        grid-template-columns: 1fr;
-      }
-
-      .dashboard {
-        padding: 13px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        gap: 18px;
-      }
-    }
-
-    @media (max-width: 450px) {
-
-      .platforms {
-        grid-template-columns: 1fr;
-      }
-
-      .platform:last-child {
-        grid-column: auto;
-      }
-
-      .nav-btn {
-        padding: 9px 12px;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SLeads — Social Lead Generation</title>
+<meta name="description" content="SLeads helps you discover and organize leads from Reddit, Instagram, Facebook, X and LinkedIn.">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --soft:#f7f8fc;
+  --soft2:#f1f3f8;
+  --card:#ffffff;
+  --border:#e6e8ef;
+  --text:#111318;
+  --muted:#69707d;
+  --primary:#675cff;
+  --primary2:#7b70ff;
+  --green:#16a36b;
+  --shadow:0 20px 60px rgba(25,30,50,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.container{
+  width:min(1160px,92%);
+  margin:auto;
+}
+
+/* NAVBAR */
+
+nav{
+  height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+
+.logo{
+  font-size:25px;
+  font-weight:850;
+  letter-spacing:-1.2px;
+}
+
+.logo span{
+  color:var(--primary);
+}
+
+.nav-links{
+  display:flex;
+  gap:32px;
+  color:#686e7b;
+  font-size:14px;
+}
+
+.nav-links a{
+  transition:.2s;
+}
+
+.nav-links a:hover{
+  color:#111318;
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.login{
+  color:#626875;
+  font-size:14px;
+  padding:9px 13px;
+}
+
+.login:hover{
+  color:#111318;
+}
+
+.nav-btn{
+  background:#111318;
+  color:#fff;
+  padding:10px 17px;
+  border-radius:9px;
+  font-size:14px;
+  font-weight:750;
+  transition:.2s;
+}
+
+.nav-btn:hover{
+  background:#292d36;
+  transform:translateY(-1px);
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  text-align:center;
+  padding:105px 20px 85px;
+  overflow:hidden;
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:620px;
+  height:390px;
+  left:50%;
+  top:10px;
+  transform:translateX(-50%);
+  background:rgba(103,92,255,.10);
+  filter:blur(105px);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 14px;
+  border:1px solid #e0e3eb;
+  background:#fafbfe;
+  border-radius:50px;
+  color:#666c79;
+  font-size:13px;
+  margin-bottom:25px;
+}
+
+.badge-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px rgba(22,163,107,.35);
+}
+
+.hero h1{
+  max-width:900px;
+  margin:auto;
+  font-size:clamp(45px,7vw,78px);
+  line-height:1.01;
+  letter-spacing:-4px;
+}
+
+.gradient-text{
+  background:linear-gradient(90deg,#6256f4,#8a82ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  max-width:690px;
+  margin:28px auto;
+  color:var(--muted);
+  font-size:18px;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:13px;
+  margin-top:32px;
+}
+
+.primary-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--primary);
+  color:#fff;
+  padding:14px 22px;
+  border-radius:10px;
+  font-weight:750;
+  transition:.2s;
+  box-shadow:0 10px 25px rgba(103,92,255,.20);
+}
+
+.primary-btn:hover{
+  background:var(--primary2);
+  transform:translateY(-2px);
+}
+
+.secondary-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #dfe2e9;
+  background:#fff;
+  color:#30343d;
+  padding:14px 22px;
+  border-radius:10px;
+  font-weight:650;
+  transition:.2s;
+}
+
+.secondary-btn:hover{
+  background:#f7f8fb;
+  transform:translateY(-1px);
+}
+
+/* PLATFORMS */
+
+.platform-strip{
+  padding:25px 0 80px;
+}
+
+.platform-title{
+  text-align:center;
+  color:#9297a3;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-bottom:25px;
+}
+
+.platforms{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+
+.platform{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:16px 10px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  color:#4d5360;
+  font-size:14px;
+  font-weight:650;
+  transition:.2s;
+  box-shadow:0 5px 18px rgba(20,25,40,.025);
+}
+
+.platform:hover{
+  border-color:#cdd1db;
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(20,25,40,.07);
+}
+
+.platform-icon{
+  width:25px;
+  height:25px;
+  display:grid;
+  place-items:center;
+  border-radius:7px;
+  background:#f0efff;
+  color:#665bf2;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+  margin:0 auto 100px;
+  max-width:1040px;
+  padding:20px;
+  border-radius:18px;
+  background:#f7f8fc;
+  border:1px solid #e1e4eb;
+  box-shadow:0 30px 80px rgba(25,30,50,.10);
+}
+
+.dashboard-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.dash-brand{
+  font-weight:750;
+}
+
+.live{
+  color:var(--green);
+  font-size:12px;
+  font-weight:650;
+}
+
+.dash-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.dash-card{
+  background:#fff;
+  border:1px solid #e5e7ed;
+  padding:21px;
+  border-radius:12px;
+  box-shadow:0 5px 18px rgba(20,25,40,.035);
+}
+
+.dash-card small{
+  color:#858a96;
+  font-size:12px;
+}
+
+.dash-card strong{
+  display:block;
+  font-size:28px;
+  margin-top:4px;
+}
+
+.dash-bottom{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:13px;
+  margin-top:13px;
+}
+
+.activity,
+.sources{
+  background:#fff;
+  border:1px solid #e5e7ed;
+  border-radius:12px;
+  padding:21px;
+}
+
+.box-title{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:17px;
+}
+
+.activity-row{
+  display:flex;
+  justify-content:space-between;
+  padding:11px 0;
+  border-bottom:1px solid #eef0f4;
+  font-size:13px;
+  color:#555b67;
+}
+
+.activity-row:last-child{
+  border-bottom:0;
+}
+
+.source-row{
+  display:flex;
+  justify-content:space-between;
+  padding:9px 0;
+  color:#6b707c;
+  font-size:13px;
+}
+
+.source-row span:last-child{
+  color:#171a21;
+  font-weight:700;
+}
+
+/* SECTIONS */
+
+.section{
+  padding:90px 0;
+}
+
+.section-heading{
+  max-width:700px;
+  margin:0 auto 48px;
+  text-align:center;
+}
+
+.section-heading h2{
+  font-size:clamp(32px,5vw,48px);
+  letter-spacing:-2px;
+  line-height:1.1;
+}
+
+.section-heading p{
+  color:var(--muted);
+  margin-top:14px;
+}
+
+/* FEATURES */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.feature{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:28px;
+  transition:.2s;
+  box-shadow:0 8px 25px rgba(20,25,40,.035);
+}
+
+.feature:hover{
+  border-color:#cfd3dc;
+  transform:translateY(-3px);
+  box-shadow:0 15px 35px rgba(20,25,40,.07);
+}
+
+.feature-icon{
+  width:43px;
+  height:43px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:#f0efff;
+  color:#665bf2;
+  font-size:18px;
+  margin-bottom:20px;
+  font-weight:750;
+}
+
+.feature h3{
+  margin-bottom:9px;
+  font-size:17px;
+}
+
+.feature p{
+  color:#747986;
+  font-size:14px;
+}
+
+/* PRICING */
+
+.pricing{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+}
+
+.price-card{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:30px;
+  box-shadow:0 8px 25px rgba(20,25,40,.035);
+  transition:.2s;
+}
+
+.price-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(20,25,40,.07);
+}
+
+.price-card.popular{
+  border-color:#aaa4ff;
+  box-shadow:0 15px 45px rgba(103,92,255,.12);
+}
+
+.popular-label{
+  position:absolute;
+  top:17px;
+  right:17px;
+  background:#f0efff;
+  color:#6258ed;
+  border:1px solid #d8d4ff;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.price-card h3{
+  font-size:20px;
+}
+
+.price-card>p{
+  color:#858995;
+  font-size:13px;
+  margin:7px 0 22px;
+  min-height:40px;
+}
+
+.price{
+  font-size:44px;
+  font-weight:800;
+  letter-spacing:-2px;
+}
+
+.price span{
+  color:#7f838e;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:0;
+}
+
+.price-btn{
+  display:block;
+  text-align:center;
+  margin:22px 0;
+  padding:12px;
+  border-radius:9px;
+  border:1px solid #dfe2e8;
+  background:#fff;
+  color:#292d36;
+  font-weight:700;
+  font-size:14px;
+  transition:.2s;
+}
+
+.price-card.popular .price-btn{
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+}
+
+.price-btn:hover{
+  background:#f4f5f8;
+}
+
+.price-card.popular .price-btn:hover{
+  background:var(--primary2);
+}
+
+.features-list{
+  list-style:none;
+}
+
+.features-list li{
+  color:#666b77;
+  font-size:13px;
+  margin:12px 0;
+}
+
+.features-list li:before{
+  content:"✓";
+  color:var(--green);
+  margin-right:9px;
+  font-weight:800;
+}
+
+/* CTA */
+
+.cta{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:90px 25px;
+  margin:70px 0 90px;
+  border:1px solid #e0e2e9;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fafaff,#f5f6fb);
+  box-shadow:0 20px 60px rgba(20,25,40,.06);
+}
+
+.cta:after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:200px;
+  background:rgba(103,92,255,.10);
+  filter:blur(80px);
+  left:50%;
+  top:30%;
+  transform:translateX(-50%);
+}
+
+.cta-content{
+  position:relative;
+  z-index:1;
+}
+
+.cta h2{
+  font-size:clamp(32px,5vw,48px);
+  letter-spacing:-2px;
+}
+
+.cta p{
+  color:var(--muted);
+  margin:14px auto 28px;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid var(--border);
+  padding:35px 0;
+  color:#858995;
+  font-size:13px;
+  background:#fbfcfe;
+}
+
+.footer-content{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.footer-logo{
+  color:#353944;
+  font-weight:750;
+}
+
+.footer-links{
+  display:flex;
+  gap:22px;
+}
+
+.footer-links a:hover{
+  color:#111318;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .nav-actions .login{
+    display:none;
+  }
+
+  .hero{
+    padding-top:75px;
+  }
+
+  .hero h1{
+    letter-spacing:-2.5px;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+    max-width:300px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .platforms{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .platform:last-child{
+    grid-column:span 2;
+  }
+
+  .dash-grid,
+  .dash-bottom,
+  .features,
+  .pricing{
+    grid-template-columns:1fr;
+  }
+
+  .dashboard{
+    padding:13px;
+  }
+
+  .footer-content{
+    flex-direction:column;
+    gap:18px;
+  }
+}
+
+@media(max-width:450px){
+
+  .platforms{
+    grid-template-columns:1fr;
+  }
+
+  .platform:last-child{
+    grid-column:auto;
+  }
+
+  .nav-btn{
+    padding:9px 12px;
+  }
+
+  .hero h1{
+    font-size:43px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- ================= NAVBAR ================= -->
+<!-- NAVBAR -->
 
-  <div class="container">
+<div class="container">
+<nav>
 
-    <nav>
+<a href="#" class="logo">S<span>Leads</span></a>
 
-      <a href="#" class="logo">
-        S<span>Leads</span>
-      </a>
+<div class="nav-links">
+<a href="#features">Features</a>
+<a href="#platforms">Platforms</a>
+<a href="#pricing">Pricing</a>
+</div>
 
-      <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#platforms">Platforms</a>
-        <a href="#pricing">Pricing</a>
-      </div>
+<div class="nav-actions">
+<a href="#" class="login">Log in</a>
+<a href="#pricing" class="nav-btn">Get Started</a>
+</div>
 
-      <div class="nav-actions">
-        <a href="#" class="login">Log in</a>
-        <a href="#pricing" class="nav-btn">Get Started</a>
-      </div>
+</nav>
+</div>
 
-    </nav>
 
-  </div>
+<!-- HERO -->
 
+<main>
 
-  <!-- ================= HERO ================= -->
+<section class="hero">
 
-  <main>
+<div class="hero-content">
 
-    <section class="hero">
+<div class="badge">
+<span class="badge-dot"></span>
+Social lead generation, simplified
+</div>
 
-      <div class="hero-content">
+<h1>
+Find the people who are
+<span class="gradient-text">ready to buy.</span>
+</h1>
 
-        <div class="badge">
-          <span class="badge-dot"></span>
-          Social lead generation, simplified
-        </div>
+<p>
+Discover potential customers across Reddit, Instagram,
+Facebook, X and LinkedIn — all from one powerful lead
+generation platform.
+</p>
 
-        <h1>
-          Find the people who are
-          <span class="gradient-text">ready to buy.</span>
-        </h1>
+<div class="hero-buttons">
 
-        <p>
-          Discover potential customers across Reddit, Instagram,
-          Facebook, X and LinkedIn — all from one powerful lead
-          generation platform.
-        </p>
+<a href="#pricing" class="primary-btn">
+Start Finding Leads →
+</a>
 
-        <div class="hero-buttons">
+<a href="#platforms" class="secondary-btn">
+Explore Platforms
+</a>
 
-          <a href="#pricing" class="primary-btn">
-            Start Finding Leads →
-          </a>
+</div>
 
-          <a href="#platforms" class="secondary-btn">
-            Explore Platforms
-          </a>
+</div>
 
-        </div>
+</section>
 
-      </div>
 
-    </section>
+<!-- PLATFORMS -->
 
+<section class="platform-strip container" id="platforms">
 
-    <!-- ================= PLATFORMS ================= -->
+<div class="platform-title">
+Find opportunities across
+</div>
 
-    <section class="platform-strip container" id="platforms">
+<div class="platforms">
 
-      <div class="platform-title">
-        Find opportunities across
-      </div>
+<div class="platform">
+<div class="platform-icon">R</div>
+Reddit
+</div>
 
-      <div class="platforms">
+<div class="platform">
+<div class="platform-icon">IG</div>
+Instagram
+</div>
 
-        <div class="platform">
-          <div class="platform-icon">R</div>
-          Reddit
-        </div>
+<div class="platform">
+<div class="platform-icon">f</div>
+Facebook
+</div>
 
-        <div class="platform">
-          <div class="platform-icon">IG</div>
-          Instagram
-        </div>
+<div class="platform">
+<div class="platform-icon">X</div>
+X
+</div>
 
-        <div class="platform">
-          <div class="platform-icon">f</div>
-          Facebook
-        </div>
+<div class="platform">
+<div class="platform-icon">in</div>
+LinkedIn
+</div>
 
-        <div class="platform">
-          <div class="platform-icon">X</div>
-          X
-        </div>
+</div>
 
-        <div class="platform">
-          <div class="platform-icon">in</div>
-          LinkedIn
-        </div>
+</section>
 
-      </div>
 
-    </section>
+<!-- DASHBOARD -->
 
+<section class="container dashboard">
 
-    <!-- ================= DASHBOARD PREVIEW ================= -->
+<div class="dashboard-top">
 
-    <section class="container dashboard">
+<div class="dash-brand">
+SLeads Overview
+</div>
 
-      <div class="dashboard-top">
+<div class="live">
+● Live system
+</div>
 
-        <div class="dash-brand">
-          SLeads Overview
-        </div>
+</div>
 
-        <div class="live">
-          ● Live system
-        </div>
+<div class="dash-grid">
 
-      </div>
+<div class="dash-card">
+<small>Total Leads</small>
+<strong id="totalLeads">12,482</strong>
+</div>
 
-      <div class="dash-grid">
+<div class="dash-card">
+<small>Qualified Leads</small>
+<strong>7,931</strong>
+</div>
 
-        <div class="dash-card">
-          <small>Total Leads</small>
-          <strong id="totalLeads">12,482</strong>
-        </div>
+<div class="dash-card">
+<small>Conversion</small>
+<strong>21.4%</strong>
+</div>
 
-        <div class="dash-card">
-          <small>Qualified Leads</small>
-          <strong>7,931</strong>
-        </div>
+</div>
 
-        <div class="dash-card">
-          <small>Conversion</small>
-          <strong>21.4%</strong>
-        </div>
+<div class="dash-bottom">
 
-      </div>
+<div class="activity">
 
-      <div class="dash-bottom">
+<div class="box-title">
+Recent lead activity
+</div>
 
-        <div class="activity">
+<div class="activity-row">
+<span>New Reddit opportunity</span>
+<span>Just now</span>
+</div>
 
-          <div class="box-title">
-            Recent lead activity
-          </div>
+<div class="activity-row">
+<span>Instagram prospect found</span>
+<span>2m ago</span>
+</div>
 
-          <div class="activity-row">
-            <span>New Reddit opportunity</span>
-            <span>Just now</span>
-          </div>
+<div class="activity-row">
+<span>LinkedIn lead qualified</span>
+<span>5m ago</span>
+</div>
 
-          <div class="activity-row">
-            <span>Instagram prospect found</span>
-            <span>2m ago</span>
-          </div>
+<div class="activity-row">
+<span>X prospect discovered</span>
+<span>8m ago</span>
+</div>
 
-          <div class="activity-row">
-            <span>LinkedIn lead qualified</span>
-            <span>5m ago</span>
-          </div>
+</div>
 
-          <div class="activity-row">
-            <span>X prospect discovered</span>
-            <span>8m ago</span>
-          </div>
+<div class="sources">
 
-        </div>
+<div class="box-title">
+Lead sources
+</div>
 
-        <div class="sources">
+<div class="source-row">
+<span>Reddit</span>
+<span>3,284</span>
+</div>
+
+<div class="source-row">
+<span>Instagram</span>
+<span>2,941</span>
+</div>
 
-          <div class="box-title">
-            Lead sources
-          </div>
+<div class="source-row">
+<span>LinkedIn</span>
+<span>2,713</span>
+</div>
 
-          <div class="source-row">
-            <span>Reddit</span>
-            <span>3,284</span>
-          </div>
+<div class="source-row">
+<span>Facebook</span>
+<span>1,984</span>
+</div>
 
-          <div class="source-row">
-            <span>Instagram</span>
-            <span>2,941</span>
-          </div>
+<div class="source-row">
+<span>X</span>
+<span>1,560</span>
+</div>
 
-          <div class="source-row">
-            <span>LinkedIn</span>
-            <span>2,713</span>
-          </div>
+</div>
 
-          <div class="source-row">
-            <span>Facebook</span>
-            <span>1,984</span>
-          </div>
+</div>
 
-          <div class="source-row">
-            <span>X</span>
-            <span>1,560</span>
-          </div>
+</section>
 
-        </div>
 
-      </div>
+<!-- FEATURES -->
 
-    </section>
+<section class="section container" id="features">
 
+<div class="section-heading">
 
-    <!-- ================= FEATURES ================= -->
+<h2>
+One system for your entire lead pipeline.
+</h2>
 
-    <section class="section container" id="features">
+<p>
+Stop searching five platforms manually.
+Bring your lead discovery workflow into one place.
+</p>
 
-      <div class="section-heading">
+</div>
 
-        <h2>
-          One system for your entire lead pipeline.
-        </h2>
+<div class="features">
 
-        <p>
-          Stop searching five platforms manually.
-          Bring your lead discovery workflow into one place.
-        </p>
+<div class="feature">
+<div class="feature-icon">⌕</div>
+<h3>Lead Discovery</h3>
+<p>
+Search for relevant prospects and opportunities
+across the social platforms you already use.
+</p>
+</div>
 
-      </div>
+<div class="feature">
+<div class="feature-icon">✦</div>
+<h3>Smart Qualification</h3>
+<p>
+Organize prospects by relevance, source,
+status and other lead information.
+</p>
+</div>
 
-      <div class="features">
+<div class="feature">
+<div class="feature-icon">↗</div>
+<h3>Lead Management</h3>
+<p>
+Keep your prospects organized and move them
+through your pipeline without messy spreadsheets.
+</p>
+</div>
 
-        <div class="feature">
-          <div class="feature-icon">⌕</div>
-          <h3>Lead Discovery</h3>
-          <p>
-            Search for relevant prospects and opportunities
-            across the social platforms you already use.
-          </p>
-        </div>
+<div class="feature">
+<div class="feature-icon">⚡</div>
+<h3>Automation</h3>
+<p>
+Build workflows that reduce repetitive lead
+research and help your team work faster.
+</p>
+</div>
 
-        <div class="feature">
-          <div class="feature-icon">✦</div>
-          <h3>Smart Qualification</h3>
-          <p>
-            Organize prospects by relevance, source,
-            status and other lead information.
-          </p>
-        </div>
+<div class="feature">
+<div class="feature-icon">▣</div>
+<h3>Central Dashboard</h3>
+<p>
+View lead activity, sources, status and
+performance from a single dashboard.
+</p>
+</div>
 
-        <div class="feature">
-          <div class="feature-icon">↗</div>
-          <h3>Lead Management</h3>
-          <p>
-            Keep your prospects organized and move them
-            through your pipeline without messy spreadsheets.
-          </p>
-        </div>
+<div class="feature">
+<div class="feature-icon">↓</div>
+<h3>Export Leads</h3>
+<p>
+Export your lead data for outreach,
+CRM workflows and other business processes.
+</p>
+</div>
 
-        <div class="feature">
-          <div class="feature-icon">⚡</div>
-          <h3>Automation</h3>
-          <p>
-            Build workflows that reduce repetitive lead
-            research and help your team work faster.
-          </p>
-        </div>
+</div>
 
-        <div class="feature">
-          <div class="feature-icon">▣</div>
-          <h3>Central Dashboard</h3>
-          <p>
-            View lead activity, sources, status and
-            performance from a single dashboard.
-          </p>
-        </div>
+</section>
 
-        <div class="feature">
-          <div class="feature-icon">↓</div>
-          <h3>Export Leads</h3>
-          <p>
-            Export your lead data for outreach,
-            CRM workflows and other business processes.
-          </p>
-        </div>
 
-      </div>
+<!-- HOW IT WORKS -->
 
-    </section>
+<section class="section container">
 
+<div class="section-heading">
 
-    <!-- ================= HOW IT WORKS ================= -->
+<h2>
+From discovery to opportunity.
+</h2>
 
-    <section class="section container">
+<p>
+A simple workflow designed around how modern teams find customers.
+</p>
 
-      <div class="section-heading">
+</div>
 
-        <h2>
-          From discovery to opportunity.
-        </h2>
+<div class="features">
 
-        <p>
-          A simple workflow designed around how modern teams find customers.
-        </p>
+<div class="feature">
 
-      </div>
+<div class="feature-icon">01</div>
 
-      <div class="features">
+<h3>Choose your audience</h3>
 
-        <div class="feature">
+<p>
+Define the niche, industry, keywords or
+customer type you want to target.
+</p>
 
-          <div class="feature-icon">01</div>
+</div>
 
-          <h3>Choose your audience</h3>
+<div class="feature">
 
-          <p>
-            Define the niche, industry, keywords or
-            customer type you want to target.
-          </p>
+<div class="feature-icon">02</div>
 
-        </div>
+<h3>Discover leads</h3>
 
-        <div class="feature">
+<p>
+Find relevant conversations, profiles,
+businesses and potential opportunities.
+</p>
 
-          <div class="feature-icon">02</div>
+</div>
 
-          <h3>Discover leads</h3>
+<div class="feature">
 
-          <p>
-            Find relevant conversations, profiles,
-            businesses and potential opportunities.
-          </p>
+<div class="feature-icon">03</div>
 
-        </div>
+<h3>Qualify & organize</h3>
 
-        <div class="feature">
+<p>
+Review the results, qualify prospects and
+organize them inside your SLeads dashboard.
+</p>
 
-          <div class="feature-icon">03</div>
+</div>
 
-          <h3>Qualify & organize</h3>
+</div>
 
-          <p>
-            Review the results, qualify prospects and
-            organize them inside your SLeads dashboard.
-          </p>
+</section>
 
-        </div>
 
-      </div>
+<!-- PRICING -->
 
-    </section>
+<section class="section container" id="pricing">
 
+<div class="section-heading">
 
-    <!-- ================= PRICING ================= -->
+<h2>
+Simple pricing. Start small, scale up.
+</h2>
 
-    <section class="section container" id="pricing">
+<p>
+Choose the plan that matches your lead-generation needs.
+</p>
 
-      <div class="section-heading">
+</div>
 
-        <h2>
-          Simple pricing. Start small, scale up.
-        </h2>
+<div class="pricing">
 
-        <p>
-          Choose the plan that matches your lead-generation needs.
-        </p>
 
-      </div>
+<!-- BASIC -->
 
-      <div class="pricing">
+<div class="price-card">
 
-        <!-- BASIC -->
+<h3>Basic</h3>
 
-        <div class="price-card">
+<p>
+For individuals getting started with lead generation.
+</p>
 
-          <h3>Basic</h3>
+<div class="price">
+$19<span>/month</span>
+</div>
 
-          <p>
-            For individuals getting started with lead generation.
-          </p>
+<a href="#" class="price-btn">
+Start Basic
+</a>
 
-          <div class="price">
-            $19<span>/month</span>
-          </div>
+<ul class="features-list">
+<li>Lead discovery</li>
+<li>Reddit leads</li>
+<li>Instagram leads</li>
+<li>Facebook leads</li>
+<li>Basic lead dashboard</li>
+<li>Lead export</li>
+</ul>
 
-          <a href="#" class="price-btn">
-            Start Basic
-          </a>
+</div>
 
-          <ul class="features-list">
-            <li>Lead discovery</li>
-            <li>Reddit leads</li>
-            <li>Instagram leads</li>
-            <li>Facebook leads</li>
-            <li>Basic lead dashboard</li>
-            <li>Lead export</li>
-          </ul>
 
-        </div>
+<!-- GROWTH -->
 
+<div class="price-card popular">
 
-        <!-- GROWTH -->
+<div class="popular-label">
+Most Popular
+</div>
 
-        <div class="price-card popular">
+<h3>Growth</h3>
 
-          <div class="popular-label">
-            Most Popular
-          </div>
+<p>
+For growing businesses that need more leads.
+</p>
 
-          <h3>Growth</h3>
+<div class="price">
+$39<span>/month</span>
+</div>
 
-          <p>
-            For growing businesses that need more leads.
-          </p>
+<a href="#" class="price-btn">
+Start Growth
+</a>
 
-          <div class="price">
-            $39<span>/month</span>
-          </div>
+<ul class="features-list">
+<li>Everything in Basic</li>
+<li>LinkedIn leads</li>
+<li>X leads</li>
+<li>Advanced filters</li>
+<li>Higher lead limits</li>
+<li>Advanced dashboard</li>
+<li>Priority processing</li>
+</ul>
 
-          <a href="#" class="price-btn">
-            Start Growth
-          </a>
+</div>
 
-          <ul class="features-list">
-            <li>Everything in Basic</li>
-            <li>LinkedIn leads</li>
-            <li>X leads</li>
-            <li>Advanced filters</li>
-            <li>Higher lead limits</li>
-            <li>Advanced dashboard</li>
-            <li>Priority processing</li>
-          </ul>
 
-        </div>
+<!-- PRO -->
 
+<div class="price-card">
 
-        <!-- PRO -->
+<h3>Pro</h3>
 
-        <div class="price-card">
+<p>
+For agencies and teams running serious lead operations.
+</p>
 
-          <h3>Pro</h3>
+<div class="price">
+$89<span>/month</span>
+</div>
 
-          <p>
-            For agencies and teams running serious lead operations.
-          </p>
+<a href="#" class="price-btn">
+Start Pro
+</a>
 
-          <div class="price">
-            $89<span>/month</span>
-          </div>
+<ul class="features-list">
+<li>Everything in Growth</li>
+<li>Maximum lead limits</li>
+<li>Advanced automation</li>
+<li>Bulk lead processing</li>
+<li>Advanced exports</li>
+<li>Team-ready workflows</li>
+<li>Priority support</li>
+</ul>
 
-          <a href="#" class="price-btn">
-            Start Pro
-          </a>
+</div>
 
-          <ul class="features-list">
-            <li>Everything in Growth</li>
-            <li>Maximum lead limits</li>
-            <li>Advanced automation</li>
-            <li>Bulk lead processing</li>
-            <li>Advanced exports</li>
-            <li>Team-ready workflows</li>
-            <li>Priority support</li>
-          </ul>
+</div>
 
-        </div>
+</section>
 
-      </div>
 
-    </section>
+<!-- CTA -->
 
+<section class="container">
 
-    <!-- ================= CTA ================= -->
+<div class="cta">
 
-    <section class="container">
+<div class="cta-content">
 
-      <div class="cta">
+<h2>
+Your next customer is already out there.
+</h2>
 
-        <div class="cta-content">
+<p>
+SLeads helps you find the opportunities faster.
+</p>
 
-          <h2>
-            Your next customer is already out there.
-          </h2>
+<a href="#pricing" class="primary-btn">
+Start Finding Leads →
+</a>
 
-          <p>
-            SLeads helps you find the opportunities faster.
-          </p>
+</div>
 
-          <a href="#pricing" class="primary-btn">
-            Start Finding Leads →
-          </a>
+</div>
 
-        </div>
+</section>
 
-      </div>
+</main>
 
-    </section>
 
-  </main>
+<!-- FOOTER -->
 
+<footer>
 
-  <!-- ================= FOOTER ================= -->
+<div class="container footer-content">
 
-  <footer>
+<div class="footer-logo">
+© 2026 SLeads
+</div>
 
-    <div class="container footer-content">
+<div class="footer-links">
+<a href="#features">Features</a>
+<a href="#pricing">Pricing</a>
+<a href="#">Privacy</a>
+<a href="#">Terms</a>
+</div>
 
-      <div class="footer-logo">
-        © 2026 SLeads
-      </div>
+</div>
 
-      <div class="footer-links">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-      </div>
+</footer>
 
-    </div>
 
-  </footer>
+<script>
 
+let leads = 12482;
 
-  <!-- ================= JAVASCRIPT ================= -->
+setInterval(function(){
 
-  <script>
+leads += Math.floor(Math.random() * 3);
 
-    let leads = 12482;
+const element = document.getElementById("totalLeads");
 
-    setInterval(() => {
+if(element){
+element.textContent = leads.toLocaleString();
+}
 
-      leads += Math.floor(Math.random() * 3);
+},5000);
 
-      document.getElementById("totalLeads").textContent =
-        leads.toLocaleString();
-
-    }, 5000);
-
-
-    document.querySelectorAll(".price-btn").forEach(button => {
-
-      button.addEventListener("click", function(event) {
-
-        event.preventDefault();
-
-        alert(
-          "SLeads checkout will be connected in the payment setup step."
-        );
-
-      });
-
-    });
-
-  </script>
+</script>
 
 </body>
 </html>
